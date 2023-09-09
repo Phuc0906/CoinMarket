@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDQ4cwN0w2Y3MKERUAoZ4z-5KDNX7nUuiw</string>
+	<key>GCM_SENDER_ID</key>
+	<string>276687101830</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.oceansoftware.CoinMarket</string>
+	<key>PROJECT_ID</key>
+	<string>ios-coinmarket</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ios-coinmarket.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:276687101830:ios:1a94008fbf5620cd711607</string>
+</dict>
+</plist>
