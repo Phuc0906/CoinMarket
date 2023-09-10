@@ -60,11 +60,14 @@ struct MainView: View {
                     .tag(3)
             }
             .onChange(of: selectedTab) { newValue in
-                print("Detect \(newValue)")
+                
+                if isShownAdd {
+                    selectedTab = lastSelectedTab
+                    return
+                }
+                
                 lastSelectedTab = (newValue == 9) ? lastSelectedTab : newValue
                 
-                print("Selected Tab: \(newValue)")
-                print("Show: \(isShownAdd)")
             }
             
             VStack {
@@ -78,6 +81,7 @@ struct MainView: View {
                     isShownAdd.toggle()
                 }) {
                     Image(systemName: "plus")
+                        .rotationEffect(isShownAdd ? Angle(degrees: 45) : Angle(degrees: 0))
                         .padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 7))
                         .background(.yellow)
                         .cornerRadius(30)
