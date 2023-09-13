@@ -30,6 +30,8 @@
 		BC7481EE2AB0600E00ABC993 /* PreviewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481ED2AB0600E00ABC993 /* PreviewProvider.swift */; };
 		BC7481F12AB0614F00ABC993 /* CoinRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F02AB0614F00ABC993 /* CoinRow.swift */; };
 		BC7481F32AB1644C00ABC993 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F22AB1644C00ABC993 /* Color.swift */; };
+		BC7481F52AB1D05700ABC993 /* CoinDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F42AB1D05700ABC993 /* CoinDetailView.swift */; };
+		BC7481F72AB1D29000ABC993 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F62AB1D29000ABC993 /* ChartView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +55,8 @@
 		BC7481ED2AB0600E00ABC993 /* PreviewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewProvider.swift; sourceTree = "<group>"; };
 		BC7481F02AB0614F00ABC993 /* CoinRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinRow.swift; sourceTree = "<group>"; };
 		BC7481F22AB1644C00ABC993 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		BC7481F42AB1D05700ABC993 /* CoinDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailView.swift; sourceTree = "<group>"; };
+		BC7481F62AB1D29000ABC993 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +126,7 @@
 				BC7481DB2AAD7D7800ABC993 /* WalletView.swift */,
 				BC7481DD2AAD7DEA00ABC993 /* MainView.swift */,
 				BC7481DF2AAD877900ABC993 /* AddButtonCustomView.swift */,
+				BC7481F42AB1D05700ABC993 /* CoinDetailView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -164,6 +169,7 @@
 			isa = PBXGroup;
 			children = (
 				BC7481F02AB0614F00ABC993 /* CoinRow.swift */,
+				BC7481F62AB1D29000ABC993 /* ChartView.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -251,7 +257,9 @@
 				BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */,
 				BC7481DE2AAD7DEA00ABC993 /* MainView.swift in Sources */,
 				BC7481D62AAD7D0500ABC993 /* HomeView.swift in Sources */,
+				BC7481F52AB1D05700ABC993 /* CoinDetailView.swift in Sources */,
 				BC7481F12AB0614F00ABC993 /* CoinRow.swift in Sources */,
+				BC7481F72AB1D29000ABC993 /* ChartView.swift in Sources */,
 				BC7481E32AAD9AE500ABC993 /* AddCoinView.swift in Sources */,
 				BC7481F32AB1644C00ABC993 /* Color.swift in Sources */,
 				BC7481D82AAD7D0E00ABC993 /* ProfileView.swift in Sources */,

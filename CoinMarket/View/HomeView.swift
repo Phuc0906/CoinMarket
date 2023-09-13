@@ -52,7 +52,9 @@ struct HomeView: View {
                     }
                     VStack {
                         ForEach(vm.getTopCoins(), id: \.id) {coin in
-                            CoinRow(coin: coin)
+                            NavigationLink(destination: CoinDetailView(coin: coin)) {
+                                CoinRow(coin: coin)
+                            }
                         }
                     }.padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
                     Spacer()
