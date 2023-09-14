@@ -12,37 +12,30 @@ struct CoinDetailView: View {
     
     var body: some View {
         NavigationView {
-            VStack(spacing: 40) {
-                coinIntroduction
-                
-                briefRecord
-                
-                ChartView(coin: coin)
-                    .frame(height: UIScreen.main.bounds.height / 2.7)
-                
-                HStack {
-                    VStack {
-                        Button {
-                            // move to login page
-                        } label: {
-                            Text("Login")
-                                .foregroundColor(.white)
-                                .cornerRadius(20)
-                        }
-
-                    }.frame(width: UIScreen.main.bounds.width / 2)
-                    .cornerRadius(20)
-                    .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+            ScrollView {
+                VStack {
+                    coinIntroduction
+                    briefRecord
+                    ChartView(coin: coin)
+                        .frame(height: UIScreen.main.bounds.height / 2.7)
+                    HStack {
+                        VStack {
+                            Button {
+                                // move to login page
+                            } label: {
+                                Text("Login")
+                                    .foregroundColor(.white)
+                                    .cornerRadius(20)
+                            }
+                            
+                        }.frame(width: UIScreen.main.bounds.width / 2)
+                            .cornerRadius(20)
+                            .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                    }.background(.yellow)
+                        .cornerRadius(30)
                     
-                }.background(.yellow)
-                    .cornerRadius(30)
-                    
-                    
-                
-                Spacer()
-            }.navigationTitle(
-                Text("\(coin.name)")
-            )
+                }.navigationTitle(Text("\(coin.name)"))
+            }
         }
     }
 }

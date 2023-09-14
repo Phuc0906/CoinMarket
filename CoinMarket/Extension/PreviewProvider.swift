@@ -23,6 +23,8 @@ class DeveloperPreview {
     
     let homeVM = HomeViewModel()
     
+    let isDisplayNav = false
+    
     let coin = Coin(
            id: "bitcoin",
            symbol: "btc",

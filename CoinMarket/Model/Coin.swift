@@ -23,6 +23,10 @@ struct Coin: Codable {
     let roi: Roi?
     let last_updated: String
     let sparkline_in_7d: SparklineIn7D
+    
+    func toString() -> String {
+        return "\(self.id),\(self.symbol),\(self.name),\(self.image),\(self.current_price),\(self.market_cap),\(self.market_cap_rank),\(self.fully_diluted_valuation),\(self.total_volume),\(self.high_24h),\(self.low_24h)"
+    }
 
 }
 

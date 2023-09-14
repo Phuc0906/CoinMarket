@@ -1,14 +1,14 @@
 //
-//  HomeViewModel.swift
+//  CryptoViewModel.swift
 //  CoinMarket
 //
-//  Created by Phuc Hoang on 12/09/2023.
+//  Created by Phuc Hoang on 14/09/2023.
 //
 
 import Foundation
 import Combine
 
-class HomeViewModel: ObservableObject {
+class CryptoViewModel: ObservableObject {
     @Published var allCoins: [Coin] = []
     
     private let coinManager = CoinManager()
@@ -16,21 +16,6 @@ class HomeViewModel: ObservableObject {
     
     init() {
         downloadCoinData()
-    }
-    
-    func getTopCoins() -> [Coin] {
-        var topCoins: [Coin] = []
-        
-        var count = 0;
-        for coin in allCoins.sorted(by: { $0.current_price > $1.current_price }) {
-            topCoins.append(coin)
-            count += 1
-            if count == 5 {
-                break
-            }
-        }
-        
-        return topCoins
     }
     
     func downloadCoinData() {

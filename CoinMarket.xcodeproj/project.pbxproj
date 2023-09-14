@@ -32,6 +32,7 @@
 		BC7481F32AB1644C00ABC993 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F22AB1644C00ABC993 /* Color.swift */; };
 		BC7481F52AB1D05700ABC993 /* CoinDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F42AB1D05700ABC993 /* CoinDetailView.swift */; };
 		BC7481F72AB1D29000ABC993 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F62AB1D29000ABC993 /* ChartView.swift */; };
+		BC7481F92AB316CD00ABC993 /* CryptoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F82AB316CD00ABC993 /* CryptoViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +58,7 @@
 		BC7481F22AB1644C00ABC993 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		BC7481F42AB1D05700ABC993 /* CoinDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailView.swift; sourceTree = "<group>"; };
 		BC7481F62AB1D29000ABC993 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
+		BC7481F82AB316CD00ABC993 /* CryptoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				BC7481EA2AB05CAE00ABC993 /* HomeViewModel.swift */,
+				BC7481F82AB316CD00ABC993 /* CryptoViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -258,6 +261,7 @@
 				BC7481DE2AAD7DEA00ABC993 /* MainView.swift in Sources */,
 				BC7481D62AAD7D0500ABC993 /* HomeView.swift in Sources */,
 				BC7481F52AB1D05700ABC993 /* CoinDetailView.swift in Sources */,
+				BC7481F92AB316CD00ABC993 /* CryptoViewModel.swift in Sources */,
 				BC7481F12AB0614F00ABC993 /* CoinRow.swift in Sources */,
 				BC7481F72AB1D29000ABC993 /* ChartView.swift in Sources */,
 				BC7481E32AAD9AE500ABC993 /* AddCoinView.swift in Sources */,

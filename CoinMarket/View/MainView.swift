@@ -18,7 +18,7 @@ struct MainView: View {
     var body: some View {
         ZStack {
             TabView(selection: $selectedTab) {
-                HomeView()
+                HomeView(coin: DeveloperPreview.instance.coin)
                     .tabItem {
                         if !isShownAdd {
                             Image(systemName: "house.fill")
