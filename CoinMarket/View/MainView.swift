@@ -12,17 +12,20 @@ struct MainView: View {
     @State private var lastSelectedTab = 0
     @State private var isShownAdd: Bool = false
     
+    @StateObject private var vm = HomeViewModel()
+    
     
     var body: some View {
         ZStack {
             TabView(selection: $selectedTab) {
-                HomeView()
+                HomeView(coin: DeveloperPreview.instance.coin)
                     .tabItem {
                         if !isShownAdd {
                             Image(systemName: "house.fill")
                         }
                             
                     }
+                    .environmentObject(vm)
                     .tag(0)
                     
                 CryptoView()
@@ -73,7 +76,7 @@ struct MainView: View {
             VStack {
                 Spacer()
                 AddCoinView(isShown: $isShownAdd)
-            }.padding(EdgeInsets(top: 0, leading: 0, bottom: 60, trailing: 0))
+            }.padding(EdgeInsets(top: 0, leading: 0, bottom: 50, trailing: 0))
             
             VStack {
                 Spacer()
