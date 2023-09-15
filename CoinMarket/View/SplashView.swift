@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SplashView: View {
     @State var nextView: Bool = false
+    @State var registerView: Bool = false
     var body: some View {
         ZStack {
             Color(UIColor(red: 1.00, green: 0.87, blue: 0.16, alpha: 1.00))
@@ -22,8 +23,9 @@ struct SplashView: View {
                     .foregroundColor(.gray)
                 Spacer()
                 VStack(spacing: 30) {
+                    LoginView()
                     Button(action: {
-                        
+                        registerView = true
                     }) {
                         Text("Register Now")
                             .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
@@ -50,6 +52,9 @@ struct SplashView: View {
             .padding()
         }.fullScreenCover(isPresented: $nextView) {
             MainView()
+        }
+        .fullScreenCover(isPresented: $registerView) {
+            RegisterView()
         }
     }
 }
