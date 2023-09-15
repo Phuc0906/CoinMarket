@@ -9,13 +9,9 @@ import SwiftUI
 
 
 struct ContentView: View {
-    
-    
-    
     var body: some View {
         // MARK: need to have a condition to go straight to home or display splash view
-        
-        SplashView()
+        Text("Color")
     }
 }
 

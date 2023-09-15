@@ -12,10 +12,14 @@ import Firebase
 struct CoinMarketApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
+    @StateObject private var vm = HomeViewModel()
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            NavigationView(content: {
+                HomeView()
+                    .navigationBarHidden(true)
+            })
+            .environmentObject(vm)
         }
     }
 }
