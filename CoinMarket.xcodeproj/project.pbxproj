@@ -13,7 +13,6 @@
 		BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481BB2AAAF3B400ABC993 /* ContentView.swift */; };
 		BC7481BE2AAAF3B500ABC993 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC7481BD2AAAF3B500ABC993 /* Assets.xcassets */; };
 		BC7481C12AAAF3B500ABC993 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC7481C02AAAF3B500ABC993 /* Preview Assets.xcassets */; };
-		BC7481C82AAC6E7000ABC993 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC7481C72AAC6E7000ABC993 /* GoogleService-Info.plist */; };
 		BC7481CB2AAC6F7500ABC993 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BC7481CA2AAC6F7500ABC993 /* FirebaseAnalytics */; };
 		BC7481CD2AAC6F7500ABC993 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BC7481CC2AAC6F7500ABC993 /* FirebaseAuth */; };
 		BC7481CF2AAC6F7500ABC993 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = BC7481CE2AAC6F7500ABC993 /* FirebaseFirestore */; };
@@ -35,6 +34,7 @@
 		BC7481F52AB1D05700ABC993 /* CoinDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F42AB1D05700ABC993 /* CoinDetailView.swift */; };
 		BC7481F72AB1D29000ABC993 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F62AB1D29000ABC993 /* ChartView.swift */; };
 		BC7481F92AB316CD00ABC993 /* CryptoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F82AB316CD00ABC993 /* CryptoViewModel.swift */; };
+		BC7481FB2AB3F6E600ABC993 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC7481FA2AB3F6E600ABC993 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,7 +45,6 @@
 		BC7481BB2AAAF3B400ABC993 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		BC7481BD2AAAF3B500ABC993 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC7481C02AAAF3B500ABC993 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		BC7481C72AAC6E7000ABC993 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BC7481D32AAD7CBF00ABC993 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		BC7481D52AAD7D0500ABC993 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		BC7481D72AAD7D0E00ABC993 /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
@@ -63,6 +62,7 @@
 		BC7481F42AB1D05700ABC993 /* CoinDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinDetailView.swift; sourceTree = "<group>"; };
 		BC7481F62AB1D29000ABC993 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		BC7481F82AB316CD00ABC993 /* CryptoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoViewModel.swift; sourceTree = "<group>"; };
+		BC7481FA2AB3F6E600ABC993 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,7 +106,7 @@
 				BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */,
 				BC7481BB2AAAF3B400ABC993 /* ContentView.swift */,
 				BC7481BD2AAAF3B500ABC993 /* Assets.xcassets */,
-				BC7481C72AAC6E7000ABC993 /* GoogleService-Info.plist */,
+				BC7481FA2AB3F6E600ABC993 /* GoogleService-Info.plist */,
 				BC7481BF2AAAF3B500ABC993 /* Preview Content */,
 			);
 			path = CoinMarket;
@@ -251,8 +251,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC7481C12AAAF3B500ABC993 /* Preview Assets.xcassets in Resources */,
+				BC7481FB2AB3F6E600ABC993 /* GoogleService-Info.plist in Resources */,
 				BC7481BE2AAAF3B500ABC993 /* Assets.xcassets in Resources */,
-				BC7481C82AAC6E7000ABC993 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
