@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		049DAFD52AB4013600671A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049DAFD42AB4013600671A1D /* Assets.xcassets */; };
 		58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6E92AB32DEB002350FF /* RegisterView.swift */; };
 		58A1C6EC2AB32EF8002350FF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6EB2AB32EF8002350FF /* LoginView.swift */; };
 		BC7481BA2AAAF3B400ABC993 /* CoinMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */; };
 		BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481BB2AAAF3B400ABC993 /* ContentView.swift */; };
-		BC7481BE2AAAF3B500ABC993 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC7481BD2AAAF3B500ABC993 /* Assets.xcassets */; };
 		BC7481C12AAAF3B500ABC993 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC7481C02AAAF3B500ABC993 /* Preview Assets.xcassets */; };
 		BC7481CB2AAC6F7500ABC993 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = BC7481CA2AAC6F7500ABC993 /* FirebaseAnalytics */; };
 		BC7481CD2AAC6F7500ABC993 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = BC7481CC2AAC6F7500ABC993 /* FirebaseAuth */; };
@@ -38,13 +38,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		049DAFD42AB4013600671A1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Downloads/Resources/Assets.xcassets; sourceTree = "<group>"; };
 		58A1C6E92AB32DEB002350FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		58A1C6EB2AB32EF8002350FF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		58A1C6ED2AB40137002350FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BC7481B62AAAF3B400ABC993 /* CoinMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarketApp.swift; sourceTree = "<group>"; };
 		BC7481BB2AAAF3B400ABC993 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		BC7481BD2AAAF3B500ABC993 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC7481C02AAAF3B500ABC993 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		BC7481D32AAD7CBF00ABC993 /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		BC7481D52AAD7D0500ABC993 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 				BC7481D22AAD7CB300ABC993 /* View */,
 				BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */,
 				BC7481BB2AAAF3B400ABC993 /* ContentView.swift */,
-				BC7481BD2AAAF3B500ABC993 /* Assets.xcassets */,
+				049DAFD42AB4013600671A1D /* Assets.xcassets */,
 				BC7481FE2AB3FCCE00ABC993 /* GoogleService-Info.plist */,
 				BC7481BF2AAAF3B500ABC993 /* Preview Content */,
 			);
@@ -253,7 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC7481C12AAAF3B500ABC993 /* Preview Assets.xcassets in Resources */,
-				BC7481BE2AAAF3B500ABC993 /* Assets.xcassets in Resources */,
+				049DAFD52AB4013600671A1D /* Assets.xcassets in Resources */,
 				BC7481FF2AB3FCCE00ABC993 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
