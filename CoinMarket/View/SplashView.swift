@@ -23,7 +23,6 @@ struct SplashView: View {
                     .foregroundColor(.gray)
                 Spacer()
                 VStack(spacing: 30) {
-                    LoginView()
                     Button(action: {
                         registerView = true
                     }) {
@@ -39,7 +38,6 @@ struct SplashView: View {
                         HStack {
                             Text("Get start")
                                 .font(.title2)
-                                
                             Image(systemName: "arrow.right")
                                 .foregroundColor(.black)
                         }.padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))

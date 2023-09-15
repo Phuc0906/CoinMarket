@@ -9,13 +9,13 @@ import SwiftUI
 
 
 struct ContentView: View {
-    
-    
-    
+    @StateObject var authViewModel = AuthViewModel()
     var body: some View {
-        // MARK: need to have a condition to go straight to home or display splash view
-        
-        SplashView()
+        if let user = authViewModel.user {
+            MainView()
+        } else {
+            SplashView()
+        }
     }
 }
 
