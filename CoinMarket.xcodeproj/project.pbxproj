@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		049DAFD52AB4013600671A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049DAFD42AB4013600671A1D /* Assets.xcassets */; };
+		049DAFD72AB4046B00671A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049DAFD62AB4046B00671A1D /* Assets.xcassets */; };
 		58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6E92AB32DEB002350FF /* RegisterView.swift */; };
 		58A1C6EC2AB32EF8002350FF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6EB2AB32EF8002350FF /* LoginView.swift */; };
 		BC7481BA2AAAF3B400ABC993 /* CoinMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */; };
@@ -38,7 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		049DAFD42AB4013600671A1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ../../../Downloads/Resources/Assets.xcassets; sourceTree = "<group>"; };
+		049DAFD62AB4046B00671A1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		58A1C6E92AB32DEB002350FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		58A1C6EB2AB32EF8002350FF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		58A1C6ED2AB40137002350FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 				BC7481D22AAD7CB300ABC993 /* View */,
 				BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */,
 				BC7481BB2AAAF3B400ABC993 /* ContentView.swift */,
-				049DAFD42AB4013600671A1D /* Assets.xcassets */,
+				049DAFD62AB4046B00671A1D /* Assets.xcassets */,
 				BC7481FE2AB3FCCE00ABC993 /* GoogleService-Info.plist */,
 				BC7481BF2AAAF3B500ABC993 /* Preview Content */,
 			);
@@ -253,7 +253,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC7481C12AAAF3B500ABC993 /* Preview Assets.xcassets in Resources */,
-				049DAFD52AB4013600671A1D /* Assets.xcassets in Resources */,
+				049DAFD72AB4046B00671A1D /* Assets.xcassets in Resources */,
 				BC7481FF2AB3FCCE00ABC993 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
