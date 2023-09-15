@@ -16,38 +16,58 @@ struct RegisterView: View {
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
-        VStack {
-            Text("Register")
-                .font(.largeTitle)
-                .padding()
+        ZStack{
+            Color(UIColor(red: 1.00, green: 0.87, blue: 0.16, alpha: 1.00))
+                .edgesIgnoringSafeArea(.all)
             
-            TextField("Email", text: $email)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            SecureField("Password", text: $password)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            SecureField("Confirm Password", text: $confirmPassword)
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-                .padding()
-            
-            Text(errorMessage)
-                .foregroundColor(.red)
-                .padding()
-            
-            Button(action: register) {
-                Text("Register")
-                    .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
-                    .font(.title2)
-                    .background(.white)
-                    .cornerRadius(30)
+            VStack {
+                Text("REGISTER")
+                    .font(.largeTitle)
+                    .bold()
+                    .foregroundColor(.white)
+                    .padding()
+                
+                
+                TextField("Email", text: $email)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(color: .white.opacity(0.05), radius: 70)
+                    .padding()
+                
+                SecureField("Password", text: $password)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(color: .white.opacity(0.05), radius: 70)
+                    .padding()
+                
+                SecureField("Confirm Password", text: $confirmPassword)
+                    .textFieldStyle(RoundedBorderTextFieldStyle())
+                    .background(Color.white)
+                    .cornerRadius(10)
+                    .shadow(color: .white.opacity(0.05), radius: 70)
+                    .padding()
+                
+                Text(errorMessage)
+                    .foregroundColor(.red)
+                    .padding()
+                
+                Button(action: register) {
+                    Text("Register")
+                        .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                        .font(.title2)
+                        .foregroundColor(.blue)
+                        .background(.white)
+                        .cornerRadius(30)
+                }
+                
+                
+                Spacer()
             }
-            
-            Spacer()
+            .padding()
         }
-        .padding()
+        
     }
     
     func register() {
@@ -56,7 +76,6 @@ struct RegisterView: View {
                 if let error = error {
                     errorMessage = error.localizedDescription
                 } else {
-                    // Registration successful
                     presentationMode.wrappedValue.dismiss()
                 }
             }
@@ -64,7 +83,7 @@ struct RegisterView: View {
             errorMessage = "Passwords do not match."
         }
     }
-
+    
 }
 
 struct RegisterView_Previews: PreviewProvider {

@@ -40,6 +40,7 @@
 /* Begin PBXFileReference section */
 		58A1C6E92AB32DEB002350FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		58A1C6EB2AB32EF8002350FF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		58A1C6ED2AB40137002350FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BC7481B62AAAF3B400ABC993 /* CoinMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarketApp.swift; sourceTree = "<group>"; };
 		BC7481BB2AAAF3B400ABC993 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -99,6 +100,7 @@
 		BC7481B82AAAF3B400ABC993 /* CoinMarket */ = {
 			isa = PBXGroup;
 			children = (
+				58A1C6ED2AB40137002350FF /* Info.plist */,
 				BC7481EC2AB05FAC00ABC993 /* Extension */,
 				BC7481E42AAF791700ABC993 /* Model */,
 				BC7481E92AB05C8600ABC993 /* ViewModel */,
@@ -415,6 +417,7 @@
 				DEVELOPMENT_TEAM = 8U646G56Y3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CoinMarket/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -444,6 +447,7 @@
 				DEVELOPMENT_TEAM = 8U646G56Y3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CoinMarket/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
