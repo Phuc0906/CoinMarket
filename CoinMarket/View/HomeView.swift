@@ -19,6 +19,14 @@ struct HomeView: View {
                 
                 // MARK: Wallet
                 VStack {
+                    HStack {
+                        Text("Home")
+                            .font(.title)
+                            .foregroundColor(.black)
+                            .fontWeight(.bold)
+                        Spacer()
+                    }
+                    
                     VStack(alignment: .leading) {
                         HStack {
                             Image(systemName: "dollarsign")
@@ -63,7 +71,7 @@ struct HomeView: View {
                         }
                     }.padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
                     Spacer()
-                }.navigationTitle(Text("Home"))
+                }
             }
         }
     }

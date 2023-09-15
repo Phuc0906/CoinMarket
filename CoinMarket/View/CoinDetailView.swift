@@ -9,11 +9,14 @@ import SwiftUI
 
 struct CoinDetailView: View {
     @State var coin: Coin
+    @State private var toLogin = false
     
     var body: some View {
         NavigationView {
             ScrollView {
-                VStack {
+                VStack(spacing: 15) {
+                    
+                        
                     coinIntroduction
                     briefRecord
                     ChartView(coin: coin)
@@ -22,6 +25,7 @@ struct CoinDetailView: View {
                         VStack {
                             Button {
                                 // move to login page
+                                toLogin = true
                             } label: {
                                 Text("Login")
                                     .foregroundColor(.white)
@@ -34,11 +38,10 @@ struct CoinDetailView: View {
                     }.background(.yellow)
                         .cornerRadius(30)
                     
-                }.navigationBarTitle("\(coin.name)", displayMode: .inline)
-                    .toolbarBackground(Color.red, for: .navigationBar)
-                    .toolbarBackground(.visible, for: .navigationBar)
-                
-            }
+                }
+            }.navigationTitle(Text("\(coin.name)"))
+        }.fullScreenCover(isPresented: $toLogin) {
+            LoginView()
         }
     }
 }
