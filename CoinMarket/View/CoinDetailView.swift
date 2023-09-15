@@ -6,10 +6,14 @@
 //
 
 import SwiftUI
+import Firebase
 
 struct CoinDetailView: View {
+    @EnvironmentObject private var vm: DetailViewModel
     @State var coin: Coin
     @State private var toLogin = false
+    @State private var toBuyView = false
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         NavigationView {
@@ -21,36 +25,23 @@ struct CoinDetailView: View {
                     briefRecord
                     ChartView(coin: coin)
                         .frame(height: UIScreen.main.bounds.height / 2.7)
-                    HStack {
-                        VStack {
-                            Button {
-                                // move to login page
-                                toLogin = true
-                            } label: {
-                                Text("Login")
-                                    .foregroundColor(.white)
-                                    .cornerRadius(20)
-                            }
-                            
-                        }.frame(width: UIScreen.main.bounds.width / 2)
-                            .cornerRadius(20)
-                            .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
-                    }.background(.yellow)
-                        .cornerRadius(30)
                     
+                    functionalButton
                 }
             }.navigationTitle(Text("\(coin.name)"))
         }.fullScreenCover(isPresented: $toLogin) {
             LoginView()
+        }.fullScreenCover(isPresented: $toBuyView) {
+            BuyView(coin: coin)
         }
     }
 }
 
-struct CoinDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        CoinDetailView(coin: dev.coin)
-    }
-}
+//struct CoinDetailView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        CoinDetailView(coin: dev.coin)
+//    }
+//}
 
 extension CoinDetailView {
     private var coinIntroduction: some View {
@@ -79,9 +70,9 @@ extension CoinDetailView {
             Spacer()
             HStack {
                 Text("\(String(format: "%.2f", coin.ath_change_percentage))")
-                    .foregroundColor(.white)
+                    .foregroundColor(colorScheme == .dark ? .black : .white)
                 Image(systemName: coin.ath_change_percentage > 0 ? "chevron.up" : "chevron.down")
-                    .foregroundColor(.white)
+                    .foregroundColor(colorScheme == .dark ? .black : .white)
             }
             .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 5))
             .background(.yellow)
@@ -111,5 +102,63 @@ extension CoinDetailView {
                 Text("$ \(String(format: "%.2f", ((coin.sparkline_in_7d.price.max() ?? 0) + (coin.sparkline_in_7d.price.min() ?? 0)) / 2 ))")
             }
         }.padding(EdgeInsets(top: 20, leading: 20, bottom: 20, trailing: 20))
+    }
+    
+    private var functionalButton: some View {
+        VStack {
+            if let user = vm.user {
+                HStack {
+                    HStack {
+                        VStack {
+                            Button {
+                                // MARK: move to sell page
+                            } label: {
+                                Text("Sell")
+                                    .foregroundColor(colorScheme == .dark ? .black : .white)
+                                    .cornerRadius(20)
+                            }
+                            
+                        }.frame(width: UIScreen.main.bounds.width / 3)
+                            .cornerRadius(20)
+                            .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                    }.background(.yellow)
+                    .cornerRadius(30)
+                    Spacer()
+                    HStack {
+                        VStack {
+                            Button {
+                                // MARK: move to buy page
+                                toBuyView = true
+                            } label: {
+                                Text("Buy")
+                                    .foregroundColor(colorScheme == .dark ? .black : .white)
+                                    .cornerRadius(20)
+                            }
+                            
+                        }.frame(width: UIScreen.main.bounds.width / 3)
+                            .cornerRadius(20)
+                            .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                    }.background(.yellow)
+                    .cornerRadius(30)
+                }.padding(EdgeInsets(top: 5, leading: 20, bottom: 5, trailing: 20))
+            }else {
+                HStack {
+                    VStack {
+                        Button {
+                            // move to login page
+                            toLogin = true
+                        } label: {
+                            Text("Login")
+                                .foregroundColor(colorScheme == .dark ? .black : .white)
+                                .cornerRadius(20)
+                        }
+                        
+                    }.frame(width: UIScreen.main.bounds.width / 2)
+                        .cornerRadius(20)
+                        .padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                }.background(.yellow)
+                    .cornerRadius(30)
+            }
+        }
     }
 }

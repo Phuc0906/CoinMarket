@@ -35,6 +35,9 @@
 		BC7481F72AB1D29000ABC993 /* ChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F62AB1D29000ABC993 /* ChartView.swift */; };
 		BC7481F92AB316CD00ABC993 /* CryptoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481F82AB316CD00ABC993 /* CryptoViewModel.swift */; };
 		BC7481FF2AB3FCCE00ABC993 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BC7481FE2AB3FCCE00ABC993 /* GoogleService-Info.plist */; };
+		BC7482012AB47C0E00ABC993 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482002AB47C0E00ABC993 /* DetailViewModel.swift */; };
+		BC7482032AB48B0000ABC993 /* BuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482022AB48B0000ABC993 /* BuyView.swift */; };
+		BC7482052AB4B9D600ABC993 /* CustomKeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482042AB4B9D600ABC993 /* CustomKeyPad.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -64,6 +67,9 @@
 		BC7481F62AB1D29000ABC993 /* ChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartView.swift; sourceTree = "<group>"; };
 		BC7481F82AB316CD00ABC993 /* CryptoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoViewModel.swift; sourceTree = "<group>"; };
 		BC7481FE2AB3FCCE00ABC993 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BC7482002AB47C0E00ABC993 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
+		BC7482022AB48B0000ABC993 /* BuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyView.swift; sourceTree = "<group>"; };
+		BC7482042AB4B9D600ABC993 /* CustomKeyPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyPad.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,7 @@
 				BC7481DD2AAD7DEA00ABC993 /* MainView.swift */,
 				BC7481DF2AAD877900ABC993 /* AddButtonCustomView.swift */,
 				BC7481F42AB1D05700ABC993 /* CoinDetailView.swift */,
+				BC7482022AB48B0000ABC993 /* BuyView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -163,6 +170,7 @@
 			children = (
 				BC7481EA2AB05CAE00ABC993 /* HomeViewModel.swift */,
 				BC7481F82AB316CD00ABC993 /* CryptoViewModel.swift */,
+				BC7482002AB47C0E00ABC993 /* DetailViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -181,6 +189,7 @@
 			children = (
 				BC7481F02AB0614F00ABC993 /* CoinRow.swift */,
 				BC7481F62AB1D29000ABC993 /* ChartView.swift */,
+				BC7482042AB4B9D600ABC993 /* CustomKeyPad.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -266,6 +275,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */,
+				BC7482032AB48B0000ABC993 /* BuyView.swift in Sources */,
 				58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */,
 				BC7481DE2AAD7DEA00ABC993 /* MainView.swift in Sources */,
 				BC7481D62AAD7D0500ABC993 /* HomeView.swift in Sources */,
@@ -274,6 +284,7 @@
 				BC7481F12AB0614F00ABC993 /* CoinRow.swift in Sources */,
 				BC7481F72AB1D29000ABC993 /* ChartView.swift in Sources */,
 				BC7481E32AAD9AE500ABC993 /* AddCoinView.swift in Sources */,
+				BC7482012AB47C0E00ABC993 /* DetailViewModel.swift in Sources */,
 				BC7481F32AB1644C00ABC993 /* Color.swift in Sources */,
 				BC7481D82AAD7D0E00ABC993 /* ProfileView.swift in Sources */,
 				BC7481EE2AB0600E00ABC993 /* PreviewProvider.swift in Sources */,
@@ -285,6 +296,7 @@
 				BC7481E82AAF7A0600ABC993 /* CoinManager.swift in Sources */,
 				BC7481DA2AAD7D6800ABC993 /* CryptoView.swift in Sources */,
 				BC7481E62AAF793000ABC993 /* Coin.swift in Sources */,
+				BC7482052AB4B9D600ABC993 /* CustomKeyPad.swift in Sources */,
 				BC7481E02AAD877900ABC993 /* AddButtonCustomView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
