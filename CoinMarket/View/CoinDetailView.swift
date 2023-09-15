@@ -34,7 +34,10 @@ struct CoinDetailView: View {
                     }.background(.yellow)
                         .cornerRadius(30)
                     
-                }.navigationTitle(Text("\(coin.name)"))
+                }.navigationBarTitle("\(coin.name)", displayMode: .inline)
+                    .toolbarBackground(Color.red, for: .navigationBar)
+                    .toolbarBackground(.visible, for: .navigationBar)
+                
             }
         }
     }
