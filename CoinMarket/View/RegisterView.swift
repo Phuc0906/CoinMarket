@@ -68,11 +68,7 @@ struct RegisterView: View {
                     
                     Button(action: register) {
                         Text("Register")
-                            .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 40))
-                            .frame(maxWidth: .infinity, maxHeight: UIDevice.isIPhone ? 50 : 70)
-                            .background(.yellow)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                            .modifier(LongButton())
                     }
                     
                 }

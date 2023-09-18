@@ -57,11 +57,8 @@ struct LoginView: View {
                     HStack (spacing: 10){
                         Button(action: login) {
                             Text("Log in")
-                                .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 40))
-                                .frame(maxWidth: .infinity, maxHeight: UIDevice.isIPhone ? 50 : 70)
-                                .background(.yellow)
-                                .foregroundColor(.white)
-                                .cornerRadius(10)
+                                .modifier(LongButton())
+                                
                         }
                         
                         
