@@ -12,6 +12,10 @@ struct SplashView: View {
     @State var registerView: Bool = false
     var body: some View {
         ZStack {
+            Color.theme.background
+                .ignoresSafeArea()
+            
+            LoginView()
             Color(UIColor(red: 1.00, green: 0.87, blue: 0.16, alpha: 1.00))
                 .edgesIgnoringSafeArea(.all)
             VStack {
@@ -60,5 +64,11 @@ struct SplashView: View {
 struct SplashView_Previews: PreviewProvider {
     static var previews: some View {
         SplashView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
+            .previewDisplayName("iPhone 14 Pro Max")
+        
+        SplashView()
+            .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch)"))
+            .previewDisplayName("iPad Pro")
     }
 }

@@ -4,7 +4,11 @@
 <dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string></string>
+		<string>WixMadeforDisplay-Regular.ttf</string>
+		<string>WixMadeforDisplay-Bold.ttf</string>
+		<string>WixMadeforDisplay-SemiBold.ttf</string>
+		<string>WixMadeforDisplay-Medium.ttf</string>
+		<string>WixMadeforDisplay-ExtraBold.ttf</string>
 	</array>
 </dict>
 </plist>
