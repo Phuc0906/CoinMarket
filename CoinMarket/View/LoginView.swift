@@ -19,14 +19,32 @@ struct LoginView: View {
     @State var nextView: Bool = false
     @State var RegisterView: Bool = false
     
-
+    @State private var language = false
+    
+    
     var body: some View {
         ZStack{
             Color.theme.background
                 .ignoresSafeArea()
             
+            
+            
             // MARK: - BODY
             GeometryReader{ geometry in
+                HStack{
+                    Spacer()
+                    Button(action: {
+                        // Add your action here
+                        print("Change language")
+                        language.toggle()
+                    }) {
+                        Image(language ? "uk" : "vietnam")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: UIDevice.isIPhone ? 40 : 50)
+                    }
+                }
+                .padding(.horizontal, 10)
                 
                 VStack (alignment: .leading, spacing: 20){
                     
@@ -36,12 +54,12 @@ struct LoginView: View {
                             .resizable()
                             .scaledToFit()
                             .frame(height: UIDevice.isIPhone ? 100 : 150)
-                        Text("App name")
+                        Text("CoinMarket")
                             .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
                     }
                     
                     // MARK: - TAGLINE
-                    Text("Nice to see you again")
+                    Text(language ? "Nice to see you again" : "Rất vui được gặp lại bạn")
                         .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
                         .padding(.vertical)
                     
@@ -49,14 +67,14 @@ struct LoginView: View {
                     VStack(alignment: .leading, spacing: 5){
                         Text("Email")
                             .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
-                        TextField("Email", text: $email)
+                        TextField("abc @gmail.com", text: $email)
                             .modifier(TextFieldModifier())
                     }
                     
                     VStack(alignment: .leading, spacing: 5){
-                        Text("Password")
+                        Text(language ? "Password" : "Mật khẩu")
                             .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
-                        SecureField("Password", text: $password)
+                        SecureField(language ? "Password" : "Mật khẩu", text: $password)
                             .modifier(TextFieldModifier())
                     }
                     
@@ -69,7 +87,7 @@ struct LoginView: View {
                     // MARK: - LOGIN AND FACEID
                     HStack (spacing: 10){
                         Button(action: login) {
-                            Text("Log in")
+                            Text(language ? "Log in" : "Đăng nhập")
                                 .modifier(LongButton())
                         }
                         
@@ -90,7 +108,7 @@ struct LoginView: View {
                         Button(action: {
                             RegisterView = true
                         }) {
-                            Text("or Register Now")
+                            Text(language ? "or Register Now!" : "hoặc Đăng kí ngay!")
                                 .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 30))
                         }
                         .padding(.bottom, 30)
@@ -107,11 +125,11 @@ struct LoginView: View {
                                         startRadius: 0,
                                         endRadius: 300
                                     ))
-                                    // Adjust the circle size
+                                // Adjust the circle size
                                     .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.3 : geometry.size.width * 0.2, height: UIDevice.isIPhone ? geometry.size.width * 0.3 : geometry.size.width * 0.2)
                                     .shadow(radius: 5)
                                 
-                                Text("Get start")
+                                Text(language ? "Get start" : "Bắt đầu")
                                     .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 22 : 30))
                                     .foregroundColor(Color.theme.background)
                             }
@@ -123,6 +141,8 @@ struct LoginView: View {
                 .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.8 : geometry.size.width * 0.6)
                 .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
             }
+            
+            
             
         }
         .fullScreenCover(isPresented: $nextView) {

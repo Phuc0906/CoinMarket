@@ -15,6 +15,8 @@ struct HomeView: View {
     @State var coin: Coin
     @StateObject private var detailVM = DetailViewModel()
     
+    @State private var language = true
+    
     var body: some View {
         NavigationView {
             ScrollView {
@@ -22,11 +24,24 @@ struct HomeView: View {
                 // MARK: Wallet
                 VStack {
                     HStack {
-                        Text("Home")
-                            .font(.title)
+                        Text(language ? "Home" : "Trang chủ")
+                            .font(.custom("WixMadeForDisplay-ExtraBold", size: UIDevice.isIPhone ? 40 : 50))
                             .foregroundColor(colorScheme == .dark ? .white : .black)
                             .fontWeight(.bold)
                         Spacer()
+                        
+                        
+                        Button(action: {
+                            // Add your action here
+                            print("Change language")
+                            language.toggle()
+                        }) {
+                            Image(language ? "uk" : "vietnam")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIDevice.isIPhone ? 40 : 50)
+                        }
+                        
                     }
                     
                     VStack(alignment: .leading) {
@@ -34,7 +49,7 @@ struct HomeView: View {
                             Image(systemName: "dollarsign")
                                 .resizable()
                                 .frame(width: UIScreen.main.bounds.width / 20, height: UIScreen.main.bounds.width / 15)
-                            Text("Your wallet")
+                            Text(language ? "Your wallet" : "Ví của bạn")
                                 .font(.title)
                                 .fontWeight(.bold)
                             Spacer()
@@ -57,9 +72,9 @@ struct HomeView: View {
                 VStack {
                     VStack {
                         HStack {
-                            Text("Top stock")
+                            Text(language ? "Top stock" : "Phổ biến")
                             Spacer()
-                            Text("See all")
+                            Text(language ? "See all" : "Tất cả")
                                 .onTapGesture {
                                     selectedTab = 1
                                 }
