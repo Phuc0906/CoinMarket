@@ -15,6 +15,9 @@ struct RegisterView: View {
     @State private var errorMessage = ""
     @Environment(\.presentationMode) var presentationMode
     
+    @State var nextView: Bool = false
+    @State var LoginView: Bool = false
+    
     var body: some View {
         
         ZStack{
@@ -30,7 +33,6 @@ struct RegisterView: View {
                         Text("App name")
                             .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
                     }
-                    .padding(.bottom, 50)
                     
                     Text("Let's start your journey")
                         .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
@@ -71,12 +73,53 @@ struct RegisterView: View {
                             .modifier(LongButton())
                     }
                     
+                    VStack{
+                        Button(action: {
+                            LoginView = true
+                        }) {
+                            Text("Already have an account?")
+                                .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 30))
+                        }
+                        
+                        // MARK: - BUTTON START
+                        Button(action: {
+                            nextView = true
+                        }) {
+                            ZStack {
+                                Circle()
+                                    .fill(RadialGradient(
+                                        gradient: Gradient(colors: [Color.yellow, Color.orange]),
+                                        center: .center,
+                                        startRadius: 0,
+                                        endRadius: 300
+                                    ))
+                                // Adjust the circle size
+                                    .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.3 : geometry.size.width * 0.2, height: UIDevice.isIPhone ? geometry.size.width * 0.3 : geometry.size.width * 0.2)
+                                    .shadow(radius: 5)
+                                
+                                Text("Get start")
+                                    .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 35))
+                                    .foregroundColor(Color.theme.background)
+                            }
+                            
+                        }
+                    }
+                    .frame(maxWidth: .infinity)
+                    
                 }
-                .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.8 : geometry.size.width * 0.5)
+                .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.8 : geometry.size.width * 0.6)
                 .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
             }
             
         }
+        .fullScreenCover(isPresented: $nextView) {
+            MainView()
+        }
+        
+        .fullScreenCover(isPresented: $LoginView) {
+            CoinMarket.LoginView()
+        }
+        
     }
     
     func register() {
@@ -98,6 +141,16 @@ struct RegisterView: View {
 struct RegisterView_Previews: PreviewProvider {
     static var previews: some View {
         RegisterView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
+            .previewDisplayName("iPhone 14 Pro Max")
+        
+        RegisterView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+            .previewDisplayName("iPhone 14")
+        
+        RegisterView()
+            .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch)"))
+            .previewDisplayName("iPad Pro")
     }
 }
 

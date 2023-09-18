@@ -16,8 +16,8 @@ struct LoginView: View {
     @State private var password = ""
     @State private var errorMessage = ""
     
-    @Binding var nextView: Bool
-    @Binding var RegisterView: Bool
+    @State var nextView: Bool = false
+    @State var RegisterView: Bool = false
     
 
     var body: some View {
@@ -39,7 +39,6 @@ struct LoginView: View {
                         Text("App name")
                             .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
                     }
-                    .padding(.bottom, 50)
                     
                     // MARK: - TAGLINE
                     Text("Nice to see you again")
@@ -87,13 +86,14 @@ struct LoginView: View {
                     }
                     
                     // MARK: - FOOTER
-                    VStack(spacing: 100){
+                    VStack{
                         Button(action: {
                             RegisterView = true
                         }) {
                             Text("or Register Now")
                                 .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 30))
                         }
+                        .padding(.bottom, 30)
                         
                         // MARK: - BUTTON START
                         Button(action: {
@@ -108,11 +108,11 @@ struct LoginView: View {
                                         endRadius: 300
                                     ))
                                     // Adjust the circle size
-                                    .frame(width: UIDevice.isIPhone ? 150 : 200, height: UIDevice.isIPhone ? 150 : 200)
+                                    .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.3 : geometry.size.width * 0.2, height: UIDevice.isIPhone ? geometry.size.width * 0.3 : geometry.size.width * 0.2)
                                     .shadow(radius: 5)
                                 
                                 Text("Get start")
-                                    .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 35))
+                                    .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 22 : 30))
                                     .foregroundColor(Color.theme.background)
                             }
                             
@@ -120,10 +120,16 @@ struct LoginView: View {
                     }
                     .frame(maxWidth: .infinity)
                 }
-                .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.8 : geometry.size.width * 0.5)
+                .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.8 : geometry.size.width * 0.6)
                 .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
             }
             
+        }
+        .fullScreenCover(isPresented: $nextView) {
+            MainView()
+        }
+        .fullScreenCover(isPresented: $RegisterView) {
+            CoinMarket.RegisterView()
         }
     }
     
@@ -145,11 +151,15 @@ struct LoginView_Previews: PreviewProvider {
     @State private static var registerView = false
     
     static var previews: some View {
-        LoginView(nextView: $nextView, RegisterView: $registerView)
+        LoginView()
             .previewDevice(PreviewDevice(rawValue: "iPhone 14 Pro Max"))
             .previewDisplayName("iPhone 14 Pro Max")
         
-        LoginView(nextView: $nextView, RegisterView: $registerView)
+        LoginView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+            .previewDisplayName("iPhone 14")
+        
+        LoginView()
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch)"))
             .previewDisplayName("iPad Pro")
     }
