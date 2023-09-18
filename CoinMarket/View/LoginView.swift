@@ -54,14 +54,30 @@ struct LoginView: View {
                             .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 16 : 25))
                     }
                     
-                    Button(action: login) {
-                        Text("Log in")
-                            .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 40))
-                            .frame(maxWidth: .infinity, maxHeight: UIDevice.isIPhone ? 50 : 70)
-                            .background(.yellow)
-                            .foregroundColor(.white)
-                            .cornerRadius(10)
+                    HStack (spacing: 10){
+                        Button(action: login) {
+                            Text("Log in")
+                                .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 40))
+                                .frame(maxWidth: .infinity, maxHeight: UIDevice.isIPhone ? 50 : 70)
+                                .background(.yellow)
+                                .foregroundColor(.white)
+                                .cornerRadius(10)
+                        }
+                        
+                        
+                        Button(action: login){
+                            Image("face-scanner")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: UIDevice.isIPhone ? 40 : 60)
+                                .padding(5)
+                        }
+                        .background(Color("TextField"))
+                        .cornerRadius(10)
+                        
                     }
+                    
+                    
                     
                 }
                 .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.8 : geometry.size.width * 0.5)
