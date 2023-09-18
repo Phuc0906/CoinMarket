@@ -13,12 +13,13 @@ struct MainView: View {
     @State private var isShownAdd: Bool = false
     
     @StateObject private var vm = HomeViewModel()
+    @StateObject private var cryptoVM = CryptoViewModel()
     
     
     var body: some View {
         ZStack {
             TabView(selection: $selectedTab) {
-                HomeView(coin: DeveloperPreview.instance.coin)
+                HomeView(selectedTab: $selectedTab , coin: DeveloperPreview.instance.coin)
                     .tabItem {
                         if !isShownAdd {
                             Image(systemName: "house.fill")
@@ -36,9 +37,8 @@ struct MainView: View {
                         
                     }
                     .tag(1)
-                    .onTapGesture {
-                        print("Helo crypto")
-                    }
+                    .environmentObject(cryptoVM)
+                    
                 
                 AddButtonCustomView(lastSelectedTab: $lastSelectedTab, selectedTab: $selectedTab)
                     .tag(9)
@@ -72,6 +72,8 @@ struct MainView: View {
                 lastSelectedTab = (newValue == 9) ? lastSelectedTab : newValue
                 
             }
+            .animation(.easeInOut) // Apply animation to the entire TabView
+            .transition(.slide)
             
             VStack {
                 Spacer()

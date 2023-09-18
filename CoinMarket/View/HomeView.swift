@@ -8,10 +8,12 @@
 import SwiftUI
 
 struct HomeView: View {
+    @Binding var selectedTab: Int
     @EnvironmentObject private var vm: HomeViewModel
     @Environment(\.colorScheme) var colorScheme
     
     @State var coin: Coin
+    @StateObject private var detailVM = DetailViewModel()
     
     var body: some View {
         NavigationView {
@@ -22,7 +24,7 @@ struct HomeView: View {
                     HStack {
                         Text("Home")
                             .font(.title)
-                            .foregroundColor(.black)
+                            .foregroundColor(colorScheme == .dark ? .white : .black)
                             .fontWeight(.bold)
                         Spacer()
                     }
@@ -58,14 +60,14 @@ struct HomeView: View {
                             Text("Top stock")
                             Spacer()
                             Text("See all")
+                                .onTapGesture {
+                                    selectedTab = 1
+                                }
                         }.padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
                     }
                     VStack {
-//                        NavigationLink(destination: CoinDetailView(coin: coin)) {
-//                            CoinRow(coin: coin)
-//                        }
                         ForEach(vm.getTopCoins(), id: \.id) {coin in
-                            NavigationLink(destination: CoinDetailView(coin: coin)) {
+                            NavigationLink(destination: CoinDetailView(coin: coin).environmentObject(detailVM)) {
                                 CoinRow(coin: coin)
                             }
                         }
@@ -77,18 +79,18 @@ struct HomeView: View {
     }
 }
 
-struct HomeView_Previews: PreviewProvider {
-    static var previews: some View {
-        HomeView(coin: dev.coin)
-            .environmentObject(dev.homeVM)
-            .preferredColorScheme(.light)
-    }
-}
-
-struct HomeView_Previews_Dark: PreviewProvider {
-    static var previews: some View {
-        HomeView(coin: dev.coin)
-            .environmentObject(dev.homeVM)
-            .preferredColorScheme(.dark)
-    }
-}
+//struct HomeView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        HomeView(coin: dev.coin)
+//            .environmentObject(dev.homeVM)
+//            .preferredColorScheme(.light)
+//    }
+//}
+//
+//struct HomeView_Previews_Dark: PreviewProvider {
+//    static var previews: some View {
+//        HomeView(coin: dev.coin)
+//            .environmentObject(dev.homeVM)
+//            .preferredColorScheme(.dark)
+//    }
+//}
