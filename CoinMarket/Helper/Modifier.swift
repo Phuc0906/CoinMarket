@@ -26,7 +26,7 @@ struct LongButton: ViewModifier{
             .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 40))
             .frame(maxWidth: .infinity, maxHeight: UIDevice.isIPhone ? 50 : 70)
             .background(.yellow)
-            .foregroundColor(.white)
+            .foregroundColor(Color.theme.background)
             .cornerRadius(10)
     }
 }
