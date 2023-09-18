@@ -107,13 +107,15 @@ struct LoginView: View {
                                         startRadius: 0,
                                         endRadius: 300
                                     ))
-                                    .frame(width: UIDevice.isIPhone ? 150 : 200) // Adjust the circle size
+                                    // Adjust the circle size
+                                    .frame(width: UIDevice.isIPhone ? 150 : 200, height: UIDevice.isIPhone ? 150 : 200)
                                     .shadow(radius: 5)
                                 
                                 Text("Get start")
                                     .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 35))
                                     .foregroundColor(Color.theme.background)
                             }
+                            
                         }
                     }
                     .frame(maxWidth: .infinity)

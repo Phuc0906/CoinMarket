@@ -15,8 +15,8 @@ struct SplashView: View {
             Color.theme.background
                 .ignoresSafeArea()
             
-                LoginView(nextView: $nextView, RegisterView: $registerView)
-                
+            LoginView(nextView: $nextView, RegisterView: $registerView)
+            
         }.fullScreenCover(isPresented: $nextView) {
             MainView()
         }
