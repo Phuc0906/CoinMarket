@@ -8,8 +8,15 @@
 import SwiftUI
 
 struct ProfileView: View {
+    @StateObject private var vm = AuthViewModel()
+    
     var body: some View {
-        Text("Profile View")
+        Button {
+            vm.signOut()
+        } label: {
+            Text("Sign out")
+        }
+
     }
 }
 

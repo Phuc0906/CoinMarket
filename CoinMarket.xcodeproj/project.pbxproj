@@ -10,6 +10,7 @@
 		049DAFD72AB4046B00671A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049DAFD62AB4046B00671A1D /* Assets.xcassets */; };
 		58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6E92AB32DEB002350FF /* RegisterView.swift */; };
 		58A1C6EC2AB32EF8002350FF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6EB2AB32EF8002350FF /* LoginView.swift */; };
+		58A1C6F32AB42755002350FF /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6F22AB42755002350FF /* AuthViewModel.swift */; };
 		BC7481BA2AAAF3B400ABC993 /* CoinMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */; };
 		BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481BB2AAAF3B400ABC993 /* ContentView.swift */; };
 		BC7481C12AAAF3B500ABC993 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC7481C02AAAF3B500ABC993 /* Preview Assets.xcassets */; };
@@ -45,6 +46,7 @@
 		58A1C6E92AB32DEB002350FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		58A1C6EB2AB32EF8002350FF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		58A1C6ED2AB40137002350FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		58A1C6F22AB42755002350FF /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		BC7481B62AAAF3B400ABC993 /* CoinMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarketApp.swift; sourceTree = "<group>"; };
 		BC7481BB2AAAF3B400ABC993 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -170,6 +172,7 @@
 			children = (
 				BC7481EA2AB05CAE00ABC993 /* HomeViewModel.swift */,
 				BC7481F82AB316CD00ABC993 /* CryptoViewModel.swift */,
+				58A1C6F22AB42755002350FF /* AuthViewModel.swift */,
 				BC7482002AB47C0E00ABC993 /* DetailViewModel.swift */,
 			);
 			path = ViewModel;
@@ -294,6 +297,7 @@
 				58A1C6EC2AB32EF8002350FF /* LoginView.swift in Sources */,
 				BC7481EB2AB05CAE00ABC993 /* HomeViewModel.swift in Sources */,
 				BC7481E82AAF7A0600ABC993 /* CoinManager.swift in Sources */,
+				58A1C6F32AB42755002350FF /* AuthViewModel.swift in Sources */,
 				BC7481DA2AAD7D6800ABC993 /* CryptoView.swift in Sources */,
 				BC7481E62AAF793000ABC993 /* Coin.swift in Sources */,
 				BC7482052AB4B9D600ABC993 /* CustomKeyPad.swift in Sources */,
