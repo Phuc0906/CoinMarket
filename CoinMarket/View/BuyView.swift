@@ -11,6 +11,9 @@ struct BuyView: View {
     @State var coin: Coin
     @State private var amount: String = ""
     @State private var holder: String = ""
+    @StateObject private var auth = AuthViewModel()
+    @StateObject private var buyVM = BuyViewModel()
+    @Environment(\.presentationMode) var presentationMode
 
     @State var isBuy = true
     
@@ -30,8 +33,6 @@ struct BuyView: View {
                         }
                         
                         ZStack {
-//                            TextField("Please enter amount", text: $amount)
-//                            MyTextField(currentText: $amount, placeHolder: $holder)
                             HStack {
                                 Text("\(amount)")
                                     .foregroundColor(.black)
@@ -63,7 +64,13 @@ struct BuyView: View {
                 Spacer()
                 CustomKeyPad(input: $amount)
                 Button {
-                    //
+                    if isBuy && !amount.isEmpty {
+                        if let user = auth.user {
+                            let transaction = Transaction(coinId: coin.id, userId: user.uid, amount: Double(amount)!, currentPrice: coin.current_price, transactionDate: Date())
+                            
+                            buyVM.buy(transaction: transaction)
+                        }
+                    }
                 } label: {
                     VStack {
                         Text("\(isBuy ? "Buy" : "Sell")")
@@ -89,6 +96,15 @@ struct BuyView: View {
                         }.padding(EdgeInsets(top: 5, leading: 10, bottom: 5, trailing: 10))
                             .background(Color(UIColor(red: 0.93, green: 0.91, blue: 0.91, alpha: 1.00)))
                             .cornerRadius(30)
+                    }
+
+                }
+                
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        presentationMode.wrappedValue.dismiss()
+                    } label: {
+                        Text("Done")
                     }
 
                 }

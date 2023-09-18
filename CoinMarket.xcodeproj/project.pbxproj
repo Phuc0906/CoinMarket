@@ -39,6 +39,10 @@
 		BC7482012AB47C0E00ABC993 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482002AB47C0E00ABC993 /* DetailViewModel.swift */; };
 		BC7482032AB48B0000ABC993 /* BuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482022AB48B0000ABC993 /* BuyView.swift */; };
 		BC7482052AB4B9D600ABC993 /* CustomKeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482042AB4B9D600ABC993 /* CustomKeyPad.swift */; };
+		BC7482072AB7EA1000ABC993 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482062AB7EA1000ABC993 /* Transaction.swift */; };
+		BC7482092AB7ED7600ABC993 /* BuyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482082AB7ED7600ABC993 /* BuyViewModel.swift */; };
+		BC74820B2AB7EEC900ABC993 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74820A2AB7EEC900ABC993 /* AppUser.swift */; };
+		BC74820D2AB7F35C00ABC993 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74820C2AB7F35C00ABC993 /* UserManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -72,6 +76,10 @@
 		BC7482002AB47C0E00ABC993 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		BC7482022AB48B0000ABC993 /* BuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyView.swift; sourceTree = "<group>"; };
 		BC7482042AB4B9D600ABC993 /* CustomKeyPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyPad.swift; sourceTree = "<group>"; };
+		BC7482062AB7EA1000ABC993 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		BC7482082AB7ED7600ABC993 /* BuyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyViewModel.swift; sourceTree = "<group>"; };
+		BC74820A2AB7EEC900ABC993 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
+		BC74820C2AB7F35C00ABC993 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +171,9 @@
 			children = (
 				BC7481E52AAF793000ABC993 /* Coin.swift */,
 				BC7481E72AAF7A0600ABC993 /* CoinManager.swift */,
+				BC7482062AB7EA1000ABC993 /* Transaction.swift */,
+				BC74820A2AB7EEC900ABC993 /* AppUser.swift */,
+				BC74820C2AB7F35C00ABC993 /* UserManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -174,6 +185,7 @@
 				BC7481F82AB316CD00ABC993 /* CryptoViewModel.swift */,
 				58A1C6F22AB42755002350FF /* AuthViewModel.swift */,
 				BC7482002AB47C0E00ABC993 /* DetailViewModel.swift */,
+				BC7482082AB7ED7600ABC993 /* BuyViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -277,11 +289,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC74820B2AB7EEC900ABC993 /* AppUser.swift in Sources */,
 				BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */,
 				BC7482032AB48B0000ABC993 /* BuyView.swift in Sources */,
 				58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */,
+				BC7482092AB7ED7600ABC993 /* BuyViewModel.swift in Sources */,
 				BC7481DE2AAD7DEA00ABC993 /* MainView.swift in Sources */,
 				BC7481D62AAD7D0500ABC993 /* HomeView.swift in Sources */,
+				BC74820D2AB7F35C00ABC993 /* UserManager.swift in Sources */,
 				BC7481F52AB1D05700ABC993 /* CoinDetailView.swift in Sources */,
 				BC7481F92AB316CD00ABC993 /* CryptoViewModel.swift in Sources */,
 				BC7481F12AB0614F00ABC993 /* CoinRow.swift in Sources */,
@@ -295,6 +310,7 @@
 				BC7481BA2AAAF3B400ABC993 /* CoinMarketApp.swift in Sources */,
 				BC7481D42AAD7CBF00ABC993 /* SplashView.swift in Sources */,
 				58A1C6EC2AB32EF8002350FF /* LoginView.swift in Sources */,
+				BC7482072AB7EA1000ABC993 /* Transaction.swift in Sources */,
 				BC7481EB2AB05CAE00ABC993 /* HomeViewModel.swift in Sources */,
 				BC7481E82AAF7A0600ABC993 /* CoinManager.swift in Sources */,
 				58A1C6F32AB42755002350FF /* AuthViewModel.swift in Sources */,

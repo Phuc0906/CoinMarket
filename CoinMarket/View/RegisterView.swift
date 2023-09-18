@@ -11,11 +11,6 @@ import FirebaseCore
 import FirebaseFirestore
 
 
-struct UserInfo: Identifiable, Codable {
-    var id: String
-    var name: String
-    var balance: String
-}
 
 struct RegisterView: View {
     @State private var email = ""
@@ -111,6 +106,7 @@ struct RegisterView: View {
                 } else {
                     if let user = authResult?.user {
                         let userID = user.uid
+                        
                         print("User ID: \(userID)")
                         let newUser = UserInfo(id: userID, name: name, balance: balance)
                         saveUserData(user: newUser)
