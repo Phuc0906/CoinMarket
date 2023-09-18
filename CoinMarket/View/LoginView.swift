@@ -20,6 +20,7 @@ struct LoginView: View {
     @State var RegisterView: Bool = false
     
     @State private var language = false
+    @Environment(\.presentationMode) var presentationMode
     
     
     var body: some View {

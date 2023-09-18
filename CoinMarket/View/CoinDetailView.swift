@@ -30,8 +30,7 @@ struct CoinDetailView: View {
                 }
             }.navigationTitle(Text("\(coin.name)"))
         }.fullScreenCover(isPresented: $toLogin) {
-            SplashView()  //Go to splash View instead of Login View
-//            LoginView()
+            LoginView()
         }.fullScreenCover(isPresented: $toBuyView) {
             BuyView(coin: coin)
         }

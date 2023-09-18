@@ -44,159 +44,161 @@ struct RegisterView: View {
                             .scaledToFit()
                             .frame(width: UIDevice.isIPhone ? 40 : 50)
                     }
-            Color(UIColor(red: 1.00, green: 0.87, blue: 0.16, alpha: 1.00))
-                .edgesIgnoringSafeArea(.all)
-            
-            VStack {
-                Text("REGISTER")
-                    .font(.largeTitle)
-                    .bold()
-                    .foregroundColor(.white)
-                    .padding()
-                
-                
-                TextField("Email", text: $email)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .autocapitalization(.none)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .shadow(color: .white.opacity(0.05), radius: 70)
-                    .padding()
-                
-                SecureField("Password", text: $password)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(Color.white)
-                    .autocapitalization(.none)
-                    .cornerRadius(10)
-                    .shadow(color: .white.opacity(0.05), radius: 70)
-                    .padding()
-                
-                SecureField("Confirm Password", text: $confirmPassword)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .autocapitalization(.none)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .shadow(color: .white.opacity(0.05), radius: 70)
-                    .padding()
-                
-                Text("USER INFO")
-                    .font(.title)
-                    .bold()
-                    .foregroundColor(.white)
-                    .padding()
-                TextField("Name", text: $name)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .shadow(color: .white.opacity(0.05), radius: 70)
-                    .padding()
-                TextField("Balance", text: $balance)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                    .keyboardType(.numberPad)
-                    .background(Color.white)
-                    .cornerRadius(10)
-                    .shadow(color: .white.opacity(0.05), radius: 70)
-                    .padding()
-                
-                Text(errorMessage)
-                    .foregroundColor(.red)
-                    .padding()
-                
-                Button(action: register) {
-                    Text("Register")
-                        .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
-                        .font(.title2)
-                        .foregroundColor(.blue)
-                        .background(.white)
-                        .cornerRadius(30)
-                }
-                .padding(.horizontal, 10)
-                
-                VStack (alignment: .leading, spacing: 20){
-                    HStack{
-                        Image("logo-transparent")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: UIDevice.isIPhone ? 100 : 150)
-                        Text("CoinMarket")
-                            .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
-                    }
+                    Color(UIColor(red: 1.00, green: 0.87, blue: 0.16, alpha: 1.00))
+                        .edgesIgnoringSafeArea(.all)
                     
-                    Text(language ? "Let's start your journey" : "Bắt đầu ngay bây giờ")
-                        .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
-                        .padding(.vertical)
-                    
-                    VStack(alignment: .leading, spacing: 5){
-                        Text("Email")
-                            .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
+                    VStack {
+                        Text("REGISTER")
+                            .font(.largeTitle)
+                            .bold()
+                            .foregroundColor(.white)
+                            .padding()
+                        
+                        
                         TextField("Email", text: $email)
-                            .modifier(TextFieldModifier())
-                    }
-                    
-                    VStack(alignment: .leading, spacing: 5){
-                        Text(language ? "Password" : "Mật khẩu")
-                            .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
-                        SecureField(language ? "Password" : "Mật khẩu", text: $password)
-                            .modifier(TextFieldModifier())
-                    }
-                    
-                    
-                    
-                    VStack(alignment: .leading, spacing: 5){
-                        Text(language ? "Confirm Password" : "Xác nhận mật khẩu")
-                            .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
-                        SecureField(language ? "Confirm Password" : "Xác nhận mật khẩu", text: $confirmPassword)
-                            .modifier(TextFieldModifier())
-                    }
-                    
-                    
-                    if !errorMessage.isEmpty{
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(.none)
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(color: .white.opacity(0.05), radius: 70)
+                            .padding()
+                        
+                        SecureField("Password", text: $password)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .background(Color.white)
+                            .autocapitalization(.none)
+                            .cornerRadius(10)
+                            .shadow(color: .white.opacity(0.05), radius: 70)
+                            .padding()
+                        
+                        SecureField("Confirm Password", text: $confirmPassword)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .autocapitalization(.none)
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(color: .white.opacity(0.05), radius: 70)
+                            .padding()
+                        
+                        Text("USER INFO")
+                            .font(.title)
+                            .bold()
+                            .foregroundColor(.white)
+                            .padding()
+                        TextField("Name", text: $name)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(color: .white.opacity(0.05), radius: 70)
+                            .padding()
+                        TextField("Balance", text: $balance)
+                            .textFieldStyle(RoundedBorderTextFieldStyle())
+                            .keyboardType(.numberPad)
+                            .background(Color.white)
+                            .cornerRadius(10)
+                            .shadow(color: .white.opacity(0.05), radius: 70)
+                            .padding()
+                        
                         Text(errorMessage)
                             .foregroundColor(.red)
-                            .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 16 : 25))
-                    }
-                    
-                    Button(action: register) {
-                        Text(language ? "Register" : "Đăng kí")
-                            .modifier(LongButton())
-                    }
-                    
-                    VStack{
-                        Button(action: {
-                            LoginView = true
-                        }) {
-                            Text(language ? "Already have an account?" : "Bạn có tài khoản rồi?")
-                                .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 30))
-                        }
+                            .padding()
                         
-                        // MARK: - BUTTON START
-                        Button(action: {
-                            nextView = true
-                        }) {
-                            ZStack {
-                                Circle()
-                                    .fill(RadialGradient(
-                                        gradient: Gradient(colors: [Color.yellow, Color.orange]),
-                                        center: .center,
-                                        startRadius: 0,
-                                        endRadius: 300
-                                    ))
-                                // Adjust the circle size
-                                    .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.3 : geometry.size.width * 0.2, height: UIDevice.isIPhone ? geometry.size.width * 0.3 : geometry.size.width * 0.2)
-                                    .shadow(radius: 5)
-                                
-                                Text(language ? "Get start" : "Bắt đầu")
-                                    .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 35))
-                                    .foregroundColor(Color.theme.background)
+                        Button(action: register) {
+                            Text("Register")
+                                .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                                .font(.title2)
+                                .foregroundColor(.blue)
+                                .background(.white)
+                                .cornerRadius(30)
+                        }
+                        .padding(.horizontal, 10)
+                        
+                        VStack (alignment: .leading, spacing: 20){
+                            HStack{
+                                Image("logo-transparent")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(height: UIDevice.isIPhone ? 100 : 150)
+                                Text("CoinMarket")
+                                    .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
                             }
                             
+                            Text(language ? "Let's start your journey" : "Bắt đầu ngay bây giờ")
+                                .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
+                                .padding(.vertical)
+                            
+                            VStack(alignment: .leading, spacing: 5){
+                                Text("Email")
+                                    .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
+                                TextField("Email", text: $email)
+                                    .modifier(TextFieldModifier())
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 5){
+                                Text(language ? "Password" : "Mật khẩu")
+                                    .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
+                                SecureField(language ? "Password" : "Mật khẩu", text: $password)
+                                    .modifier(TextFieldModifier())
+                            }
+                            
+                            
+                            
+                            VStack(alignment: .leading, spacing: 5){
+                                Text(language ? "Confirm Password" : "Xác nhận mật khẩu")
+                                    .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
+                                SecureField(language ? "Confirm Password" : "Xác nhận mật khẩu", text: $confirmPassword)
+                                    .modifier(TextFieldModifier())
+                            }
+                            
+                            
+                            if !errorMessage.isEmpty{
+                                Text(errorMessage)
+                                    .foregroundColor(.red)
+                                    .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 16 : 25))
+                            }
+                            
+                            Button(action: register) {
+                                Text(language ? "Register" : "Đăng kí")
+                                    .modifier(LongButton())
+                            }
+                            
+                            VStack{
+                                Button(action: {
+                                    LoginView = true
+                                }) {
+                                    Text(language ? "Already have an account?" : "Bạn có tài khoản rồi?")
+                                        .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 30))
+                                }
+                                
+                                // MARK: - BUTTON START
+                                Button(action: {
+                                    nextView = true
+                                }) {
+                                    ZStack {
+                                        Circle()
+                                            .fill(RadialGradient(
+                                                gradient: Gradient(colors: [Color.yellow, Color.orange]),
+                                                center: .center,
+                                                startRadius: 0,
+                                                endRadius: 300
+                                            ))
+                                        // Adjust the circle size
+                                            .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.3 : geometry.size.width * 0.2, height: UIDevice.isIPhone ? geometry.size.width * 0.3 : geometry.size.width * 0.2)
+                                            .shadow(radius: 5)
+                                        
+                                        Text(language ? "Get start" : "Bắt đầu")
+                                            .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 35))
+                                            .foregroundColor(Color.theme.background)
+                                    }
+                                    
+                                }
+                            }
+                            .frame(maxWidth: .infinity)
+                            
                         }
+                        .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.8 : geometry.size.width * 0.6)
+                        .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
                     }
-                    .frame(maxWidth: .infinity)
-                    
                 }
-                .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.8 : geometry.size.width * 0.6)
-                .position(x: geometry.size.width * 0.5, y: geometry.size.height * 0.5)
             }
             
         }
