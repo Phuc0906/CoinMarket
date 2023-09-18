@@ -10,6 +10,7 @@
 		049DAFD72AB4046B00671A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049DAFD62AB4046B00671A1D /* Assets.xcassets */; };
 		58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6E92AB32DEB002350FF /* RegisterView.swift */; };
 		58A1C6EC2AB32EF8002350FF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6EB2AB32EF8002350FF /* LoginView.swift */; };
+
 		786FC98C2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98B2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf */; };
 		786FC9912AB772B50016E4FF /* WixMadeforDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98D2AB772B40016E4FF /* WixMadeforDisplay-Medium.ttf */; };
 		786FC9922AB772B50016E4FF /* WixMadeforDisplay-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98E2AB772B40016E4FF /* WixMadeforDisplay-SemiBold.ttf */; };
@@ -17,6 +18,9 @@
 		786FC9942AB772B50016E4FF /* WixMadeforDisplay-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC9902AB772B40016E4FF /* WixMadeforDisplay-ExtraBold.ttf */; };
 		788F942F2AB73BEC00163138 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788F942E2AB73BEC00163138 /* UIDevice.swift */; };
 		788F94322AB73D0400163138 /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788F94312AB73D0400163138 /* Modifier.swift */; };
+
+		58A1C6F32AB42755002350FF /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6F22AB42755002350FF /* AuthViewModel.swift */; };
+
 		BC7481BA2AAAF3B400ABC993 /* CoinMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */; };
 		BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481BB2AAAF3B400ABC993 /* ContentView.swift */; };
 		BC7481C12AAAF3B500ABC993 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC7481C02AAAF3B500ABC993 /* Preview Assets.xcassets */; };
@@ -45,6 +49,10 @@
 		BC7482012AB47C0E00ABC993 /* DetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482002AB47C0E00ABC993 /* DetailViewModel.swift */; };
 		BC7482032AB48B0000ABC993 /* BuyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482022AB48B0000ABC993 /* BuyView.swift */; };
 		BC7482052AB4B9D600ABC993 /* CustomKeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482042AB4B9D600ABC993 /* CustomKeyPad.swift */; };
+		BC7482072AB7EA1000ABC993 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482062AB7EA1000ABC993 /* Transaction.swift */; };
+		BC7482092AB7ED7600ABC993 /* BuyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482082AB7ED7600ABC993 /* BuyViewModel.swift */; };
+		BC74820B2AB7EEC900ABC993 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74820A2AB7EEC900ABC993 /* AppUser.swift */; };
+		BC74820D2AB7F35C00ABC993 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74820C2AB7F35C00ABC993 /* UserManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +60,7 @@
 		58A1C6E92AB32DEB002350FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		58A1C6EB2AB32EF8002350FF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		58A1C6ED2AB40137002350FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+
 		786FC98B2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-Regular.ttf"; sourceTree = "<group>"; };
 		786FC98D2AB772B40016E4FF /* WixMadeforDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		786FC98E2AB772B40016E4FF /* WixMadeforDisplay-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -59,6 +68,9 @@
 		786FC9902AB772B40016E4FF /* WixMadeforDisplay-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-ExtraBold.ttf"; sourceTree = "<group>"; };
 		788F942E2AB73BEC00163138 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
 		788F94312AB73D0400163138 /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
+
+		58A1C6F22AB42755002350FF /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+
 		BC7481B62AAAF3B400ABC993 /* CoinMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarketApp.swift; sourceTree = "<group>"; };
 		BC7481BB2AAAF3B400ABC993 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -84,6 +96,10 @@
 		BC7482002AB47C0E00ABC993 /* DetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewModel.swift; sourceTree = "<group>"; };
 		BC7482022AB48B0000ABC993 /* BuyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyView.swift; sourceTree = "<group>"; };
 		BC7482042AB4B9D600ABC993 /* CustomKeyPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyPad.swift; sourceTree = "<group>"; };
+		BC7482062AB7EA1000ABC993 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
+		BC7482082AB7ED7600ABC993 /* BuyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyViewModel.swift; sourceTree = "<group>"; };
+		BC74820A2AB7EEC900ABC993 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
+		BC74820C2AB7F35C00ABC993 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,6 +213,9 @@
 			children = (
 				BC7481E52AAF793000ABC993 /* Coin.swift */,
 				BC7481E72AAF7A0600ABC993 /* CoinManager.swift */,
+				BC7482062AB7EA1000ABC993 /* Transaction.swift */,
+				BC74820A2AB7EEC900ABC993 /* AppUser.swift */,
+				BC74820C2AB7F35C00ABC993 /* UserManager.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -206,7 +225,9 @@
 			children = (
 				BC7481EA2AB05CAE00ABC993 /* HomeViewModel.swift */,
 				BC7481F82AB316CD00ABC993 /* CryptoViewModel.swift */,
+				58A1C6F22AB42755002350FF /* AuthViewModel.swift */,
 				BC7482002AB47C0E00ABC993 /* DetailViewModel.swift */,
+				BC7482082AB7ED7600ABC993 /* BuyViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -316,12 +337,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
 				788F942F2AB73BEC00163138 /* UIDevice.swift in Sources */,
+
+				BC74820B2AB7EEC900ABC993 /* AppUser.swift in Sources */,
+
 				BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */,
 				BC7482032AB48B0000ABC993 /* BuyView.swift in Sources */,
 				58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */,
+				BC7482092AB7ED7600ABC993 /* BuyViewModel.swift in Sources */,
 				BC7481DE2AAD7DEA00ABC993 /* MainView.swift in Sources */,
 				BC7481D62AAD7D0500ABC993 /* HomeView.swift in Sources */,
+				BC74820D2AB7F35C00ABC993 /* UserManager.swift in Sources */,
 				BC7481F52AB1D05700ABC993 /* CoinDetailView.swift in Sources */,
 				BC7481F92AB316CD00ABC993 /* CryptoViewModel.swift in Sources */,
 				788F94322AB73D0400163138 /* Modifier.swift in Sources */,
@@ -336,8 +363,10 @@
 				BC7481BA2AAAF3B400ABC993 /* CoinMarketApp.swift in Sources */,
 				BC7481D42AAD7CBF00ABC993 /* SplashView.swift in Sources */,
 				58A1C6EC2AB32EF8002350FF /* LoginView.swift in Sources */,
+				BC7482072AB7EA1000ABC993 /* Transaction.swift in Sources */,
 				BC7481EB2AB05CAE00ABC993 /* HomeViewModel.swift in Sources */,
 				BC7481E82AAF7A0600ABC993 /* CoinManager.swift in Sources */,
+				58A1C6F32AB42755002350FF /* AuthViewModel.swift in Sources */,
 				BC7481DA2AAD7D6800ABC993 /* CryptoView.swift in Sources */,
 				BC7481E62AAF793000ABC993 /* Coin.swift in Sources */,
 				BC7482052AB4B9D600ABC993 /* CustomKeyPad.swift in Sources */,

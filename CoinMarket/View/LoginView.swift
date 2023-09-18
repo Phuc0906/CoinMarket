@@ -159,7 +159,7 @@ struct LoginView: View {
             if let error = error {
                 errorMessage = error.localizedDescription
             } else {
-                print("login")
+                presentationMode.wrappedValue.dismiss()
             }
         }
     }
