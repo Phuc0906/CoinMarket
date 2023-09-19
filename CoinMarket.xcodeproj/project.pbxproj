@@ -12,6 +12,7 @@
 		04DF5DEB2AB88E6500D84EA0 /* CircleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5DEA2AB88E6500D84EA0 /* CircleButtonView.swift */; };
 		04DF5DED2AB88ECF00D84EA0 /* CircleAnimationButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5DEC2AB88ECF00D84EA0 /* CircleAnimationButtonView.swift */; };
 		04DF5DEF2AB8A50900D84EA0 /* PieChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5DEE2AB8A50900D84EA0 /* PieChartView.swift */; };
+		04DF5DF12AB95FE500D84EA0 /* ChartCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5DF02AB95FE500D84EA0 /* ChartCellModel.swift */; };
 		58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6E92AB32DEB002350FF /* RegisterView.swift */; };
 		58A1C6EC2AB32EF8002350FF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6EB2AB32EF8002350FF /* LoginView.swift */; };
 		58A1C6F32AB42755002350FF /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6F22AB42755002350FF /* AuthViewModel.swift */; };
@@ -55,6 +56,7 @@
 		04DF5DEA2AB88E6500D84EA0 /* CircleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonView.swift; sourceTree = "<group>"; };
 		04DF5DEC2AB88ECF00D84EA0 /* CircleAnimationButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleAnimationButtonView.swift; sourceTree = "<group>"; };
 		04DF5DEE2AB8A50900D84EA0 /* PieChartView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PieChartView.swift; sourceTree = "<group>"; };
+		04DF5DF02AB95FE500D84EA0 /* ChartCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCellModel.swift; sourceTree = "<group>"; };
 		58A1C6E92AB32DEB002350FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		58A1C6EB2AB32EF8002350FF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		58A1C6ED2AB40137002350FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 				BC7482062AB7EA1000ABC993 /* Transaction.swift */,
 				BC74820A2AB7EEC900ABC993 /* AppUser.swift */,
 				BC74820C2AB7F35C00ABC993 /* UserManager.swift */,
+				04DF5DF02AB95FE500D84EA0 /* ChartCellModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -320,6 +323,7 @@
 				BC7481D62AAD7D0500ABC993 /* HomeView.swift in Sources */,
 				BC74820D2AB7F35C00ABC993 /* UserManager.swift in Sources */,
 				BC7481F52AB1D05700ABC993 /* CoinDetailView.swift in Sources */,
+				04DF5DF12AB95FE500D84EA0 /* ChartCellModel.swift in Sources */,
 				BC7481F92AB316CD00ABC993 /* CryptoViewModel.swift in Sources */,
 				BC7481F12AB0614F00ABC993 /* CoinRow.swift in Sources */,
 				BC7481F72AB1D29000ABC993 /* ChartView.swift in Sources */,

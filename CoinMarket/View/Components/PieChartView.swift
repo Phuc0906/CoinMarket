@@ -25,12 +25,6 @@ struct PieChartCell: Shape {
     }
 }
 
-struct ChartCellModel: Identifiable {
-    let id = UUID()
-    let color: Color
-    let name: String
-    let amount: Double
-}
 
 final class ChartDataModel: ObservableObject {
     var chartCellModel: [ChartCellModel]

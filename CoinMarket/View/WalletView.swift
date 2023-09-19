@@ -13,6 +13,7 @@ struct WalletView: View {
     @State var selectedPie: String = ""
     @State var selectedDonut: String = ""
     let holdings: ChartDataModel
+    let userAssets: ChartDataModel
     var body: some View {
         VStack {
             HStack {
@@ -38,25 +39,30 @@ struct WalletView: View {
             }
             if (showPortfolio) {
                 VStack {
-                    
-                    Section("Asset Management") {
-                        BarView(cryptoHoldings: [CryptoHolding(name:"Bitcoin", amount: 3.5), CryptoHolding(name: "Dodge", amount: 7)])
-                            .frame(height: 350)
-                    }
-                    
-                    Section("Cash Flow") {
-                        PieChart(dataModel: holdings) {  dataModel in
-                            if let dataModel = dataModel {
-                                let percentage = String(format: "%.2f", dataModel.amount / holdings.totalValue * 100)
-                                self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total assets"
-                            } else {
-                                self.selectedPie = ""
-                            }
+                    PieChart(dataModel: holdings) {  dataModel in
+                        if let dataModel = dataModel {
+                            let percentage = String(format: "%.2f", dataModel.amount / holdings.totalValue * 100)
+                            self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total assets"
+                        } else {
+                            self.selectedPie = ""
                         }
                     }
+                    .frame(width: UIScreen.main.bounds.width/1.5, height:  UIScreen.main.bounds.height/5)
                     
                     Text("\(selectedPie)")
-                  
+                }
+                
+                ScrollView {
+                    VStack {
+                        Section("Asset Management") {
+                            BarView(cryptoHoldings: [CryptoHolding(name:"Bitcoin", amount: 3.5), CryptoHolding(name: "Dodge", amount: 7)])
+                                .frame(height: UIScreen.main.bounds.height/3.5)
+                        }
+                        Section("Holding List") {
+                            CoinRow(coin: DeveloperPreview.instance.coin)
+                        }
+                       
+                    }
                 }
                 
             } else {
@@ -74,10 +80,10 @@ struct WalletView: View {
                         Spacer()
                         Button(action: {
                         }) {
-                           
+                            
                             VStack {
                                 Image(systemName: "dollarsign.arrow.circlepath")
-                                 
+                                
                                     .foregroundColor(.white)
                                 Text("Deposit")
                                     .font(.headline)
@@ -92,12 +98,11 @@ struct WalletView: View {
                             
                         }
                         
-                        
                         Spacer()
                         
                         Button(action: {
                         }) {
-                           
+                            
                             VStack {
                                 Image(systemName: "person.line.dotted.person")
                                     .foregroundColor(.white)
@@ -115,9 +120,33 @@ struct WalletView: View {
                         }
                         
                         Spacer()
-                     
+                        
                     }
                     
+                    VStack {
+                        ZStack {
+                            PieChart(dataModel: userAssets) { dataModel in
+                                if let dataModel = dataModel {
+                                    let percentage = String(format: "%.2f", dataModel.amount / holdings.totalValue * 0.01)
+                                    self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total assets"
+                                }else {
+                                    self.selectedPie = ""
+                                }
+                                
+                            }
+                            
+                            Circle()
+                                .foregroundColor(.white)
+                                .frame(width: UIScreen.main.bounds.width/1.5)
+                            
+                            Text("\(selectedPie)")
+                                .frame(width: UIScreen.main.bounds.width/2)
+                                .multilineTextAlignment(.center)
+                            
+                        }
+                        .padding()
+                        
+                    }
                     
                     
                 }
@@ -132,7 +161,7 @@ struct WalletView: View {
 
 struct WalletView_Previews: PreviewProvider {
     static var previews: some View {
-        WalletView(holdings: ChartDataModel.init(dataModel: [ChartCellModel(color: .orange, name:"Bitcoin", amount: 3.5), ChartCellModel(color: .red, name: "Dodge", amount: 7)]))
+        WalletView(holdings: ChartDataModel.init(dataModel: [ChartCellModel(color: .orange, name:"Bitcoin", amount: 3.5), ChartCellModel(color: .red, name: "Dodge", amount: 7)]), userAssets: ChartDataModel.init(dataModel: [ChartCellModel(color: .purple, name: "Cash", amount: 10000), ChartCellModel(color: .pink, name: "Coins Value", amount: 50000)]))
     }
 }
 
