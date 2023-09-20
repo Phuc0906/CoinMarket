@@ -21,7 +21,8 @@ struct SplashView: View {
             VStack {
                 Spacer()
                 Text("CRYPTO TRADING")
-                    .font(.title)
+                    .font(.custom("WixMadeForDisplay-Bold", size: UIDevice.isIPhone ? 30 : 40))
+                    .foregroundColor(.black)
                 Text("Start trading now with Coin Market")
                     .padding(EdgeInsets(top: 10, leading: 20, bottom: 20, trailing: 20))
                     .foregroundColor(.gray)
@@ -34,6 +35,7 @@ struct SplashView: View {
                             .padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
                             .font(.title2)
                             .background(.white)
+                            .foregroundColor(.black)
                             .cornerRadius(30)
                     }
                     Button(action: {
@@ -46,6 +48,7 @@ struct SplashView: View {
                                 .foregroundColor(.black)
                         }.padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
                             .background(.white)
+                            .foregroundColor(.black)
                             .cornerRadius(30)
                     }
                 }
