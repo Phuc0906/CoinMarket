@@ -12,7 +12,6 @@ struct WalletView: View {
     @State private var showPortfolio = false
     @State var selectedPie: String = ""
     @State var selectedDonut: String = ""
-    @StateObject private var buyVM = BuyViewModel()
     @ObservedObject private var userManager = UserManager()
 
     let holdings: ChartDataModel
@@ -69,8 +68,7 @@ struct WalletView: View {
             } else {
                 VStack(spacing: 30) {
                     VStack {
-
-                        if let user = buyVM.userManager.userInfo {
+                        if let user = userManager.userInfo {
                             Text("\(user.balance)")
                                 .font(.system(size: 50))
                                 .foregroundColor(Color.theme.accent)
@@ -82,6 +80,13 @@ struct WalletView: View {
                         Text("Total Balance")
                             .font(.caption)
                             .foregroundColor(Color.theme.accent)
+                        ForEach(userManager.wallet.keys.sorted(), id: \.self) { coinId in
+                           if let transaction = userManager.wallet[coinId] {
+                               Text("Coin ID: \(coinId)")
+                               Text("Amount: \(transaction.amount)")
+                               // Add more views to display other transaction properties
+                           }
+                       }
                     }
                     
                     HStack {

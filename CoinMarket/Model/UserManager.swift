@@ -11,6 +11,7 @@ import FirebaseAuth
 
 class UserManager: ObservableObject {
     @Published var transactions: [Transaction] = []
+    @Published var wallet: [String:Transaction] = [:]
     @Published var userInfo: UserInfo?
     private var auth = AuthViewModel()
     let db = Firestore.firestore()
@@ -44,6 +45,7 @@ class UserManager: ObservableObject {
     
     func getTransactions() {
         if let user = auth.user {
+            var filteredTrans: [String:Transaction] = [:]
             self.db.collection("transactions").document("\(user.uid)").getDocument { (document, error) in
                 
                 if let document = document, document.exists {
@@ -54,27 +56,22 @@ class UserManager: ObservableObject {
                         
                         do {
                             let transactions = try JSONDecoder().decode([Transaction].self, from: jsonData)
+                            for var transaction in transactions {
+                                if filteredTrans.keys.contains(transaction.coinId) {
+                                    transaction.numberOfCoin += filteredTrans[transaction.coinId]?.numberOfCoin ?? 0
+                                    transaction.amount += filteredTrans[transaction.coinId]?.amount ?? 0
+                                    filteredTrans[transaction.coinId] = transaction
+                                }else {
+                                    filteredTrans[transaction.coinId] = transaction
+                                }
+                            }
                             self.transactions = transactions
-                            self.filteredTransaction()
+                            self.wallet = filteredTrans
                         }catch {
 
                         }
                     }
                 }
-            }
-        }
-    }
-    
-    func filteredTransaction() {
-        var filteredTrans: [String:Transaction] = [:]
-        for var transaction in transactions {
-            if filteredTrans.keys.contains(transaction.coinId) {
-                transaction.numberOfCoin += filteredTrans[transaction.coinId]?.numberOfCoin ?? 0
-                transaction.amount += filteredTrans[transaction.coinId]?.amount ?? 0
-                filteredTrans[transaction.coinId] = transaction
-            }else {
-                
-                filteredTrans[transaction.coinId] = transaction
             }
         }
     }
