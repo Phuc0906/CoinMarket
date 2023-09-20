@@ -62,6 +62,7 @@
 		BC74821C2ABB1D6200ABC993 /* ReceiverCodeInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74821B2ABB1D6200ABC993 /* ReceiverCodeInputViewModel.swift */; };
 		BC74821E2ABB238500ABC993 /* SendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74821D2ABB238400ABC993 /* SendingView.swift */; };
 		BC7482202ABB468D00ABC993 /* SendingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74821F2ABB468D00ABC993 /* SendingViewModel.swift */; };
+		BC7482222ABB493F00ABC993 /* CoinHoldingRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482212ABB493F00ABC993 /* CoinHoldingRow.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -117,6 +118,7 @@
 		BC74821B2ABB1D6200ABC993 /* ReceiverCodeInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverCodeInputViewModel.swift; sourceTree = "<group>"; };
 		BC74821D2ABB238400ABC993 /* SendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingView.swift; sourceTree = "<group>"; };
 		BC74821F2ABB468D00ABC993 /* SendingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingViewModel.swift; sourceTree = "<group>"; };
+		BC7482212ABB493F00ABC993 /* CoinHoldingRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinHoldingRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -285,6 +287,7 @@
 				BC7482042AB4B9D600ABC993 /* CustomKeyPad.swift */,
 				58A1C6F42ABAA2EF002350FF /* BarView.swift */,
 				58A1C6F62ABAA31D002350FF /* PieChartView.swift */,
+				BC7482212ABB493F00ABC993 /* CoinHoldingRow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -399,6 +402,7 @@
 				58A1C6F72ABAA31D002350FF /* PieChartView.swift in Sources */,
 				BC7482012AB47C0E00ABC993 /* DetailViewModel.swift in Sources */,
 				BC74821E2ABB238500ABC993 /* SendingView.swift in Sources */,
+				BC7482222ABB493F00ABC993 /* CoinHoldingRow.swift in Sources */,
 				BC7481F32AB1644C00ABC993 /* Color.swift in Sources */,
 				BC7481D82AAD7D0E00ABC993 /* ProfileView.swift in Sources */,
 				BC7481EE2AB0600E00ABC993 /* PreviewProvider.swift in Sources */,

@@ -12,7 +12,7 @@ struct ReceiverCodeInputView: View {
     @State private var receiverID: String = ""
     @State private var userIsNotExist = false
     @State private var toSendingView = false
-    
+    @StateObject private var sendingVM = SendingViewModel()
     
     
     var body: some View {
@@ -33,6 +33,7 @@ struct ReceiverCodeInputView: View {
                 
                 NavigationLink(isActive: $toSendingView, destination: {
                     SendingView()
+                        .environmentObject(sendingVM)
                 }) {
                     
                 }

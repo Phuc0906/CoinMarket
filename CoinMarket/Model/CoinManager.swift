@@ -168,4 +168,15 @@ class CoinManager {
             }
         }
     }
+    
+    
+    func getCoin(coinId: String) -> Coin? {
+        for coin in coins {
+            if coin.id == coinId {
+                return coin
+            }
+        }
+        
+        return nil
+    }
 }

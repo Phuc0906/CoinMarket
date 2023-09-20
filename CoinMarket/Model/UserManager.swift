@@ -13,6 +13,7 @@ class UserManager: ObservableObject {
     @Published var transactions: [Transaction] = []
     @Published var wallet: [String:Transaction] = [:]
     @Published var userInfo: UserInfo?
+    @Published var walletTransactions: [Transaction] = []
     private var auth = AuthViewModel()
     let db = Firestore.firestore()
     private var user: User?
@@ -72,6 +73,12 @@ class UserManager: ObservableObject {
                             }
                             self.transactions = transactions
                             self.wallet = filteredTrans
+                            var walletTransactions: [Transaction] = []
+                            for transaction in filteredTrans {
+                                walletTransactions.append(transaction.value)
+                            }
+                            print(walletTransactions)
+                            self.walletTransactions = walletTransactions
                         }catch {
 
                         }
@@ -100,6 +107,26 @@ class UserManager: ObservableObject {
                     }
                 }
             }
+        }
+    }
+    
+    func saveTransaction(transactions: [Transaction]) {
+        do {
+            let encodedData = try JSONEncoder().encode(transactions)
+            let jsonString = String(data: encodedData,
+                                    encoding: .utf8)
+            
+            if let user = auth.user {
+                db.collection("transactions").document("\(user.uid)").setData(["list_of_transaction": jsonString!]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("Document transaction written!")
+                    }
+                }
+            }
+        }catch {
+            
         }
     }
     

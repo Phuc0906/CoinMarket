@@ -8,7 +8,11 @@
 import SwiftUI
 
 struct SendingView: View {
+    @EnvironmentObject private var vm: SendingViewModel
     @State private var amount: String = ""
+    @State private var userWallet: [Transaction] = []
+    @State private var currentUnit = ""
+    @State private var currentSelectedTransaction: Transaction?
     
     var body: some View {
         NavigationView {
@@ -23,9 +27,18 @@ struct SendingView: View {
                         }
                         
                         ZStack {
+ 
                             HStack {
                                 TextField("Enter transfer amount", text: $amount)
+                                    .keyboardType(.decimalPad)
+                                    
                                 Spacer()
+                            }
+                            
+                            HStack {
+                                Spacer()
+                                Text("\(currentUnit)")
+                                    .foregroundColor(.black)
                             }
                             
                         }
@@ -38,12 +51,35 @@ struct SendingView: View {
                             
                     }
                 }.padding(EdgeInsets(top: 30, leading: 15, bottom: 20, trailing: 15))
+                ScrollView {
+                    VStack {
+                        ForEach(vm.userManager.walletTransactions, id: \.id) {transaction in
+                            CoinHoldingRow(coin: vm.getCoin(coinId: transaction.coinId), transaction: transaction)
+                                .onTapGesture {
+                                    currentUnit = vm.getCoin(coinId: transaction.coinId).symbol.uppercased()
+                                    currentSelectedTransaction = transaction
+                                }
+                        }
+                    }
+                }
+                
                 
                 Spacer()
                 Button {
-
-                    
-                    
+                    if !amount.isEmpty {
+                        if let transaction = currentSelectedTransaction {
+                            if Double(amount)! <= transaction.numberOfCoin {
+                                // process transfer
+                                vm.transfer(amount: Double(amount)!, selectedTransaction: transaction)
+                            }else {
+                                //MARK: alet over holding
+                            }
+                        }else {
+                            //MARK: alert no coin selected
+                        }
+                    }else {
+                        //MARK: alert user to enter amount
+                    }
                 } label: {
                     VStack {
                         Text("Send")
@@ -56,6 +92,10 @@ struct SendingView: View {
 
                 
             }.padding(EdgeInsets(top: 10, leading: 15, bottom: 10, trailing: 15))
+                .onAppear {
+                    
+                    
+                }
         }
     }
 }
