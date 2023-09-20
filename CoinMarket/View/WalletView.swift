@@ -14,7 +14,7 @@ struct WalletView: View {
     @State var selectedDonut: String = ""
     @StateObject private var buyVM = BuyViewModel()
     @ObservedObject private var userManager = UserManager()
-    
+
     let holdings: ChartDataModel
     let userAssets: ChartDataModel
     var body: some View {
@@ -37,15 +37,13 @@ struct WalletView: View {
                             showPortfolio.toggle()
                         }
                     }
-                
-                
             }
             if (showPortfolio) {
                 VStack {
                     PieChart(dataModel: holdings) {  dataModel in
                         if let dataModel = dataModel {
-                            let percentage = String(format: "%.2f", dataModel.amount / holdings.totalValue * 100)
-                            self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total assets"
+                            let percentage = String(format: "%.2f", (dataModel.amount / holdings.totalValue)*100)
+                            self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total coin amount"
                         } else {
                             self.selectedPie = ""
                         }
@@ -64,16 +62,16 @@ struct WalletView: View {
                         Section("Holding List") {
                             CoinRow(coin: DeveloperPreview.instance.coin)
                         }
-                       
+                        
                     }
                 }
                 
             } else {
                 VStack(spacing: 30) {
                     VStack {
-                        if let user = userManager.userInfo {
-                            let userBalance = user.balance
-                            Text("\(userBalance)")
+
+                        if let user = buyVM.userManager.userInfo {
+                            Text("\(user.balance)")
                                 .font(.system(size: 50))
                                 .foregroundColor(Color.theme.accent)
                         } else {
@@ -81,7 +79,6 @@ struct WalletView: View {
                                 .font(.system(size: 50))
                                 .foregroundColor(Color.theme.accent)
                         }
-                        
                         Text("Total Balance")
                             .font(.caption)
                             .foregroundColor(Color.theme.accent)
@@ -138,7 +135,8 @@ struct WalletView: View {
                         ZStack {
                             PieChart(dataModel: userAssets) { dataModel in
                                 if let dataModel = dataModel {
-                                    let percentage = String(format: "%.2f", dataModel.amount / holdings.totalValue * 0.01)
+                                    let percentage = String(format: "%.2f",
+                                                            (dataModel.amount/userAssets.totalValue)*100)
                                     self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total assets"
                                 }else {
                                     self.selectedPie = ""
@@ -147,7 +145,7 @@ struct WalletView: View {
                             }
                             
                             Circle()
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.theme.background)
                                 .frame(width: UIScreen.main.bounds.width/1.5)
                             
                             Text("\(selectedPie)")
@@ -161,8 +159,8 @@ struct WalletView: View {
                 }
             }
             Spacer()
-            
         }
     }
 }
+
 
