@@ -119,23 +119,14 @@ struct LoginView: View {
                         Button(action: {
                             nextView = true
                         }) {
-                            ZStack {
-                                Circle()
-                                    .fill(RadialGradient(
-                                        gradient: Gradient(colors: [Color.yellow, Color.orange]),
-                                        center: .center,
-                                        startRadius: 0,
-                                        endRadius: 300
-                                    ))
-                                // Adjust the circle size
-                                    .frame(width: UIDevice.isIPhone ? geometry.size.width * 0.3 : geometry.size.width * 0.2, height: UIDevice.isIPhone ? geometry.size.width * 0.3 : geometry.size.width * 0.2)
-                                    .shadow(radius: 5)
-                                
+                            HStack {
                                 Text(language ? "Get start" : "Bắt đầu")
-                                    .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 22 : 30))
-                                    .foregroundColor(Color.theme.background)
-                            }
-                            
+                                    .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 35))
+                                Image(systemName: "arrow.right")
+                                    .foregroundColor(.black)
+                            }.padding(EdgeInsets(top: 10, leading: 20, bottom: 10, trailing: 20))
+                                .background(.yellow)
+                                .cornerRadius(30)
                         }
                     }
                     .frame(maxWidth: .infinity)
