@@ -44,7 +44,7 @@ struct MainView: View {
                     .tag(9)
                 
                 
-                WalletView(holdings: ChartDataModel.init(dataModel: [ChartCellModel(color: .orange, name:"Bitcoin", amount: 3.5), ChartCellModel(color: .red, name: "Dodge", amount: 7)]), userAssets: ChartDataModel.init(dataModel: [ChartCellModel(color: .purple, name: "Cash", amount: 10000), ChartCellModel(color: .pink, name: "Coins Value", amount: 50000)]))
+                WalletView()
                     .tabItem {
                         if !isShownAdd {
                             Image(systemName: "wallet.pass")
