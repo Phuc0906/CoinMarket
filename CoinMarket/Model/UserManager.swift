@@ -16,6 +16,7 @@ class UserManager: ObservableObject {
     private var auth = AuthViewModel()
     let db = Firestore.firestore()
     private var user: User?
+    var receiverValidation = false
     
     init() {
         Auth.auth().addStateDidChangeListener { auth, user in
@@ -23,6 +24,10 @@ class UserManager: ObservableObject {
             self.getTransactions()
             self.getUserInfo()
         }
+    }
+    
+    private func getAllUsers() {
+        db.collection("users").document()
     }
     
     private func saveUserInfo(user: UserInfo) {
@@ -121,6 +126,17 @@ class UserManager: ObservableObject {
             }
         }catch {
             
+        }
+    }
+    
+    func verifyUser(userId: String, verify: @escaping (Bool) -> Void) {
+        db.collection("users").document("\(userId)").getDocument { document, error in
+            if let document = document, document.exists {
+                print("USer valid")
+                verify(true)
+            }else {
+                verify(false)
+            }
         }
     }
 }

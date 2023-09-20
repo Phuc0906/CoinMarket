@@ -55,6 +55,13 @@
 		BC7482092AB7ED7600ABC993 /* BuyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482082AB7ED7600ABC993 /* BuyViewModel.swift */; };
 		BC74820B2AB7EEC900ABC993 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74820A2AB7EEC900ABC993 /* AppUser.swift */; };
 		BC74820D2AB7F35C00ABC993 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74820C2AB7F35C00ABC993 /* UserManager.swift */; };
+		BC74820F2ABAF73000ABC993 /* TransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74820E2ABAF73000ABC993 /* TransferView.swift */; };
+		BC7482112ABAF91400ABC993 /* TransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482102ABAF91400ABC993 /* TransferViewModel.swift */; };
+		BC7482182ABB171800ABC993 /* CodeScanner in Frameworks */ = {isa = PBXBuildFile; productRef = BC7482172ABB171700ABC993 /* CodeScanner */; };
+		BC74821A2ABB1B2900ABC993 /* ReceiverCodeInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482192ABB1B2900ABC993 /* ReceiverCodeInputView.swift */; };
+		BC74821C2ABB1D6200ABC993 /* ReceiverCodeInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74821B2ABB1D6200ABC993 /* ReceiverCodeInputViewModel.swift */; };
+		BC74821E2ABB238500ABC993 /* SendingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74821D2ABB238400ABC993 /* SendingView.swift */; };
+		BC7482202ABB468D00ABC993 /* SendingViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74821F2ABB468D00ABC993 /* SendingViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -104,6 +111,12 @@
 		BC7482082AB7ED7600ABC993 /* BuyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyViewModel.swift; sourceTree = "<group>"; };
 		BC74820A2AB7EEC900ABC993 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		BC74820C2AB7F35C00ABC993 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
+		BC74820E2ABAF73000ABC993 /* TransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferView.swift; sourceTree = "<group>"; };
+		BC7482102ABAF91400ABC993 /* TransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewModel.swift; sourceTree = "<group>"; };
+		BC7482192ABB1B2900ABC993 /* ReceiverCodeInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverCodeInputView.swift; sourceTree = "<group>"; };
+		BC74821B2ABB1D6200ABC993 /* ReceiverCodeInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiverCodeInputViewModel.swift; sourceTree = "<group>"; };
+		BC74821D2ABB238400ABC993 /* SendingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingView.swift; sourceTree = "<group>"; };
+		BC74821F2ABB468D00ABC993 /* SendingViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendingViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +128,7 @@
 				BC7481D12AAC6F7500ABC993 /* FirebaseStorage in Frameworks */,
 				BC7481CD2AAC6F7500ABC993 /* FirebaseAuth in Frameworks */,
 				BC7481CF2AAC6F7500ABC993 /* FirebaseFirestore in Frameworks */,
+				BC7482182ABB171800ABC993 /* CodeScanner in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +223,9 @@
 				BC7481DF2AAD877900ABC993 /* AddButtonCustomView.swift */,
 				BC7481F42AB1D05700ABC993 /* CoinDetailView.swift */,
 				BC7482022AB48B0000ABC993 /* BuyView.swift */,
+				BC74820E2ABAF73000ABC993 /* TransferView.swift */,
+				BC7482192ABB1B2900ABC993 /* ReceiverCodeInputView.swift */,
+				BC74821D2ABB238400ABC993 /* SendingView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -242,6 +259,9 @@
 				58A1C6F22AB42755002350FF /* AuthViewModel.swift */,
 				BC7482002AB47C0E00ABC993 /* DetailViewModel.swift */,
 				BC7482082AB7ED7600ABC993 /* BuyViewModel.swift */,
+				BC7482102ABAF91400ABC993 /* TransferViewModel.swift */,
+				BC74821B2ABB1D6200ABC993 /* ReceiverCodeInputViewModel.swift */,
+				BC74821F2ABB468D00ABC993 /* SendingViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -290,6 +310,7 @@
 				BC7481CC2AAC6F7500ABC993 /* FirebaseAuth */,
 				BC7481CE2AAC6F7500ABC993 /* FirebaseFirestore */,
 				BC7481D02AAC6F7500ABC993 /* FirebaseStorage */,
+				BC7482172ABB171700ABC993 /* CodeScanner */,
 			);
 			productName = CoinMarket;
 			productReference = BC7481B62AAAF3B400ABC993 /* CoinMarket.app */;
@@ -321,6 +342,7 @@
 			mainGroup = BC7481AD2AAAF3B400ABC993;
 			packageReferences = (
 				BC7481C92AAC6F7500ABC993 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				BC7482162ABB171700ABC993 /* XCRemoteSwiftPackageReference "CodeScanner" */,
 			);
 			productRefGroup = BC7481B72AAAF3B400ABC993 /* Products */;
 			projectDirPath = "";
@@ -354,6 +376,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC74820F2ABAF73000ABC993 /* TransferView.swift in Sources */,
+				BC7482112ABAF91400ABC993 /* TransferViewModel.swift in Sources */,
+				BC74821C2ABB1D6200ABC993 /* ReceiverCodeInputViewModel.swift in Sources */,
 				788F942F2AB73BEC00163138 /* UIDevice.swift in Sources */,
 				BC74820B2AB7EEC900ABC993 /* AppUser.swift in Sources */,
 				BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */,
@@ -361,6 +386,7 @@
 				58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */,
 				BC7482092AB7ED7600ABC993 /* BuyViewModel.swift in Sources */,
 				BC7481DE2AAD7DEA00ABC993 /* MainView.swift in Sources */,
+				BC7482202ABB468D00ABC993 /* SendingViewModel.swift in Sources */,
 				BC7481D62AAD7D0500ABC993 /* HomeView.swift in Sources */,
 				BC74820D2AB7F35C00ABC993 /* UserManager.swift in Sources */,
 				BC7481F52AB1D05700ABC993 /* CoinDetailView.swift in Sources */,
@@ -372,6 +398,7 @@
 				BC7481E32AAD9AE500ABC993 /* AddCoinView.swift in Sources */,
 				58A1C6F72ABAA31D002350FF /* PieChartView.swift in Sources */,
 				BC7482012AB47C0E00ABC993 /* DetailViewModel.swift in Sources */,
+				BC74821E2ABB238500ABC993 /* SendingView.swift in Sources */,
 				BC7481F32AB1644C00ABC993 /* Color.swift in Sources */,
 				BC7481D82AAD7D0E00ABC993 /* ProfileView.swift in Sources */,
 				BC7481EE2AB0600E00ABC993 /* PreviewProvider.swift in Sources */,
@@ -384,6 +411,7 @@
 				BC7482072AB7EA1000ABC993 /* Transaction.swift in Sources */,
 				58A1C6F52ABAA2EF002350FF /* BarView.swift in Sources */,
 				BC7481EB2AB05CAE00ABC993 /* HomeViewModel.swift in Sources */,
+				BC74821A2ABB1B2900ABC993 /* ReceiverCodeInputView.swift in Sources */,
 				BC7481E82AAF7A0600ABC993 /* CoinManager.swift in Sources */,
 				58A1C6F32AB42755002350FF /* AuthViewModel.swift in Sources */,
 				BC7481DA2AAD7D6800ABC993 /* CryptoView.swift in Sources */,
@@ -522,6 +550,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CoinMarket/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to scan QR code";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -552,6 +581,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = CoinMarket/Info.plist;
+				INFOPLIST_KEY_NSCameraUsageDescription = "We need to scan QR code";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -602,6 +632,14 @@
 				minimumVersion = 10.0.0;
 			};
 		};
+		BC7482162ABB171700ABC993 /* XCRemoteSwiftPackageReference "CodeScanner" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/twostraws/CodeScanner.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -624,6 +662,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = BC7481C92AAC6F7500ABC993 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		BC7482172ABB171700ABC993 /* CodeScanner */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC7482162ABB171700ABC993 /* XCRemoteSwiftPackageReference "CodeScanner" */;
+			productName = CodeScanner;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
