@@ -70,6 +70,7 @@ struct LoginView: View {
                             .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
                         TextField("abc @gmail.com", text: $email)
                             .modifier(TextFieldModifier())
+                            .autocapitalization(.none)
                     }
                     
                     VStack(alignment: .leading, spacing: 5){
