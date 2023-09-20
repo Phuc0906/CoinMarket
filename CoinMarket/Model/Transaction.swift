@@ -11,8 +11,8 @@ struct Transaction: Identifiable, Codable {
     let id = UUID()
     let coinId: String
     let userId: String
-    let amount: Double
-    let numberOfCoin: Double
+    var amount: Double
+    var numberOfCoin: Double
     let transactionDate: Date
     
     init(coinId: String, userId: String, amount: Double, currentPrice: Double, transactionDate: Date) {

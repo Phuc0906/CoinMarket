@@ -15,7 +15,17 @@
 		04DF5DF12AB95FE500D84EA0 /* ChartCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04DF5DF02AB95FE500D84EA0 /* ChartCellModel.swift */; };
 		58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6E92AB32DEB002350FF /* RegisterView.swift */; };
 		58A1C6EC2AB32EF8002350FF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6EB2AB32EF8002350FF /* LoginView.swift */; };
+
+		786FC98C2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98B2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf */; };
+		786FC9912AB772B50016E4FF /* WixMadeforDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98D2AB772B40016E4FF /* WixMadeforDisplay-Medium.ttf */; };
+		786FC9922AB772B50016E4FF /* WixMadeforDisplay-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98E2AB772B40016E4FF /* WixMadeforDisplay-SemiBold.ttf */; };
+		786FC9932AB772B50016E4FF /* WixMadeforDisplay-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98F2AB772B40016E4FF /* WixMadeforDisplay-Bold.ttf */; };
+		786FC9942AB772B50016E4FF /* WixMadeforDisplay-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC9902AB772B40016E4FF /* WixMadeforDisplay-ExtraBold.ttf */; };
+		788F942F2AB73BEC00163138 /* UIDevice.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788F942E2AB73BEC00163138 /* UIDevice.swift */; };
+		788F94322AB73D0400163138 /* Modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 788F94312AB73D0400163138 /* Modifier.swift */; };
+
 		58A1C6F32AB42755002350FF /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6F22AB42755002350FF /* AuthViewModel.swift */; };
+
 		BC7481BA2AAAF3B400ABC993 /* CoinMarketApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */; };
 		BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7481BB2AAAF3B400ABC993 /* ContentView.swift */; };
 		BC7481C12AAAF3B500ABC993 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC7481C02AAAF3B500ABC993 /* Preview Assets.xcassets */; };
@@ -60,7 +70,17 @@
 		58A1C6E92AB32DEB002350FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		58A1C6EB2AB32EF8002350FF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		58A1C6ED2AB40137002350FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+
+		786FC98B2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-Regular.ttf"; sourceTree = "<group>"; };
+		786FC98D2AB772B40016E4FF /* WixMadeforDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-Medium.ttf"; sourceTree = "<group>"; };
+		786FC98E2AB772B40016E4FF /* WixMadeforDisplay-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-SemiBold.ttf"; sourceTree = "<group>"; };
+		786FC98F2AB772B40016E4FF /* WixMadeforDisplay-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-Bold.ttf"; sourceTree = "<group>"; };
+		786FC9902AB772B40016E4FF /* WixMadeforDisplay-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-ExtraBold.ttf"; sourceTree = "<group>"; };
+		788F942E2AB73BEC00163138 /* UIDevice.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIDevice.swift; sourceTree = "<group>"; };
+		788F94312AB73D0400163138 /* Modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Modifier.swift; sourceTree = "<group>"; };
+
 		58A1C6F22AB42755002350FF /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+
 		BC7481B62AAAF3B400ABC993 /* CoinMarket.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CoinMarket.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC7481B92AAAF3B400ABC993 /* CoinMarketApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoinMarketApp.swift; sourceTree = "<group>"; };
 		BC7481BB2AAAF3B400ABC993 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -114,6 +134,24 @@
 				04DF5DEC2AB88ECF00D84EA0 /* CircleAnimationButtonView.swift */,
 			);
 			path = CircleButton;
+		786FC98A2AB7719E0016E4FF /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				786FC98F2AB772B40016E4FF /* WixMadeforDisplay-Bold.ttf */,
+				786FC9902AB772B40016E4FF /* WixMadeforDisplay-ExtraBold.ttf */,
+				786FC98D2AB772B40016E4FF /* WixMadeforDisplay-Medium.ttf */,
+				786FC98E2AB772B40016E4FF /* WixMadeforDisplay-SemiBold.ttf */,
+				786FC98B2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		788F94302AB73CF000163138 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				788F94312AB73D0400163138 /* Modifier.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 		BC7481AD2AAAF3B400ABC993 = {
@@ -135,6 +173,8 @@
 		BC7481B82AAAF3B400ABC993 /* CoinMarket */ = {
 			isa = PBXGroup;
 			children = (
+				786FC98A2AB7719E0016E4FF /* Fonts */,
+				788F94302AB73CF000163138 /* Helper */,
 				58A1C6ED2AB40137002350FF /* Info.plist */,
 				BC7481EC2AB05FAC00ABC993 /* Extension */,
 				BC7481E42AAF791700ABC993 /* Model */,
@@ -216,6 +256,7 @@
 			children = (
 				BC7481ED2AB0600E00ABC993 /* PreviewProvider.swift */,
 				BC7481F22AB1644C00ABC993 /* Color.swift */,
+				788F942E2AB73BEC00163138 /* UIDevice.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -300,9 +341,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				786FC9932AB772B50016E4FF /* WixMadeforDisplay-Bold.ttf in Resources */,
+				786FC9942AB772B50016E4FF /* WixMadeforDisplay-ExtraBold.ttf in Resources */,
+				786FC98C2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf in Resources */,
 				BC7481C12AAAF3B500ABC993 /* Preview Assets.xcassets in Resources */,
+				786FC9922AB772B50016E4FF /* WixMadeforDisplay-SemiBold.ttf in Resources */,
 				049DAFD72AB4046B00671A1D /* Assets.xcassets in Resources */,
 				BC7481FF2AB3FCCE00ABC993 /* GoogleService-Info.plist in Resources */,
+				786FC9912AB772B50016E4FF /* WixMadeforDisplay-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -313,7 +359,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+
+				788F942F2AB73BEC00163138 /* UIDevice.swift in Sources */,
+
 				BC74820B2AB7EEC900ABC993 /* AppUser.swift in Sources */,
+
 				BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */,
 				BC7482032AB48B0000ABC993 /* BuyView.swift in Sources */,
 				04DF5DED2AB88ECF00D84EA0 /* CircleAnimationButtonView.swift in Sources */,
@@ -325,6 +375,7 @@
 				BC7481F52AB1D05700ABC993 /* CoinDetailView.swift in Sources */,
 				04DF5DF12AB95FE500D84EA0 /* ChartCellModel.swift in Sources */,
 				BC7481F92AB316CD00ABC993 /* CryptoViewModel.swift in Sources */,
+				788F94322AB73D0400163138 /* Modifier.swift in Sources */,
 				BC7481F12AB0614F00ABC993 /* CoinRow.swift in Sources */,
 				BC7481F72AB1D29000ABC993 /* ChartView.swift in Sources */,
 				BC7481E32AAD9AE500ABC993 /* AddCoinView.swift in Sources */,
