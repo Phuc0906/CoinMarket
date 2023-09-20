@@ -11,6 +11,8 @@ struct BuyView: View {
     @State var coin: Coin
     @State private var amount: String = ""
     @State private var holder: String = ""
+    @State private var userInfo: UserInfo?
+    @State private var alertOutOfBalance = false
     @StateObject private var auth = AuthViewModel()
     @StateObject private var buyVM = BuyViewModel()
     @Environment(\.presentationMode) var presentationMode
@@ -64,13 +66,25 @@ struct BuyView: View {
                 Spacer()
                 CustomKeyPad(input: $amount)
                 Button {
-                    if isBuy && !amount.isEmpty {
-                        if let user = auth.user {
-                            let transaction = Transaction(coinId: coin.id, userId: user.uid, amount: Double(amount)!, currentPrice: coin.current_price, transactionDate: Date())
-                            
-                            buyVM.buy(transaction: transaction)
+                    if let user = buyVM.userManager.userInfo {
+                        let userBalance = user.balance
+                        print("In here")
+                        print(userBalance)
+                        if Double(userBalance)! < Double(amount)! {
+                            alertOutOfBalance = true
+                        }else {
+                            buyVM.userManager.getTransactions()
+                            if isBuy && !amount.isEmpty {
+                                if let user = auth.user {
+                                    let transaction = Transaction(coinId: coin.id, userId: user.uid, amount: Double(amount)!, currentPrice: coin.current_price, transactionDate: Date())
+
+                                    buyVM.buy(transaction: transaction)
+                                }
+                            }
                         }
                     }
+                    
+                    
                 } label: {
                     VStack {
                         Text("\(isBuy ? "Buy" : "Sell")")
@@ -108,6 +122,8 @@ struct BuyView: View {
                     }
 
                 }
+            }.onAppear {
+                buyVM.userManager.getUserInfo()
             }
         }
     }
@@ -147,6 +163,8 @@ extension BuyView {
                 .textCase(.uppercase)
                 .fontWeight(.bold)
             Spacer()
+        }.alert("Not enough money", isPresented: $alertOutOfBalance) {
+            
         }
     }
 }
