@@ -41,8 +41,8 @@ struct WalletView: View {
                 VStack {
                     PieChart(dataModel: holdings) {  dataModel in
                         if let dataModel = dataModel {
-                            let percentage = String(format: "%.2f", dataModel.amount / holdings.totalValue * 100)
-                            self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total assets"
+                            let percentage = String(format: "%.2f", (dataModel.amount / holdings.totalValue)*100)
+                            self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total coin amount"
                         } else {
                             self.selectedPie = ""
                         }
@@ -133,7 +133,8 @@ struct WalletView: View {
                         ZStack {
                             PieChart(dataModel: userAssets) { dataModel in
                                 if let dataModel = dataModel {
-                                    let percentage = String(format: "%.2f", dataModel.amount / holdings.totalValue * 0.01)
+                                    let percentage = String(format: "%.2f",
+                                                            (dataModel.amount/userAssets.totalValue)*100)
                                     self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total assets"
                                 }else {
                                     self.selectedPie = ""
@@ -166,6 +167,6 @@ struct WalletView: View {
 
 struct WalletView_Previews: PreviewProvider {
     static var previews: some View {
-        WalletView(holdings: ChartDataModel.init(dataModel: [ChartCellModel(color: .orange, name:"Bitcoin", amount: 3.5), ChartCellModel(color: .red, name: "Dodge", amount: 7)]), userAssets: ChartDataModel.init(dataModel: [ChartCellModel(color: .yellow, name: "Cash", amount: 10000), ChartCellModel(color: .black, name: "Coins Value", amount: 50000)]))
+        WalletView(holdings: ChartDataModel.init(dataModel: [ChartCellModel(color: .orange, name:"Bitcoin", amount: 3.5), ChartCellModel(color: .red, name: "Dodge", amount: 7)]), userAssets: ChartDataModel.init(dataModel: [ChartCellModel(color: .yellow, name: "Cash", amount: 10000), ChartCellModel(color: Color.brown, name: "Coins Value", amount: 50000)]))
     }
 }
