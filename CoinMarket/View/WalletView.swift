@@ -12,6 +12,8 @@ struct WalletView: View {
     @State private var showPortfolio = false
     @State var selectedPie: String = ""
     @State var selectedDonut: String = ""
+    @State private var userInfo: UserInfo?
+    @StateObject private var buyVM = BuyViewModel()
     let holdings: ChartDataModel
     let userAssets: ChartDataModel
     var body: some View {
@@ -34,8 +36,6 @@ struct WalletView: View {
                             showPortfolio.toggle()
                         }
                     }
-                
-                
             }
             if (showPortfolio) {
                 VStack {
@@ -61,16 +61,22 @@ struct WalletView: View {
                         Section("Holding List") {
                             CoinRow(coin: DeveloperPreview.instance.coin)
                         }
-                       
+                        
                     }
                 }
                 
             } else {
                 VStack(spacing: 30) {
                     VStack {
-                        Text("$10,000")
-                            .font(.system(size: 50))
-                            .foregroundColor(Color.theme.accent)
+                        if let user = buyVM.userManager.userInfo {
+                            Text("\(user.balance)")
+                                .font(.system(size: 50))
+                                .foregroundColor(Color.theme.accent)
+                        } else {
+                            Text("0$")
+                                .font(.system(size: 50))
+                                .foregroundColor(Color.theme.accent)
+                        }
                         Text("Total Balance")
                             .font(.caption)
                             .foregroundColor(Color.theme.accent)
@@ -136,7 +142,7 @@ struct WalletView: View {
                             }
                             
                             Circle()
-                                .foregroundColor(.white)
+                                .foregroundColor(Color.theme.background)
                                 .frame(width: UIScreen.main.bounds.width/1.5)
                             
                             Text("\(selectedPie)")
@@ -153,7 +159,6 @@ struct WalletView: View {
                 
             }
             Spacer()
-            
         }
     }
 }
@@ -161,6 +166,6 @@ struct WalletView: View {
 
 struct WalletView_Previews: PreviewProvider {
     static var previews: some View {
-        WalletView(holdings: ChartDataModel.init(dataModel: [ChartCellModel(color: .orange, name:"Bitcoin", amount: 3.5), ChartCellModel(color: .red, name: "Dodge", amount: 7)]), userAssets: ChartDataModel.init(dataModel: [ChartCellModel(color: .purple, name: "Cash", amount: 10000), ChartCellModel(color: .pink, name: "Coins Value", amount: 50000)]))
+        WalletView(holdings: ChartDataModel.init(dataModel: [ChartCellModel(color: .orange, name:"Bitcoin", amount: 3.5), ChartCellModel(color: .red, name: "Dodge", amount: 7)]), userAssets: ChartDataModel.init(dataModel: [ChartCellModel(color: .yellow, name: "Cash", amount: 10000), ChartCellModel(color: .black, name: "Coins Value", amount: 50000)]))
     }
 }
