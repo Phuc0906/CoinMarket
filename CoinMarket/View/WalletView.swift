@@ -12,6 +12,9 @@ struct WalletView: View {
     @State private var showPortfolio = false
     @State var selectedPie: String = ""
     @State var selectedDonut: String = ""
+    @StateObject private var buyVM = BuyViewModel()
+    @ObservedObject private var userManager = UserManager()
+    
     let holdings: ChartDataModel
     let userAssets: ChartDataModel
     var body: some View {
@@ -68,9 +71,17 @@ struct WalletView: View {
             } else {
                 VStack(spacing: 30) {
                     VStack {
-                        Text("$10,000")
-                            .font(.system(size: 50))
-                            .foregroundColor(Color.theme.accent)
+                        if let user = userManager.userInfo {
+                            let userBalance = user.balance
+                            Text("\(userBalance)")
+                                .font(.system(size: 50))
+                                .foregroundColor(Color.theme.accent)
+                        } else {
+                            Text("0$")
+                                .font(.system(size: 50))
+                                .foregroundColor(Color.theme.accent)
+                        }
+                        
                         Text("Total Balance")
                             .font(.caption)
                             .foregroundColor(Color.theme.accent)
@@ -147,10 +158,7 @@ struct WalletView: View {
                         .padding()
                         
                     }
-                    
-                    
                 }
-                
             }
             Spacer()
             
@@ -158,9 +166,3 @@ struct WalletView: View {
     }
 }
 
-
-struct WalletView_Previews: PreviewProvider {
-    static var previews: some View {
-        WalletView(holdings: ChartDataModel.init(dataModel: [ChartCellModel(color: .orange, name:"Bitcoin", amount: 3.5), ChartCellModel(color: .red, name: "Dodge", amount: 7)]), userAssets: ChartDataModel.init(dataModel: [ChartCellModel(color: .purple, name: "Cash", amount: 10000), ChartCellModel(color: .pink, name: "Coins Value", amount: 50000)]))
-    }
-}

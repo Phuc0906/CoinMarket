@@ -11,7 +11,6 @@ struct MainView: View {
     @State private var selectedTab = 0
     @State private var lastSelectedTab = 0
     @State private var isShownAdd: Bool = false
-    
     @StateObject private var vm = HomeViewModel()
     @StateObject private var cryptoVM = CryptoViewModel()
     

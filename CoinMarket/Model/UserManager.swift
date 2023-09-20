@@ -9,7 +9,7 @@ import Foundation
 import Firebase
 import FirebaseAuth
 
-class UserManager {
+class UserManager: ObservableObject {
     @Published var transactions: [Transaction] = []
     @Published var userInfo: UserInfo?
     private var auth = AuthViewModel()
@@ -26,7 +26,6 @@ class UserManager {
     
     private func saveUserInfo(user: UserInfo) {
         do {
-            print(user)
             let encodedData = try JSONEncoder().encode(user)
             let jsonString = String(data: encodedData,
                                     encoding: .utf8)
@@ -34,7 +33,6 @@ class UserManager {
                 if let err = err {
                     print("Error writing document: \(err)")
                 } else {
-                    
                     print("Document user written!")
                 }
             }
@@ -68,7 +66,6 @@ class UserManager {
     }
     
     func filteredTransaction() {
-        print(transactions)
         var filteredTrans: [String:Transaction] = [:]
         for var transaction in transactions {
             if filteredTrans.keys.contains(transaction.coinId) {
@@ -80,7 +77,6 @@ class UserManager {
                 filteredTrans[transaction.coinId] = transaction
             }
         }
-        print(filteredTrans)
     }
     
     func getUserInfo() {
@@ -120,7 +116,6 @@ class UserManager {
                         if var user = self.userInfo {
                             var userBalance = Double(user.balance)! - transaction.amount
                             user.balance = String(userBalance)
-                            print(user)
                             self.saveUserInfo(user: user)
                         }
                         print("Document transaction written!")

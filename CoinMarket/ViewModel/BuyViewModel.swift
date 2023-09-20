@@ -19,10 +19,7 @@ struct UserInfo: Identifiable, Codable {
 class BuyViewModel: ObservableObject {
     private var auth = AuthViewModel()
     let db = Firestore.firestore()
-    var userInfo: UserInfo?
     let userManager = UserManager()
-    
-
     
     func buy(transaction: Transaction) {
         userManager.addTransaction(transaction: transaction)

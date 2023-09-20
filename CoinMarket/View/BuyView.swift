@@ -11,7 +11,6 @@ struct BuyView: View {
     @State var coin: Coin
     @State private var amount: String = ""
     @State private var holder: String = ""
-    @State private var userInfo: UserInfo?
     @State private var alertOutOfBalance = false
     @StateObject private var auth = AuthViewModel()
     @StateObject private var buyVM = BuyViewModel()
@@ -23,8 +22,6 @@ struct BuyView: View {
         NavigationView {
             VStack {
                 buyInfo
-                
-                // buy amount
                 VStack {
                     VStack {
                         HStack {
@@ -68,8 +65,6 @@ struct BuyView: View {
                 Button {
                     if let user = buyVM.userManager.userInfo {
                         let userBalance = user.balance
-                        print("In here")
-                        print(userBalance)
                         if Double(userBalance)! < Double(amount)! {
                             alertOutOfBalance = true
                         }else {
@@ -122,8 +117,6 @@ struct BuyView: View {
                     }
 
                 }
-            }.onAppear {
-                buyVM.userManager.getUserInfo()
             }
         }
     }
@@ -164,7 +157,6 @@ extension BuyView {
                 .fontWeight(.bold)
             Spacer()
         }.alert("Not enough money", isPresented: $alertOutOfBalance) {
-            
         }
     }
 }
