@@ -16,6 +16,7 @@
 		58A1C6F92ABAA36B002350FF /* ChartCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6F82ABAA36B002350FF /* ChartCellModel.swift */; };
 		58A1C6FC2ABAA3F1002350FF /* CircleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6FB2ABAA3F1002350FF /* CircleButtonView.swift */; };
 		58A1C6FE2ABAA417002350FF /* CircleButtonAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6FD2ABAA417002350FF /* CircleButtonAnimationView.swift */; };
+		58A1C7022ABC47C3002350FF /* WalletCoinRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C7012ABC47C2002350FF /* WalletCoinRow.swift */; };
 		786FC98C2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98B2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf */; };
 		786FC9912AB772B50016E4FF /* WixMadeforDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98D2AB772B40016E4FF /* WixMadeforDisplay-Medium.ttf */; };
 		786FC9922AB772B50016E4FF /* WixMadeforDisplay-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98E2AB772B40016E4FF /* WixMadeforDisplay-SemiBold.ttf */; };
@@ -76,6 +77,7 @@
 		58A1C6F82ABAA36B002350FF /* ChartCellModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartCellModel.swift; sourceTree = "<group>"; };
 		58A1C6FB2ABAA3F1002350FF /* CircleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonView.swift; sourceTree = "<group>"; };
 		58A1C6FD2ABAA417002350FF /* CircleButtonAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonAnimationView.swift; sourceTree = "<group>"; };
+		58A1C7012ABC47C2002350FF /* WalletCoinRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCoinRow.swift; sourceTree = "<group>"; };
 		786FC98B2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-Regular.ttf"; sourceTree = "<group>"; };
 		786FC98D2AB772B40016E4FF /* WixMadeforDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		786FC98E2AB772B40016E4FF /* WixMadeforDisplay-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 				58A1C6F42ABAA2EF002350FF /* BarView.swift */,
 				58A1C6F62ABAA31D002350FF /* PieChartView.swift */,
 				BC7482212ABB493F00ABC993 /* CoinHoldingRow.swift */,
+				58A1C7012ABC47C2002350FF /* WalletCoinRow.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -395,6 +398,7 @@
 				BC7481F52AB1D05700ABC993 /* CoinDetailView.swift in Sources */,
 				58A1C6F92ABAA36B002350FF /* ChartCellModel.swift in Sources */,
 				BC7481F92AB316CD00ABC993 /* CryptoViewModel.swift in Sources */,
+				58A1C7022ABC47C3002350FF /* WalletCoinRow.swift in Sources */,
 				788F94322AB73D0400163138 /* Modifier.swift in Sources */,
 				BC7481F12AB0614F00ABC993 /* CoinRow.swift in Sources */,
 				BC7481F72AB1D29000ABC993 /* ChartView.swift in Sources */,

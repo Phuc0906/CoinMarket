@@ -60,10 +60,23 @@ struct WalletView: View {
                                 .frame(height: UIScreen.main.bounds.height/3.5)
                         }
                         Section("Holding List") {
-                            ForEach(userManager.wallet.keys.sorted(), id: \.self) { coinId in
-                                if let transaction = userManager.wallet[coinId] {
-                                    let currentCoin = coinManager.getCoin(coinId: transaction.coinId)
-                                    CoinRow(coin: currentCoin!)
+                            VStack {
+                                HStack {
+                                    Text("Name")
+                                        .font(.caption)
+                                        .foregroundColor(Color.theme.secondaryText)
+                                    Spacer()
+                                    Text("Total Coin Value")
+                                        .font(.caption)
+                                        .foregroundColor(Color.theme.secondaryText)
+                                }
+                                .padding()
+                                ForEach(userManager.wallet.keys.sorted(), id: \.self) { coinId in
+                                    if let transaction = userManager.wallet[coinId] {
+                                        if let currentCoin = coinManager.getCoin(coinId: transaction.coinId) {
+                                            WalletCoinRow(transaction: transaction, coin: currentCoin)
+                                        }
+                                    }
                                 }
                             }
                         }
