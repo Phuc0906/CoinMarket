@@ -19,7 +19,7 @@ class SendingViewModel: ObservableObject {
         return coinManager.getCoin(coinId: coinId)!
     }
     
-    func transfer(amount: Double, selectedTransaction: Transaction) {
+    func transfer(amount: Double, selectedTransaction: Transaction, receiverID: String) {
         var processAmount = amount * -1
         var userTransactions = userManager.transactions
         
@@ -31,7 +31,7 @@ class SendingViewModel: ObservableObject {
                 if userTransactions[i].numberOfCoin <= abs(tmpCoinAmount) {
                     userTransactions[i].numberOfCoin = 0
                 }else {
-                    userTransactions[i].numberOfCoin -= tmpCoinAmount
+                    userTransactions[i].numberOfCoin -= abs(tmpCoinAmount)
                     print("Current trans")
                     print(userTransactions[i])
                 }
@@ -47,7 +47,7 @@ class SendingViewModel: ObservableObject {
         print("Transfer complete")
         print(userTransactions)
         userManager.saveTransaction(transactions: userTransactions)
-        
-        
+        userManager.addBuyHistory(transaction: Transaction(coinId: selectedTransaction.coinId, userId: selectedTransaction.userId, amount: 0, numberOfCoin: amount*(-1), transactionDate: Date()))
+        userManager.transferTo(receiverID: receiverID, transaction: Transaction(coinId: selectedTransaction.coinId, userId: selectedTransaction.userId, amount: 0, numberOfCoin: amount, transactionDate: Date()))
     }
 }

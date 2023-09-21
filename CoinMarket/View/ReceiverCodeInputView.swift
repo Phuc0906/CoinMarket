@@ -32,7 +32,7 @@ struct ReceiverCodeInputView: View {
                 }
                 
                 NavigationLink(isActive: $toSendingView, destination: {
-                    SendingView()
+                    SendingView(receiver: receiverID)
                         .environmentObject(sendingVM)
                 }) {
                     

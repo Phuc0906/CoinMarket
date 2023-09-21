@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import LocalAuthentication
 
 struct SendingView: View {
     @EnvironmentObject private var vm: SendingViewModel
@@ -13,6 +14,7 @@ struct SendingView: View {
     @State private var userWallet: [Transaction] = []
     @State private var currentUnit = ""
     @State private var currentSelectedTransaction: Transaction?
+    @State var receiver: String = ""
     
     var body: some View {
         NavigationView {
@@ -66,11 +68,19 @@ struct SendingView: View {
                 
                 Spacer()
                 Button {
-                    if !amount.isEmpty {
+                    if !amount.isEmpty && !receiver.isEmpty {
                         if let transaction = currentSelectedTransaction {
                             if Double(amount)! <= transaction.numberOfCoin {
                                 // process transfer
-                                vm.transfer(amount: Double(amount)!, selectedTransaction: transaction)
+                                vm.transfer(amount: Double(amount)!, selectedTransaction: transaction, receiverID: receiver)
+                                if getBiometricStatus() {
+                                    authenticateUser {
+                                        print("Start transfer here")
+                                    }
+                                }else {
+                                    print(LAContext().biometryType)
+                                    print("NO faceid")
+                                }
                             }else {
                                 //MARK: alet over holding
                             }
@@ -98,10 +108,27 @@ struct SendingView: View {
                 }
         }
     }
-}
-
-struct SendingView_Previews: PreviewProvider {
-    static var previews: some View {
-        SendingView()
+    
+    func getBiometricStatus() -> Bool {
+        let scanner = LAContext()
+        if scanner.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: .none) {
+            return true
+        }
+        return false
+    }
+    
+    func authenticateUser(complete: @escaping () -> Void) {
+        let scanner = LAContext()
+        scanner.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: "To unlock \(String(describing: vm.userManager.userInfo?.name))") { status, error in
+            if error != nil {
+                print("Call error")
+                print(error?.localizedDescription)
+                return
+            }
+            print("Call")
+            complete()
+            
+        }
     }
 }
+
