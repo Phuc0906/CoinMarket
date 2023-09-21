@@ -320,7 +320,7 @@ class UserManager: ObservableObject {
             let jsonStringTransaction = String(data: encodedData,
                                                encoding: .utf8)
             let encodedDataBuyHistory = try JSONEncoder().encode(receiverBuyHistory)
-            let jsonStringBuyHistory = String(data: encodedData,
+            let jsonStringBuyHistory = String(data: encodedDataBuyHistory,
                                               encoding: .utf8)
             db.collection("wallet").document("\(receiverID)").setData(["list_of_transaction": jsonStringTransaction!]) { err in
                 if let err = err {
@@ -340,6 +340,52 @@ class UserManager: ObservableObject {
         }catch {
             
         }
+    }
+    
+    func sell(transaction: Transaction) {
+        self.buyHistory.append(transaction)
+        var localWallet = self.wallet
+        for var localTransaction in localWallet {
+            if localTransaction.value.coinId == transaction.coinId {
+                localTransaction.value.amount += transaction.amount // this amount is negative
+                localTransaction.value.numberOfCoin -= transaction.numberOfCoin
+                self.userInfo?.balance = String(Double(self.userInfo?.balance ?? "0.0")! + abs(transaction.amount))
+                break
+            }
+        }
+        saveUserInfo(user: self.userInfo!)
+        if let user = auth.user {
+            do {
+                let encodedData = try JSONEncoder().encode(localWallet)
+                let jsonString = String(data: encodedData,
+                                        encoding: .utf8)
+                
+                if let user = auth.user {
+                    db.collection("wallet").document("\(user.uid)").setData(["list_of_transaction": jsonString!]) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        } else {
+                            print("Document transaction written!")
+                        }
+                    }
+                }
+                
+                let encodedDataBuyHistory = try JSONEncoder().encode(buyHistory)
+                let jsonStringBuyHistory = String(data: encodedDataBuyHistory,
+                                                  encoding: .utf8)
+                db.collection("buy_history").document("\(user.uid)").setData(["list_of_transaction": jsonStringBuyHistory!]) { err in
+                    if let err = err {
+                        print("Error writing sell document: \(err)")
+                    } else {
+                        print("Document transaction sell written!")
+                    }
+                }
+            }catch {
+                
+            }
+        }
+        
+        
     }
     
     func addTransaction(transaction: Transaction) {
@@ -446,5 +492,25 @@ class UserManager: ObservableObject {
                 verify(false)
             }
         }
+    }
+    
+    func isHadCoin(coinID: String) -> Bool {
+        for transaction in buyHistory {
+            if transaction.coinId == coinID {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func getUserHolding(coinID: String) -> Double {
+        for transaction in buyHistory {
+            if transaction.coinId == coinID {
+                return transaction.numberOfCoin
+            }
+        }
+        
+        return 0.0
     }
 }
