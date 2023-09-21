@@ -22,4 +22,12 @@ struct Transaction: Identifiable, Codable {
         self.numberOfCoin = amount / currentPrice
         self.transactionDate = transactionDate
     }
+    
+    init(coinId: String, userId: String, amount: Double, numberOfCoin: Double, transactionDate: Date) {
+        self.coinId = coinId
+        self.userId = userId
+        self.amount = amount
+        self.numberOfCoin = numberOfCoin
+        self.transactionDate = transactionDate
+    }
 }

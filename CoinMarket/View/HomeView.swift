@@ -14,8 +14,11 @@ struct HomeView: View {
     
     @State var coin: Coin
     @StateObject private var detailVM = DetailViewModel()
+    @StateObject private var transferVM = TransferViewModel()
     
     @State private var language = true
+    
+    @State private var toTransferView = false
     
     var body: some View {
         NavigationView {
@@ -30,6 +33,16 @@ struct HomeView: View {
                             .fontWeight(.bold)
                         Spacer()
                         
+                        Button {
+                            // to transfer view
+                            toTransferView = true
+                        } label: {
+                            Image(systemName: "qrcode.viewfinder")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: UIDevice.isIPhone ? 40 : 50)
+                        }
+
                         
                         Button(action: {
                             // Add your action here
@@ -88,6 +101,9 @@ struct HomeView: View {
                         }
                     }.padding(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
                     Spacer()
+                }.fullScreenCover(isPresented: $toTransferView) {
+                    TransferView()
+                        .environmentObject(transferVM)
                 }
             }
         }
