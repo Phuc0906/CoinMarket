@@ -24,4 +24,18 @@ class AuthViewModel: ObservableObject {
             print("Error signing out: \(error.localizedDescription)")
         }
     }
+    
+    func changePassword(newPass: String){
+        if let user = Auth.auth().currentUser{
+            user.updatePassword(to: newPass) { error in
+                if let error = error {
+                    print("Error updating password.")
+                } else {
+                    print("Password update susscessfully.")
+                }
+            }
+        } else {
+            print("user in not signed in.")
+        }
+    }
 }

@@ -17,7 +17,8 @@ struct RegisterView: View {
     @State var nextView: Bool = false
     @State var LoginView: Bool = false
     
-    @State private var language = false
+    @State private var language = true //true = English, false  = Vietnamese
+    @State private var theme = true // true = light, false = dark
     
     var body: some View {
         
@@ -27,12 +28,25 @@ struct RegisterView: View {
             GeometryReader{ geometry in
                 HStack{
                     Spacer()
+                    // language button
                     Button(action: {
                         // Add your action here
                         print("Change language")
                         language.toggle()
                     }) {
                         Image(language ? "uk" : "vietnam")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: UIDevice.isIPhone ? 40 : 50)
+                    }
+                    
+                    // theme button
+                    Button(action: {
+                        // Add your action here
+                        print("Change mode")
+                        language.toggle()
+                    }) {
+                        Image(systemName: theme ? "moon.fill" : "sun.max.fill")
                             .resizable()
                             .scaledToFit()
                             .frame(width: UIDevice.isIPhone ? 40 : 50)
