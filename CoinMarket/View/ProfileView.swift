@@ -18,18 +18,20 @@ struct ProfileView: View {
             Color.theme.background
                 .ignoresSafeArea()
             
-            VStack(spacing: 0){
+            VStack(spacing: 20){
                 HStack{
                     Text(language ? "Profile" : "Hồ sơ")
                         .font(.custom("WixMadeForDisplay-ExtraBold", size: UIDevice.isIPhone ? 40 : 50))
                         .foregroundColor(Color.theme.accent)
                         .fontWeight(.bold)
                     Spacer()
+                    
+                    
                 }
                 .padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                 
                 
-                // MARK: ID CARD
+                //                // MARK: ID CARD
                 VStack(alignment: .leading) {
                     //MARK: LOGO
                     HStack(spacing: 0){
@@ -82,8 +84,80 @@ struct ProfileView: View {
                 
                 // MARK: SETTING
                 
-                ZStack (alignment: .topLeading){
-                    Color.black
+                VStack(alignment: .leading) {
+                    VStack(alignment: .leading){
+                        // Row Profile
+                        Button(action: {
+                            print("Edit profile")
+                        }) {
+                            HStack(spacing: 20){
+                                Image("profile")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: UIDevice.isIPhone ? 35 : 50, height: UIDevice.isIPhone ? 35 : 50)
+                                Text("Edit profile information")
+                                Spacer()
+                            }
+                        }
+                        
+                        // Row notification
+                        Button(action: {
+                            print("Edit notification")
+                        }) {
+                            HStack(spacing: 20){
+                                Image("noti")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: UIDevice.isIPhone ? 35 : 50, height: UIDevice.isIPhone ? 35 : 50)
+                                Text("Notification")
+                                Spacer()
+                            }
+                        }
+                        
+                        // Row Theme
+                        Button(action: {
+                            print("Edit theme")
+                        }) {
+                            HStack(spacing: 20){
+                                Image("theme")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: UIDevice.isIPhone ? 35 : 50, height: UIDevice.isIPhone ? 35 : 50)
+                                Text("Theme")
+                                Spacer()
+                            }
+                        }
+                        
+                        
+                        // Row language
+                        Button(action: {
+                            print("Edit language")
+                        }) {
+                            HStack(spacing: 20){
+                                Image("lang")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: UIDevice.isIPhone ? 35 : 50, height: UIDevice.isIPhone ? 35 : 50)
+                                Text("Language")
+                                
+                                Spacer()
+                                
+                                Image(language ? "uk" : "vietnamese")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: UIDevice.isIPhone ? 35 : 50)
+                            }
+                        }
+                        
+                        
+                    }
+                    
+                    
+                    
+                }
+                .frame(width: 320)
+                .padding(EdgeInsets(top: 30, leading: 25, bottom: 30, trailing: 25))
+                .background(
                     RoundedRectangle(cornerRadius: 20) // Rounded border
                         .stroke(Color.gray, lineWidth: 0.1) // Border color and width
                         .background(
@@ -91,85 +165,8 @@ struct ProfileView: View {
                                 .fill(Color.white) // Border background color
                                 .shadow(color: Color.gray, radius: 5, x: 0, y: 2) // Shadow for the border
                         )
-                    
-                    
-                    VStack(alignment: .leading) {
-                        VStack(alignment: .leading){
-                            // Row Profile
-                            Button(action: {
-                                print("Edit profile")
-                            }) {
-                                HStack(spacing: 20){
-                                    Image("profile")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIDevice.isIPhone ? 35 : 50, height: UIDevice.isIPhone ? 35 : 50)
-                                    Text("Edit profile information")
-                                    Spacer()
-                                }
-                            }
-                            
-                            // Row notification
-                            Button(action: {
-                                print("Edit notification")
-                            }) {
-                                HStack(spacing: 20){
-                                    Image("noti")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIDevice.isIPhone ? 35 : 50, height: UIDevice.isIPhone ? 35 : 50)
-                                    Text("Notification")
-                                    Spacer()
-                                }
-                            }
-                            
-                            // Row Theme
-                            Button(action: {
-                                print("Edit theme")
-                            }) {
-                                HStack(spacing: 20){
-                                    Image("theme")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIDevice.isIPhone ? 35 : 50, height: UIDevice.isIPhone ? 35 : 50)
-                                    Text("Theme")
-                                    Spacer()
-                                }
-                            }
-                            
-                            
-                            // Row language
-                            Button(action: {
-                                print("Edit language")
-                            }) {
-                                HStack(spacing: 20){
-                                    Image("lang")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIDevice.isIPhone ? 35 : 50, height: UIDevice.isIPhone ? 35 : 50)
-                                    Text("Language")
-                                    
-                                    Spacer()
-                                    
-                                    Image(language ? "uk" : "vietnamese")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIDevice.isIPhone ? 35 : 50)
-                                }
-                            }
-                            
-                            
-                        }
-                        
-                        
-                        
-                    }
-                    .frame(width: 320)
-                    .padding(EdgeInsets(top: 30, leading: 25, bottom: 30, trailing: 25))
-                    //                        .background(.blue)
-                }
-                .frame(maxWidth: 0)
-                .frame(height: 0)
+                )
+                
                 
                 Spacer()
                 Button {
@@ -180,7 +177,6 @@ struct ProfileView: View {
                 
                 
             }
-            
             
             
         }
