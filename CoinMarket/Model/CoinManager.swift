@@ -176,7 +176,6 @@ class CoinManager {
                 return coin
             }
         }
-        
         return nil
     }
 }

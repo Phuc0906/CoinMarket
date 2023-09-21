@@ -13,9 +13,7 @@ struct WalletView: View {
     @State var selectedPie: String = ""
     @State var selectedDonut: String = ""
     @ObservedObject private var userManager = UserManager()
-
-    let holdings: ChartDataModel
-    let userAssets: ChartDataModel
+    let coinManager = CoinManager()
     var body: some View {
         VStack {
             HStack {
@@ -39,17 +37,20 @@ struct WalletView: View {
             }
             if (showPortfolio) {
                 VStack {
-                    PieChart(dataModel: holdings) {  dataModel in
-                        if let dataModel = dataModel {
-                            let percentage = String(format: "%.2f", (dataModel.amount / holdings.totalValue)*100)
-                            self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total coin amount"
-                        } else {
-                            self.selectedPie = ""
+                    if let holdings = userManager.holdings {
+                        PieChart(dataModel: holdings) {  dataModel in
+                            if let dataModel = dataModel {
+                                let percentage = String(format: "%.2f", (dataModel.amount / holdings.totalValue)*100)
+                                self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total coin amount"
+                            } else {
+                                self.selectedPie = ""
+                            }
                         }
+                        .frame(width: UIScreen.main.bounds.width/1.5, height:  UIScreen.main.bounds.height/5)
+                        
+                        Text("\(selectedPie)")
                     }
-                    .frame(width: UIScreen.main.bounds.width/1.5, height:  UIScreen.main.bounds.height/5)
                     
-                    Text("\(selectedPie)")
                 }
                 
                 ScrollView {
@@ -59,9 +60,13 @@ struct WalletView: View {
                                 .frame(height: UIScreen.main.bounds.height/3.5)
                         }
                         Section("Holding List") {
-                            CoinRow(coin: DeveloperPreview.instance.coin)
+                            ForEach(userManager.wallet.keys.sorted(), id: \.self) { coinId in
+                                if let transaction = userManager.wallet[coinId] {
+                                    let currentCoin = coinManager.getCoin(coinId: transaction.coinId)
+                                    CoinRow(coin: currentCoin!)
+                                }
+                            }
                         }
-                        
                     }
                 }
                 
@@ -80,13 +85,6 @@ struct WalletView: View {
                         Text("Total Balance")
                             .font(.caption)
                             .foregroundColor(Color.theme.accent)
-                        ForEach(userManager.wallet.keys.sorted(), id: \.self) { coinId in
-                           if let transaction = userManager.wallet[coinId] {
-                               Text("Coin ID: \(coinId)")
-                               Text("Amount: \(transaction.amount)")
-                               // Add more views to display other transaction properties
-                           }
-                       }
                     }
                     
                     HStack {
@@ -138,15 +136,17 @@ struct WalletView: View {
                     
                     VStack {
                         ZStack {
-                            PieChart(dataModel: userAssets) { dataModel in
-                                if let dataModel = dataModel {
-                                    let percentage = String(format: "%.2f",
-                                                            (dataModel.amount/userAssets.totalValue)*100)
-                                    self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total assets"
-                                }else {
-                                    self.selectedPie = ""
+                            if let userAssets = userManager.userAssets {
+                                PieChart(dataModel: userAssets) { dataModel in
+                                    if let dataModel = dataModel {
+                                        let percentage = String(format: "%.2f",
+                                                                (dataModel.amount/userAssets.totalValue)*100)
+                                        self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total assets"
+                                    }else {
+                                        self.selectedPie = ""
+                                    }
+                                    
                                 }
-                                
                             }
                             
                             Circle()

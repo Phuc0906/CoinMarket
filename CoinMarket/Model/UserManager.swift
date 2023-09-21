@@ -8,13 +8,17 @@
 import Foundation
 import Firebase
 import FirebaseAuth
-
+import SwiftUI
 class UserManager: ObservableObject {
+    
     @Published var transactions: [Transaction] = []
     @Published var buyHistory: [Transaction] = []
     @Published var wallet: [String:Transaction] = [:]
     @Published var userInfo: UserInfo?
     @Published var walletTransactions: [Transaction] = []
+    @Published var holdings: ChartDataModel?
+    @Published var userAssets: ChartDataModel?
+    let coinManager = CoinManager()
     private var auth = AuthViewModel()
     let db = Firestore.firestore()
     private var user: User?
@@ -24,9 +28,11 @@ class UserManager: ObservableObject {
         Auth.auth().addStateDidChangeListener { auth, user in
             self.user = user
             self.getTransactions()
-            self.getUserInfo()
+            self.getUserInfo() {
+                self.getWallet()
+            }
             self.getBuyHistory()
-            self.getWallet()
+            //self.getWallet()
         }
     }
     
@@ -44,8 +50,10 @@ class UserManager: ObservableObject {
                             let wallet = try JSONDecoder().decode([String:Transaction].self, from: jsonData)
                             
                             self.wallet = wallet
+                            self.getHoldings(wallet: wallet)
+                            self.getUserAssets(wallet: wallet)
                         }catch {
-
+                            
                         }
                     }
                 }
@@ -87,7 +95,7 @@ class UserManager: ObservableObject {
                             let transactions = try JSONDecoder().decode([Transaction].self, from: jsonData)
                             self.buyHistory = transactions
                         }catch {
-
+                            
                         }
                     }
                 }
@@ -128,7 +136,7 @@ class UserManager: ObservableObject {
                             print(walletTransactions)
                             self.walletTransactions = walletTransactions
                         }catch {
-
+                            
                         }
                     }
                 }
@@ -136,7 +144,7 @@ class UserManager: ObservableObject {
         }
     }
     
-    func getUserInfo() {
+    func getUserInfo(completion: @escaping () -> Void) {
         if let user = auth.user {
             db.collection("users").document("\(user.uid)").getDocument { (document, error) in
                 
@@ -150,12 +158,13 @@ class UserManager: ObservableObject {
                             let userInfo = try JSONDecoder().decode(UserInfo.self, from: jsonData)
                             self.userInfo = userInfo
                         }catch {
-
+                            
                         }
                     }
                 }
             }
         }
+        completion()
     }
     
     func saveTransaction(transaction: Transaction, coins: [Coin]) {
@@ -206,7 +215,7 @@ class UserManager: ObservableObject {
         do {
             let encodedData = try JSONEncoder().encode(buyHistory)
             let jsonStringBuyHistory = String(data: encodedData,
-                                    encoding: .utf8)
+                                              encoding: .utf8)
             if let user = auth.user {
                 db.collection("buy_history").document("\(user.uid)").setData(["list_of_transaction": jsonStringBuyHistory!]) { err in
                     if let err = err {
@@ -277,7 +286,7 @@ class UserManager: ObservableObject {
                             self.processReceiverTransaction(receiverWallet: receiverWallet, receiverBuyHistory: receiverBuyHistory, receiverID: receiverID)
                         }
                     }catch {
-
+                        
                     }
                 }
             }else {
@@ -309,10 +318,10 @@ class UserManager: ObservableObject {
         do {
             let encodedData = try JSONEncoder().encode(receiverWallet)
             let jsonStringTransaction = String(data: encodedData,
-                                    encoding: .utf8)
+                                               encoding: .utf8)
             let encodedDataBuyHistory = try JSONEncoder().encode(receiverBuyHistory)
             let jsonStringBuyHistory = String(data: encodedData,
-                                    encoding: .utf8)
+                                              encoding: .utf8)
             db.collection("wallet").document("\(receiverID)").setData(["list_of_transaction": jsonStringTransaction!]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
@@ -349,7 +358,7 @@ class UserManager: ObservableObject {
             localWallet[transaction.coinId] = transaction
         }
         
-//        transactions.append(transaction)
+        //        transactions.append(transaction)
         buyHistory.append(transaction)
         do {
             let encodedData = try JSONEncoder().encode(localWallet)
@@ -372,7 +381,7 @@ class UserManager: ObservableObject {
                 
                 let encodedData = try JSONEncoder().encode(buyHistory)
                 let jsonStringBuyHistory = String(data: encodedData,
-                                        encoding: .utf8)
+                                                  encoding: .utf8)
                 db.collection("buy_history").document("\(user.uid)").setData(["list_of_transaction": jsonStringBuyHistory!]) { err in
                     if let err = err {
                         print("Error writing document: \(err)")
@@ -384,6 +393,48 @@ class UserManager: ObservableObject {
         }catch {
             
         }
+    }
+    
+    func getHoldings(wallet: [String:Transaction]) {
+        var colors: [Color] = []
+        var chartCellModels: [ChartCellModel] = []
+        var randomColor: Color
+        for var transaction in wallet {
+            repeat {
+                randomColor = Color(
+                    
+                    red: .random(in: 0...1),
+                    
+                    green: .random(in: 0...1),
+                    
+                    blue: .random(in: 0...1)
+                    
+                )
+                
+            } while colors.contains(randomColor)
+            
+            colors.append(randomColor)
+            if let currentCoin = coinManager.getCoin(coinId: transaction.value.coinId) {
+                print("coin: \(currentCoin)")
+                chartCellModels.append(ChartCellModel(color: randomColor, name: currentCoin.name, amount: Double(transaction.value.numberOfCoin * currentCoin.current_price)))
+            }
+        }
+        self.holdings = ChartDataModel(dataModel: chartCellModels)
+    }
+    
+    func getUserAssets(wallet: [String:Transaction]) {
+        var chartCellModels: [ChartCellModel] = []
+        var coinValue: Double = 0.0
+        for var transaction in wallet {
+            if let currentCoin = coinManager.getCoin(coinId: transaction.value.coinId) {
+                coinValue += transaction.value.numberOfCoin * currentCoin.current_price
+            }
+        }
+        chartCellModels.append(ChartCellModel(color: .red, name: "Coin", amount: Double(coinValue)))
+        if let user = self.userInfo {
+            chartCellModels.append(ChartCellModel(color: .blue, name: "Money", amount: Double(user.balance) ?? 0.0))
+        }
+        self.userAssets = ChartDataModel(dataModel: chartCellModels)
     }
     
     func verifyUser(userId: String, verify: @escaping (Bool) -> Void) {
