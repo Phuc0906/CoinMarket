@@ -10,6 +10,7 @@ import Charts
 
 struct WalletView: View {
     @State private var showPortfolio = false
+    @State private var showInfo = false
     @State var selectedPie: String = ""
     @State var selectedDonut: String = ""
     @ObservedObject private var userManager = UserManager()
@@ -21,6 +22,10 @@ struct WalletView: View {
                     .background(
                         CircleButtonAnimationView(animate: $showPortfolio)
                     )
+                    .onTapGesture {
+                        showInfo = true
+                    }
+                    
                 Spacer()
                 Text(!showPortfolio ? "Balance" : "Portfolio")
                     .font(.headline)
@@ -177,6 +182,9 @@ struct WalletView: View {
                 }
             }
             Spacer()
+        }
+        .sheet(isPresented: $showInfo) {
+            InfoView()
         }
     }
 }
