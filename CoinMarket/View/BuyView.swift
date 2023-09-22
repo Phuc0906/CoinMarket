@@ -13,10 +13,11 @@ struct BuyView: View {
     @State private var holder: String = ""
     @State private var alertOutOfBalance = false
     @StateObject private var auth = AuthViewModel()
-    @StateObject private var buyVM = BuyViewModel()
+//    @StateObject private var buyVM = BuyViewModel()
+    @EnvironmentObject private var buyVM: BuyViewModel
     @Environment(\.presentationMode) var presentationMode
 
-    @State var isBuy = true
+    @State var isBuy: Bool
     
     var body: some View {
         NavigationView {
@@ -40,7 +41,7 @@ struct BuyView: View {
                             
                             HStack {
                                 Spacer()
-                                Text("USD")
+                                Text(isBuy ? "USD" : "\(coin.symbol.uppercased())")
                                     .foregroundColor(.black)
                             }
                         }
@@ -50,13 +51,11 @@ struct BuyView: View {
                             .cornerRadius(5)
                         
                         HStack {
-                            Text("5 - 20,000 $")
+                            Text(isBuy ? "5 - 20,000 $" : "\(buyVM.isUserHasCoin(coinID: coin.id) ? "You are holding \(buyVM.getUserHolding(coinID: coin.id)) \(coin.symbol.uppercased())" : "You do not have \(coin.name.uppercased())")")
                                 .font(.footnote)
                                 .foregroundColor(.gray)
                             Spacer()
                         }
-                        
-                            
                     }
                 }.padding(EdgeInsets(top: 30, leading: 15, bottom: 20, trailing: 15))
                 
@@ -73,8 +72,26 @@ struct BuyView: View {
                                 if let user = auth.user {
                                     let transaction = Transaction(coinId: coin.id, userId: user.uid, amount: Double(amount)!, currentPrice: coin.current_price, transactionDate: Date())
 
-                                    buyVM.buy(transaction: transaction)
+                                    buyVM.buy(transaction: transaction) {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
                                 }
+                            }else if !amount.isEmpty && buyVM.isUserHasCoin(coinID: coin.id) {
+                                if let user = auth.user {
+                                    if Double(amount)! <= buyVM.getUserHolding(coinID: coin.id) {
+                                        let transaction = Transaction(coinId: coin.id, userId: user.uid, currentPrice: coin.current_price, numberOfCoin: Double(amount)!, transactionDate: Date())
+                                        
+                                        buyVM.sell(transaction: transaction) {
+                                            self.presentationMode.wrappedValue.dismiss()
+                                        }
+                                    }else {
+                                        // MARK: alert over amount
+                                        print("Over holding")
+                                    }
+                                    
+                                }
+                            }else {
+                                //MARK: alert to enter amount
                             }
                         }
                     }
@@ -122,11 +139,7 @@ struct BuyView: View {
     }
 }
 
-struct BuyView_Previews: PreviewProvider {
-    static var previews: some View {
-        BuyView(coin: dev.coin)
-    }
-}
+
 
 extension BuyView {
     private var buyInfo: some View {

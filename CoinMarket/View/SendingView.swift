@@ -15,6 +15,7 @@ struct SendingView: View {
     @State private var currentUnit = ""
     @State private var currentSelectedTransaction: Transaction?
     @State var receiver: String = ""
+    @Binding var presentationMode: PresentationMode
     
     var body: some View {
         VStack {
@@ -54,7 +55,7 @@ struct SendingView: View {
             }.padding(EdgeInsets(top: 30, leading: 15, bottom: 20, trailing: 15))
             ScrollView {
                 VStack {
-                    ForEach(vm.userManager.walletTransactions, id: \.id) {transaction in
+                    ForEach(vm.userManager.getFilteredTransaction(), id: \.id) {transaction in
                         CoinHoldingRow(coin: vm.getCoin(coinId: transaction.coinId), transaction: transaction)
                             .onTapGesture {
                                 currentUnit = vm.getCoin(coinId: transaction.coinId).symbol.uppercased()
@@ -71,15 +72,18 @@ struct SendingView: View {
                     if let transaction = currentSelectedTransaction {
                         if Double(amount)! <= transaction.numberOfCoin {
                             // process transfer
-                            vm.transfer(amount: Double(amount)!, selectedTransaction: transaction, receiverID: receiver)
-                            if getBiometricStatus() {
-                                authenticateUser {
-                                    print("Start transfer here")
-                                }
-                            }else {
-                                print(LAContext().biometryType)
-                                print("NO faceid")
+                            vm.transfer(amount: Double(amount)!, selectedTransaction: transaction, receiverID: receiver) {
+                                print("Execute dismiss")
+                                self.presentationMode.dismiss()
                             }
+//                            if getBiometricStatus() {
+//                                authenticateUser {
+//                                    print("Start transfer here")
+//                                }
+//                            }else {
+//                                print(LAContext().biometryType)
+//                                print("NO faceid")
+//                            }
                         }else {
                             //MARK: alet over holding
                         }

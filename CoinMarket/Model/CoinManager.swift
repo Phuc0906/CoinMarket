@@ -24,16 +24,20 @@ class CoinManager {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         
-        print(dateString1)
+        
         
         let now = Date()
         let date2_format = dateFormatter.string(from: now)
+        print(dateFormatter.date(from: dateString1))
+        print(date2_format)
         
         if let date1 = dateFormatter.date(from: dateString1), let date2 = dateFormatter.date(from: date2_format) {
             return date1.compare(date2)
+        }else {
+            return nil // One or both date strings were invalid
         }
         
-        return nil // One or both date strings were invalid
+        
     }
     
     private func fetchData() {
@@ -43,34 +47,33 @@ class CoinManager {
                 let dataDescription = document.data()?.values.map(String.init(describing:))
                 let key = document.data()?.keys.map(String.init(describing:))
                 let dbDate = key![0].split(separator: ",")[0]
-                
-                if let comparisonResult = self.compareDates(dateString1: String(dbDate), format: "MMM/dd/yyyy") {
+                if let comparisonResult = self.compareDates(dateString1: String(dbDate), format: "MM/dd/yyyy") {
                     switch comparisonResult {
                     case .orderedAscending:
                         print("Fetch from API")
                         fetchFromAPI()
                         break
                     case .orderedSame:
-                        
-                        
+
+
                         // check hour
                         let currentDate = Date()
 
                         // Create a DateFormatter with the "HH:mm:ss" format
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "HH:mm:ss"
-                        
+
                         if let pastTime = dateFormatter.date(from: String(key![0].split(separator: ",")[1])) {
                             // Extract the hour component from the current time
                             let calendar = Calendar.current
                             let currentHour = calendar.component(.hour, from: currentDate)
-                            
+
                             // Extract the hour component from the past time
                             let pastHour = calendar.component(.hour, from: pastTime)
-                            
+
                             // Calculate the hour difference
                             let hourDifference = currentHour - pastHour
-                            
+
                             if hourDifference == 0 {
                                 print("Fetch from Firebase")
                                 if let jsonData = dataDescription![0].data(using: .utf8) {
@@ -88,9 +91,9 @@ class CoinManager {
                         } else {
                             print("Invalid pastTime format")
                         }
-                        
-                        
-                        
+
+
+
                         break
                     case .orderedDescending:
                         print("Date 1 is later than Date 2")
@@ -138,7 +141,7 @@ class CoinManager {
                 do {
                     let db = Firestore.firestore()
                     let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = "MMM/dd/yyyy" // Format for the date (e.g., "Sep 13, 2023")
+                    dateFormatter.dateFormat = "M/dd/yyyy" // Format for the date (e.g., "Sep 13, 2023")
                     
                     let now = Date()
                     let currentUpdateDate = dateFormatter.string(from: now)
@@ -176,7 +179,6 @@ class CoinManager {
                 return coin
             }
         }
-        
         return nil
     }
 }
