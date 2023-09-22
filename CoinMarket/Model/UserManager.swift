@@ -66,7 +66,7 @@ class UserManager: ObservableObject {
         db.collection("users").document()
     }
     
-    private func saveUserInfo(user: UserInfo) {
+    func saveUserInfo(user: UserInfo) {
         do {
             let encodedData = try JSONEncoder().encode(user)
             let jsonString = String(data: encodedData,
