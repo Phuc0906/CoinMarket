@@ -166,6 +166,7 @@ class UserManager: ObservableObject {
                         do {
                             let userInfo = try JSONDecoder().decode(UserInfo.self, from: jsonData)
                             self.userInfo = userInfo
+                            completion()
                         }catch {
                             
                         }
@@ -173,7 +174,6 @@ class UserManager: ObservableObject {
                 }
             }
         }
-        completion()
     }
     
     func saveTransaction(amount: Double, transaction: Transaction, coins: [Coin], buyHistoryTransaction: Transaction, receiverID: String, receiverTransaction: Transaction, complete: (() -> Void)? = nil) {
@@ -580,6 +580,7 @@ class UserManager: ObservableObject {
         var colors: [Color] = []
         var chartCellModels: [ChartCellModel] = []
         var randomColor: Color
+        print("In holding wallet: \(wallet.count)")
         for var transaction in wallet {
             repeat {
                 randomColor = Color(
