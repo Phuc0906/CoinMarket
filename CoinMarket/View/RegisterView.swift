@@ -1,7 +1,5 @@
 import SwiftUI
 import Firebase
-import FirebaseStorage
-
 
 struct RegisterView: View {
     @State private var email = ""
@@ -13,10 +11,6 @@ struct RegisterView: View {
     // MARK: need name and balance text field
     @State private var name = ""
     @State private var balance = "0"
-    @State var profileImage: UIImage?
-    @State private var isImagePickerPresented = false
-
-
     
     @Environment(\.presentationMode) var presentationMode
     
@@ -73,18 +67,6 @@ struct RegisterView: View {
                     Text(language ? "Let's start your journey" : "Bắt đầu ngay bây giờ")
                         .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
                         .padding(.vertical)
-                    
-                    VStack{
-                        if let profileImage = profileImage {
-                            Image(uiImage: profileImage)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 100, height: 100)
-                        }
-                        Button(action: selectProfilePicture) {
-                            Text("Select Profile Picture")
-                        }
-                    }
                     
                     VStack(alignment: .leading, spacing: 5){
                         Text(language ? "Username" : "Tên người dùng")
@@ -159,10 +141,7 @@ struct RegisterView: View {
             }
             
         }
-        .sheet(isPresented: $isImagePickerPresented) {
-            ImagePicker(image: $profileImage)
-        }
-
+        
         .fullScreenCover(isPresented: $nextView) {
             MainView()
         }
@@ -172,52 +151,6 @@ struct RegisterView: View {
         }
         
     }
-    
-    func selectProfilePicture() {
-        isImagePickerPresented = true
-    }
-    
-    func saveProfilePicture(_ image: UIImage, userID: String) {
-        let storageRef = Storage.storage().reference()
-        let profileImageRef = storageRef.child("profileImages/\(userID).jpg")
-
-        if let imageData = image.jpegData(compressionQuality: 0.5) {
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/jpeg"
-
-            profileImageRef.putData(imageData, metadata: metadata) { (metadata, error) in
-                if let error = error {
-                    print("Error uploading profile picture: \(error.localizedDescription)")
-                } else {
-                    // Successfully uploaded profile picture
-                    profileImageRef.downloadURL { (url, error) in
-                        if let url = url {
-                            // You can save the download URL to the user's Firestore document or wherever you store user data.
-                            // For example, you can update the user's document with the download URL.
-                            self.updateUserProfilePictureURL(url, userID: userID)
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    func updateUserProfilePictureURL(_ url: URL, userID: String) {
-        // You can update the user's Firestore document with the profile picture URL.
-        let db = Firestore.firestore()
-        let userRef = db.collection("users").document(userID)
-        
-        userRef.updateData(["profilePictureURL": url.absoluteString]) { (error) in
-            if let error = error {
-                print("Error updating profile picture URL: \(error.localizedDescription)")
-            } else {
-                print("Profile picture URL updated successfully")
-            }
-        }
-    }
-
-    
-
     
     func register() {
         if password == confirmPassword {
@@ -229,11 +162,6 @@ struct RegisterView: View {
                         let userID = user.uid
 
                         print("User ID: \(userID)")
-
-                        // Save the profile picture and user data
-                        if let profileImage = profileImage {
-                            saveProfilePicture(profileImage, userID: userID)
-                        }
 
                         let newUser = UserInfo(id: userID, name: name, balance: balance)
                         saveUserData(user: newUser)

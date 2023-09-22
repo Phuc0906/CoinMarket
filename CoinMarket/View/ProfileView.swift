@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import Firebase
+import FirebaseStorage
 
 struct ProfileView: View {
     @StateObject private var vm = AuthViewModel()
@@ -14,8 +16,12 @@ struct ProfileView: View {
     @State private var showEditProfile = false
     @Environment(\.colorScheme) var colorScheme
     @State private var language = true
-    
     @State private var user: UserInfo?
+    @State var profileImage: UIImage?
+    @State private var isFetchingImage = true
+    @State private var profileImageURL: URL?
+    @State private var isImagePickerPresented = false
+    @State private var isEdited = false
     
     var body: some View {
         ZStack{
@@ -86,13 +92,47 @@ struct ProfileView: View {
                 .background(.cyan.opacity(0.8))
                 .cornerRadius(20)
                 
+                VStack{
+                    if isFetchingImage {
+                        ProgressView() // Show a loading indicator while fetching the image
+                    } else if let profileImage = profileImage {
+                        Image(uiImage: profileImage)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: UIDevice.isIPhone ? 100 : 150)
+                            .clipShape(Circle())
+                            .frame(width: UIDevice.isIPhone ? 120 : 180, height: UIDevice.isIPhone ? 120 : 180)
+                            .padding(.bottom, 20)
+                    } else {
+                        // Display a default placeholder or error image
+                        Image(systemName: "person.fill")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: UIDevice.isIPhone ? 100 : 150)
+                            .clipShape(Circle())
+                            .frame(width: UIDevice.isIPhone ? 120 : 180, height: UIDevice.isIPhone ? 120 : 180)
+                            .foregroundColor(.gray)
+                    }
+                    Button(action: selectProfilePicture) {
+                        Text("Select Profile Picture")
+                    }
+                    if isEdited {
+                        Button("Save", action: {
+                            if let profileImage = profileImage, let userId = vm.user?.uid {
+                                saveProfilePicture(profileImage, userID: userId)
+                            }
+                            isEdited = false
+                        })
+                    }
+                }
+                
                 // MARK: SETTING
                 
                 VStack(alignment: .leading) {
                     VStack(alignment: .leading){
                         // Row Profile
                         Button(action: {
-                            if let user = user{
+                            if let user = user {
                                 print(user.id)
                             }
                             
@@ -190,10 +230,16 @@ struct ProfileView: View {
                 Spacer()
             }
         }
+        .sheet(isPresented: $isImagePickerPresented) {
+            ImagePicker(image: $profileImage)
+        }
         .sheet(isPresented: $showEditProfile){
             EditProfileView(dismiss: dismiss)
         }
         .onAppear {
+            if let userId = vm.user?.uid {
+                fetchProfileImage(userID: userId)
+            }
             // Fetch or load user data when the view appears
             if let fetchedUser = userManager.userInfo {
                 // Assign the fetched user data to the State property
@@ -211,6 +257,68 @@ struct ProfileView: View {
         showEditProfile.toggle()
     }
     
+    private func fetchProfileImage(userID: String) {
+        let storageRef = Storage.storage().reference()
+        let profileImageRef = storageRef.child("profileImages/\(userID).jpg")
+
+        profileImageRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+            if let error = error {
+                print("Error fetching profile image: \(error.localizedDescription)")
+                isFetchingImage = false
+                return
+            }
+
+            if let data = data, let image = UIImage(data: data) {
+                profileImage = image
+                isFetchingImage = false
+            }
+        }
+    }
+    
+    func selectProfilePicture() {
+        isEdited = true
+        isImagePickerPresented = true
+    }
+    
+    func saveProfilePicture(_ image: UIImage, userID: String) {
+        let storageRef = Storage.storage().reference()
+        let profileImageRef = storageRef.child("profileImages/\(userID).jpg")
+
+        if let imageData = image.jpegData(compressionQuality: 0.5) {
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+
+            profileImageRef.putData(imageData, metadata: metadata) { (metadata, error) in
+                if let error = error {
+                    print("Error uploading profile picture: \(error.localizedDescription)")
+                } else {
+                    // Successfully uploaded profile picture
+                    profileImageRef.downloadURL { (url, error) in
+                        if let url = url {
+                            // You can save the download URL to the user's Firestore document or wherever you store user data.
+                            // For example, you can update the user's document with the download URL.
+                            self.updateUserProfilePictureURL(url, userID: userID)
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    func updateUserProfilePictureURL(_ url: URL, userID: String) {
+        // You can update the user's Firestore document with the profile picture URL.
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(userID)
+        
+        userRef.updateData(["profilePictureURL": url.absoluteString]) { (error) in
+            if let error = error {
+                print("Error updating profile picture URL: \(error.localizedDescription)")
+            } else {
+                print("Profile picture URL updated successfully")
+            }
+        }
+    }
+
 }
 
 
