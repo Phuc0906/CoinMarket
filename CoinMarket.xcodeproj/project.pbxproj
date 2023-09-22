@@ -17,6 +17,9 @@
 		58A1C6FC2ABAA3F1002350FF /* CircleButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6FB2ABAA3F1002350FF /* CircleButtonView.swift */; };
 		58A1C6FE2ABAA417002350FF /* CircleButtonAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6FD2ABAA417002350FF /* CircleButtonAnimationView.swift */; };
 		58A1C7022ABC47C3002350FF /* WalletCoinRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C7012ABC47C2002350FF /* WalletCoinRow.swift */; };
+		58BF85EF2ABDA3250056D42D /* ImagePickerCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF85EE2ABDA3250056D42D /* ImagePickerCoordinator.swift */; };
+		58BF85F12ABDA4300056D42D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF85F02ABDA4300056D42D /* ImagePicker.swift */; };
+		58BF85F32ABDA6D70056D42D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF85F22ABDA6D70056D42D /* UserInfo.swift */; };
 		786FC98C2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98B2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf */; };
 		786FC9912AB772B50016E4FF /* WixMadeforDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98D2AB772B40016E4FF /* WixMadeforDisplay-Medium.ttf */; };
 		786FC9922AB772B50016E4FF /* WixMadeforDisplay-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98E2AB772B40016E4FF /* WixMadeforDisplay-SemiBold.ttf */; };
@@ -54,7 +57,6 @@
 		BC7482052AB4B9D600ABC993 /* CustomKeyPad.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482042AB4B9D600ABC993 /* CustomKeyPad.swift */; };
 		BC7482072AB7EA1000ABC993 /* Transaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482062AB7EA1000ABC993 /* Transaction.swift */; };
 		BC7482092AB7ED7600ABC993 /* BuyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482082AB7ED7600ABC993 /* BuyViewModel.swift */; };
-		BC74820B2AB7EEC900ABC993 /* AppUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74820A2AB7EEC900ABC993 /* AppUser.swift */; };
 		BC74820D2AB7F35C00ABC993 /* UserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74820C2AB7F35C00ABC993 /* UserManager.swift */; };
 		BC74820F2ABAF73000ABC993 /* TransferView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC74820E2ABAF73000ABC993 /* TransferView.swift */; };
 		BC7482112ABAF91400ABC993 /* TransferViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7482102ABAF91400ABC993 /* TransferViewModel.swift */; };
@@ -78,6 +80,9 @@
 		58A1C6FB2ABAA3F1002350FF /* CircleButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonView.swift; sourceTree = "<group>"; };
 		58A1C6FD2ABAA417002350FF /* CircleButtonAnimationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircleButtonAnimationView.swift; sourceTree = "<group>"; };
 		58A1C7012ABC47C2002350FF /* WalletCoinRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalletCoinRow.swift; sourceTree = "<group>"; };
+		58BF85EE2ABDA3250056D42D /* ImagePickerCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerCoordinator.swift; sourceTree = "<group>"; };
+		58BF85F02ABDA4300056D42D /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
+		58BF85F22ABDA6D70056D42D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		786FC98B2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-Regular.ttf"; sourceTree = "<group>"; };
 		786FC98D2AB772B40016E4FF /* WixMadeforDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		786FC98E2AB772B40016E4FF /* WixMadeforDisplay-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -112,7 +117,6 @@
 		BC7482042AB4B9D600ABC993 /* CustomKeyPad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomKeyPad.swift; sourceTree = "<group>"; };
 		BC7482062AB7EA1000ABC993 /* Transaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transaction.swift; sourceTree = "<group>"; };
 		BC7482082AB7ED7600ABC993 /* BuyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BuyViewModel.swift; sourceTree = "<group>"; };
-		BC74820A2AB7EEC900ABC993 /* AppUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUser.swift; sourceTree = "<group>"; };
 		BC74820C2AB7F35C00ABC993 /* UserManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserManager.swift; sourceTree = "<group>"; };
 		BC74820E2ABAF73000ABC993 /* TransferView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferView.swift; sourceTree = "<group>"; };
 		BC7482102ABAF91400ABC993 /* TransferViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransferViewModel.swift; sourceTree = "<group>"; };
@@ -218,7 +222,9 @@
 				BC7481E12AAD9AD400ABC993 /* CustomView */,
 				BC7481D32AAD7CBF00ABC993 /* SplashView.swift */,
 				58A1C6EB2AB32EF8002350FF /* LoginView.swift */,
+				58BF85F02ABDA4300056D42D /* ImagePicker.swift */,
 				58A1C6E92AB32DEB002350FF /* RegisterView.swift */,
+				58BF85EE2ABDA3250056D42D /* ImagePickerCoordinator.swift */,
 				BC7481D52AAD7D0500ABC993 /* HomeView.swift */,
 				BC7481D72AAD7D0E00ABC993 /* ProfileView.swift */,
 				BC7481D92AAD7D6800ABC993 /* CryptoView.swift */,
@@ -248,9 +254,9 @@
 				BC7481E52AAF793000ABC993 /* Coin.swift */,
 				BC7481E72AAF7A0600ABC993 /* CoinManager.swift */,
 				BC7482062AB7EA1000ABC993 /* Transaction.swift */,
-				BC74820A2AB7EEC900ABC993 /* AppUser.swift */,
 				BC74820C2AB7F35C00ABC993 /* UserManager.swift */,
 				58A1C6F82ABAA36B002350FF /* ChartCellModel.swift */,
+				58BF85F22ABDA6D70056D42D /* UserInfo.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -386,15 +392,16 @@
 				BC7482112ABAF91400ABC993 /* TransferViewModel.swift in Sources */,
 				BC74821C2ABB1D6200ABC993 /* ReceiverCodeInputViewModel.swift in Sources */,
 				788F942F2AB73BEC00163138 /* UIDevice.swift in Sources */,
-				BC74820B2AB7EEC900ABC993 /* AppUser.swift in Sources */,
 				BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */,
 				BC7482032AB48B0000ABC993 /* BuyView.swift in Sources */,
+				58BF85F32ABDA6D70056D42D /* UserInfo.swift in Sources */,
 				58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */,
 				BC7482092AB7ED7600ABC993 /* BuyViewModel.swift in Sources */,
 				BC7481DE2AAD7DEA00ABC993 /* MainView.swift in Sources */,
 				BC7482202ABB468D00ABC993 /* SendingViewModel.swift in Sources */,
 				BC7481D62AAD7D0500ABC993 /* HomeView.swift in Sources */,
 				BC74820D2AB7F35C00ABC993 /* UserManager.swift in Sources */,
+				58BF85F12ABDA4300056D42D /* ImagePicker.swift in Sources */,
 				BC7481F52AB1D05700ABC993 /* CoinDetailView.swift in Sources */,
 				58A1C6F92ABAA36B002350FF /* ChartCellModel.swift in Sources */,
 				BC7481F92AB316CD00ABC993 /* CryptoViewModel.swift in Sources */,
@@ -411,6 +418,7 @@
 				BC7481D82AAD7D0E00ABC993 /* ProfileView.swift in Sources */,
 				BC7481EE2AB0600E00ABC993 /* PreviewProvider.swift in Sources */,
 				BC7481DC2AAD7D7800ABC993 /* WalletView.swift in Sources */,
+				58BF85EF2ABDA3250056D42D /* ImagePickerCoordinator.swift in Sources */,
 				BC7481BA2AAAF3B400ABC993 /* CoinMarketApp.swift in Sources */,
 				58A1C6FE2ABAA417002350FF /* CircleButtonAnimationView.swift in Sources */,
 				58A1C6FC2ABAA3F1002350FF /* CircleButtonView.swift in Sources */,
