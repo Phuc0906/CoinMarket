@@ -19,17 +19,21 @@
 	<key>STORAGE_BUCKET</key>
 	<string>ios-coinmarket.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:276687101830:ios:1a94008fbf5620cd711607</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Please allow access to take a profile picture</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Please allow access to select a photo for profile </string>
 	<key>DATABASE_URL</key>
 	<string>https://ios-coinmarket-default-rtdb.firebaseio.com</string>
 </dict>
