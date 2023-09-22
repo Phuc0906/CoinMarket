@@ -9,10 +9,11 @@ import SwiftUI
 
 struct ReceiverCodeInputView: View {
     @EnvironmentObject private var vm: ReceiverInputViewModel
-    @State private var receiverID: String = ""
+    @State var receiverID: String = ""
     @State private var userIsNotExist = false
     @State private var toSendingView = false
     @StateObject private var sendingVM = SendingViewModel()
+    @Binding var presentationMode: PresentationMode
     
     
     var body: some View {
@@ -32,7 +33,7 @@ struct ReceiverCodeInputView: View {
                 }
                 
                 NavigationLink(isActive: $toSendingView, destination: {
-                    SendingView(receiver: receiverID)
+                    SendingView(receiver: receiverID, presentationMode: self.$presentationMode)
                         .environmentObject(sendingVM)
                 }) {
                     
@@ -53,6 +54,11 @@ struct ReceiverCodeInputView: View {
                 }
 
             }.padding(EdgeInsets(top: 20, leading: 10, bottom: 20, trailing: 10))
+                .onAppear {
+                    if !receiverID.isEmpty {
+                        toSendingView = true
+                    }
+                }
         }
     }
     func verifyReceiver(verify: Bool) {
@@ -66,8 +72,3 @@ struct ReceiverCodeInputView: View {
     }
 }
 
-struct ReceiverCodeInputView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReceiverCodeInputView()
-    }
-}

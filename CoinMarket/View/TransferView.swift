@@ -30,7 +30,7 @@ struct TransferView: View {
                 Spacer()
                 
                 NavigationLink(isActive: $toCodeInputField) {
-                    ReceiverCodeInputView()
+                    ReceiverCodeInputView(receiverID: receiverId , presentationMode: self.presentationMode)
                         .environmentObject(receiverInputVM)
                 } label: {
                     
@@ -85,6 +85,12 @@ struct TransferView: View {
         case .success(let result):
             let data = result.string
             print("Result: \(data)")
+            vm.verifyUser(userId: data) { result in
+                if result {
+                    self.receiverId = data
+                    self.toCodeInputField = true
+                }
+            }
         case .failure(let error):
             print("Error: \(error.localizedDescription)")
         }

@@ -26,8 +26,10 @@ class BuyViewModel: ObservableObject {
         return coinManager.getCoin(coinId: coinId)!
     }
     
-    func buy(transaction: Transaction) {
-        userManager.addTransaction(transaction: transaction)
+    func buy(transaction: Transaction, complete: (() -> Void)? = nil) {
+        userManager.addTransaction(transaction: transaction) {
+            complete?()
+        }
     }
     
     func isUserHasCoin(coinID: String) -> Bool {
@@ -35,11 +37,13 @@ class BuyViewModel: ObservableObject {
     }
     
     func getUserHolding(coinID: String) -> Double {
-        return userManager.getUserHolding(coinID: coinID)
+        return userManager.getUserHolding(coinID: coinID, userWallet: userManager.wallet)
     }
     
-    func sell(transaction: Transaction) {
-        userManager.sell(transaction: transaction)
+    func sell(transaction: Transaction, complete: (() -> Void)? = nil) {
+        userManager.sell(transaction: transaction) {
+            complete?()
+        }
     }
     
 }

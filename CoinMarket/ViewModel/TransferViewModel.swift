@@ -27,4 +27,10 @@ class TransferViewModel: ObservableObject {
         }
         return ""
     }
+    
+    func verifyUser(userId: String, verifyResult: @escaping (Bool) -> Void) {
+        userManager.verifyUser(userId: userId) { result in
+            verifyResult(result)
+        }
+    }
 }

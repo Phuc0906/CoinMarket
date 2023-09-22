@@ -72,16 +72,21 @@ struct BuyView: View {
                                 if let user = auth.user {
                                     let transaction = Transaction(coinId: coin.id, userId: user.uid, amount: Double(amount)!, currentPrice: coin.current_price, transactionDate: Date())
 
-                                    buyVM.buy(transaction: transaction)
+                                    buyVM.buy(transaction: transaction) {
+                                        presentationMode.wrappedValue.dismiss()
+                                    }
                                 }
                             }else if !amount.isEmpty && buyVM.isUserHasCoin(coinID: coin.id) {
                                 if let user = auth.user {
                                     if Double(amount)! <= buyVM.getUserHolding(coinID: coin.id) {
                                         let transaction = Transaction(coinId: coin.id, userId: user.uid, currentPrice: coin.current_price, numberOfCoin: Double(amount)!, transactionDate: Date())
                                         
-                                        buyVM.sell(transaction: transaction)
+                                        buyVM.sell(transaction: transaction) {
+                                            self.presentationMode.wrappedValue.dismiss()
+                                        }
                                     }else {
                                         // MARK: alert over amount
+                                        print("Over holding")
                                     }
                                     
                                 }

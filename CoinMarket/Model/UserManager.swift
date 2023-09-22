@@ -50,6 +50,7 @@ class UserManager: ObservableObject {
                             let wallet = try JSONDecoder().decode([String:Transaction].self, from: jsonData)
                             
                             self.wallet = wallet
+                            print(wallet)
                             self.getHoldings(wallet: wallet)
                             self.getUserAssets(wallet: wallet)
                         }catch {
@@ -102,6 +103,14 @@ class UserManager: ObservableObject {
             }
         }
     }
+    
+    func getFilteredTransaction() -> [Transaction] {
+        var localWallet: [Transaction] = []
+        for transaction in wallet {
+            localWallet.append(transaction.value)
+        }
+        return localWallet
+     }
     
     
     func getTransactions() {
@@ -167,7 +176,7 @@ class UserManager: ObservableObject {
         completion()
     }
     
-    func saveTransaction(transaction: Transaction, coins: [Coin]) {
+    func saveTransaction(amount: Double, transaction: Transaction, coins: [Coin], buyHistoryTransaction: Transaction, receiverID: String, receiverTransaction: Transaction, complete: (() -> Void)? = nil) {
         // find current coin
         var transferCoin: Coin?
         for coin in coins {
@@ -180,14 +189,177 @@ class UserManager: ObservableObject {
         if let coin = transferCoin {
             var localWallet = self.wallet
             
+            var i = 0
+            
             for var walletTransaction in localWallet {
                 if walletTransaction.value.coinId == transaction.coinId {
-                    walletTransaction.value.amount -= coin.current_price*transaction.numberOfCoin
-                    walletTransaction.value.numberOfCoin -= transaction.numberOfCoin
+                    localWallet[walletTransaction.key]?.amount -= coin.current_price*abs(amount)
+                    localWallet[walletTransaction.key]?.numberOfCoin -= abs(amount)
+                    print("Reach wallet \(walletTransaction.value.coinId) - \(transaction.numberOfCoin)")
                     break
                 }
             }
+            print(localWallet)
             
+            do {
+                let encodedData = try JSONEncoder().encode(localWallet)
+                let jsonString = String(data: encodedData,
+                                        encoding: .utf8)
+                
+                if let user = auth.user {
+                    db.collection("wallet").document("\(user.uid)").setData(["list_of_transaction": jsonString!]) { err in
+                        if let err = err {
+                            print("Error Saving Transaction document: \(err)")
+                        } else {
+                            print("Save wallet transaction written!")
+                            self.addBuyHistory(transaction: buyHistoryTransaction) {
+                                self.transferTo(receiverID: receiverID, transaction: receiverTransaction, coins: coins,complete: {
+                                    self.getUserInfo() {
+                                        self.getWallet()
+                                    }
+                                    self.getBuyHistory()
+                                    complete?()
+                                })
+                            }
+                        }
+                    }
+                }
+            }catch {
+                
+            }
+        }
+        
+        
+    }
+    
+    func addBuyHistory(transaction: Transaction, complete: (() -> Void)? = nil) {
+        buyHistory.append(transaction)
+        do {
+            let encodedData = try JSONEncoder().encode(buyHistory)
+            let jsonStringBuyHistory = String(data: encodedData,
+                                              encoding: .utf8)
+            if let user = auth.user {
+                db.collection("buy_history").document("\(user.uid)").setData(["list_of_transaction": jsonStringBuyHistory!]) { err in
+                    if let err = err {
+                        print("Error in writing buy history document: \(err)")
+                    } else {
+                        print("Buy history transaction written!")
+                        
+                        complete?()
+                        
+                    }
+                }
+            }
+        }catch {
+            
+        }
+    }
+    
+    func isHadCoin(coinID: String) -> Bool {
+        for transaction in buyHistory {
+            if transaction.coinId == coinID {
+                return true
+            }
+        }
+        
+        return false
+    }
+    
+    func sellAll(coinID: String) {
+        var currentCoin = coinManager.getCoin(coinId: coinID)
+        
+        
+        if let coin = currentCoin {
+            var localWallet = self.wallet
+            var transactionKey = ""
+            for transaction in localWallet {
+                if transaction.value.coinId == coinID {
+                    // reset transaction
+                    self.userInfo?.balance = String(Double(self.userInfo?.balance ?? "0.0")! + (localWallet[transaction.key]?.numberOfCoin ?? 0.0)*coin.current_price)
+                    transactionKey = transaction.key
+                    break
+                }
+            }
+            self.saveBuyHistory(transaction: Transaction(coinId: localWallet[transactionKey]?.coinId ?? "", userId: localWallet[transactionKey]?.userId ?? "", currentPrice: currentCoin?.current_price ?? 0.0, numberOfCoin: localWallet[transactionKey]?.numberOfCoin ?? 0.0, transactionDate: Date()))
+            
+            localWallet.removeValue(forKey: transactionKey)
+            self.saveWallet(wallet: localWallet)
+            saveUserInfo(user: self.userInfo!)
+            
+        }
+    }
+    
+    func getUserHolding(coinID: String, userWallet: [String:Transaction]) -> Double {
+        for transaction in userWallet {
+            if transaction.value.coinId == coinID {
+                return transaction.value.numberOfCoin
+            }
+        }
+        
+        return 0.0
+    }
+    
+    func saveBuyHistory(transaction: Transaction) {
+        do {
+            if let user = auth.user {
+                let encodedDataBuyHistory = try JSONEncoder().encode(self.buyHistory)
+                let jsonStringBuyHistory = String(data: encodedDataBuyHistory,
+                                                  encoding: .utf8)
+                self.db.collection("buy_history").document("\(user.uid)").setData(["list_of_transaction": jsonStringBuyHistory!]) { err in
+                    if let err = err {
+                        print("Error writing sell document: \(err)")
+                    } else {
+                        print("Document transaction sell written!")
+                        self.getUserInfo() {
+                            self.getWallet()
+                        }
+                        self.getBuyHistory()
+                    }
+                }
+            }
+        }catch {
+            
+        }
+    }
+    
+    func saveWallet(wallet: [String:Transaction]) {
+        
+        do {
+            let encodedData = try JSONEncoder().encode(wallet)
+            let jsonString = String(data: encodedData,
+                                    encoding: .utf8)
+            
+            if let user = auth.user {
+                db.collection("wallet").document("\(user.uid)").setData(["list_of_transaction": jsonString!]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    } else {
+                        print("Document transaction written!")
+                        
+                    }
+                }
+            }
+            
+            
+        }catch {
+            
+        }
+    }
+    
+    func sell(transaction: Transaction, complete: (() -> Void)? = nil) {
+        self.buyHistory.append(transaction)
+        var localWallet = self.wallet
+        for var localTransaction in localWallet {
+            if localTransaction.value.coinId == transaction.coinId {
+                localWallet[localTransaction.key]?.amount -= transaction.amount // this amount is negative
+                localWallet[localTransaction.key]?.numberOfCoin -= transaction.numberOfCoin
+                self.userInfo?.balance = String(Double(self.userInfo?.balance ?? "0.0")! + abs(transaction.amount))
+                break
+            }
+        }
+        print(localWallet)
+        saveUserInfo(user: self.userInfo!)
+        if let user = auth.user {
             do {
                 let encodedData = try JSONEncoder().encode(localWallet)
                 let jsonString = String(data: encodedData,
@@ -202,6 +374,22 @@ class UserManager: ObservableObject {
                         }
                     }
                 }
+                
+                let encodedDataBuyHistory = try JSONEncoder().encode(buyHistory)
+                let jsonStringBuyHistory = String(data: encodedDataBuyHistory,
+                                                  encoding: .utf8)
+                db.collection("buy_history").document("\(user.uid)").setData(["list_of_transaction": jsonStringBuyHistory!]) { err in
+                    if let err = err {
+                        print("Error writing sell document: \(err)")
+                    } else {
+                        print("Document transaction sell written!")
+                        self.getUserInfo() {
+                            self.getWallet()
+                        }
+                        self.getBuyHistory()
+                        complete?()
+                    }
+                }
             }catch {
                 
             }
@@ -210,27 +398,7 @@ class UserManager: ObservableObject {
         
     }
     
-    func addBuyHistory(transaction: Transaction) {
-        buyHistory.append(transaction)
-        do {
-            let encodedData = try JSONEncoder().encode(buyHistory)
-            let jsonStringBuyHistory = String(data: encodedData,
-                                              encoding: .utf8)
-            if let user = auth.user {
-                db.collection("buy_history").document("\(user.uid)").setData(["list_of_transaction": jsonStringBuyHistory!]) { err in
-                    if let err = err {
-                        print("Error writing document: \(err)")
-                    } else {
-                        print("Document transaction written!")
-                    }
-                }
-            }
-        }catch {
-            
-        }
-    }
-    
-    func transferTo(receiverID: String, transaction: Transaction, coins: [Coin]) {
+    func transferTo(receiverID: String, transaction: Transaction, coins: [Coin], complete: (() -> Void)? = nil) {
         var transferCoin: Coin?
         for coin in coins {
             if coin.id == transaction.coinId {
@@ -283,7 +451,10 @@ class UserManager: ObservableObject {
                                     }
                                 }
                             }
-                            self.processReceiverTransaction(receiverWallet: receiverWallet, receiverBuyHistory: receiverBuyHistory, receiverID: receiverID)
+                            self.processReceiverTransaction(receiverWallet: receiverWallet, receiverBuyHistory: receiverBuyHistory, receiverID: receiverID) {
+                                print("Run in transfer to")
+                                complete?()
+                            }
                         }
                     }catch {
                         
@@ -308,93 +479,52 @@ class UserManager: ObservableObject {
                     }else {
                         receiverBuyHistory.append(transaction)
                     }
-                    self.processReceiverTransaction(receiverWallet: receiverWallet, receiverBuyHistory: receiverBuyHistory, receiverID: receiverID)
+                    self.processReceiverTransaction(receiverWallet: receiverWallet, receiverBuyHistory: receiverBuyHistory, receiverID: receiverID) {
+                        print("Run in transfer to")
+                        complete?()
+                    }
                 }
             }
         }
     }
     
-    private func processReceiverTransaction(receiverWallet: [String:Transaction], receiverBuyHistory: [Transaction], receiverID: String) {
+    private func processReceiverTransaction(receiverWallet: [String:Transaction], receiverBuyHistory: [Transaction], receiverID: String, complete: (() -> Void)? = nil) {
         do {
             let encodedData = try JSONEncoder().encode(receiverWallet)
             let jsonStringTransaction = String(data: encodedData,
                                                encoding: .utf8)
             let encodedDataBuyHistory = try JSONEncoder().encode(receiverBuyHistory)
-            let jsonStringBuyHistory = String(data: encodedDataBuyHistory,
+            let jsonStringBuyHistory = String(data: encodedData,
                                               encoding: .utf8)
             db.collection("wallet").document("\(receiverID)").setData(["list_of_transaction": jsonStringTransaction!]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
                 } else {
                     print("Document receiver transaction written!")
+                    self.db.collection("buy_history").document("\(receiverID)").setData(["list_of_transaction": jsonStringBuyHistory!]) { err in
+                        if let err = err {
+                            print("Error writing document: \(err)")
+                        } else {
+                            print("Document receiver buy history written!")
+                            complete?()
+                        }
+                    }
                 }
             }
             
-            db.collection("buy_history").document("\(receiverID)").setData(["list_of_transaction": jsonStringBuyHistory!]) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
-                } else {
-                    print("Document receiver buy history written!")
-                }
-            }
+            
         }catch {
             
         }
     }
     
-    func sell(transaction: Transaction) {
-        self.buyHistory.append(transaction)
-        var localWallet = self.wallet
-        for var localTransaction in localWallet {
-            if localTransaction.value.coinId == transaction.coinId {
-                localTransaction.value.amount += transaction.amount // this amount is negative
-                localTransaction.value.numberOfCoin -= transaction.numberOfCoin
-                self.userInfo?.balance = String(Double(self.userInfo?.balance ?? "0.0")! + abs(transaction.amount))
-                break
-            }
-        }
-        saveUserInfo(user: self.userInfo!)
-        if let user = auth.user {
-            do {
-                let encodedData = try JSONEncoder().encode(localWallet)
-                let jsonString = String(data: encodedData,
-                                        encoding: .utf8)
-                
-                if let user = auth.user {
-                    db.collection("wallet").document("\(user.uid)").setData(["list_of_transaction": jsonString!]) { err in
-                        if let err = err {
-                            print("Error writing document: \(err)")
-                        } else {
-                            print("Document transaction written!")
-                        }
-                    }
-                }
-                
-                let encodedDataBuyHistory = try JSONEncoder().encode(buyHistory)
-                let jsonStringBuyHistory = String(data: encodedDataBuyHistory,
-                                                  encoding: .utf8)
-                db.collection("buy_history").document("\(user.uid)").setData(["list_of_transaction": jsonStringBuyHistory!]) { err in
-                    if let err = err {
-                        print("Error writing sell document: \(err)")
-                    } else {
-                        print("Document transaction sell written!")
-                    }
-                }
-            }catch {
-                
-            }
-        }
-        
-        
-    }
-    
-    func addTransaction(transaction: Transaction) {
+    func addTransaction(transaction: Transaction, complete: (() -> Void)? = nil) {
         var localWallet = self.wallet
         var isFound = false
         for var walletTransaction in localWallet {
             if walletTransaction.value.coinId == transaction.coinId {
-                walletTransaction.value.numberOfCoin += transaction.numberOfCoin
-                walletTransaction.value.amount += transaction.amount
+                localWallet[walletTransaction.key]?.numberOfCoin += transaction.numberOfCoin
+                localWallet[walletTransaction.key]?.amount += transaction.amount
                 isFound = true
                 break
             }
@@ -433,6 +563,11 @@ class UserManager: ObservableObject {
                         print("Error writing document: \(err)")
                     } else {
                         print("Document transaction written!")
+                        complete?()
+                        self.getUserInfo() {
+                            self.getWallet()
+                        }
+                        self.getBuyHistory()
                     }
                 }
             }
@@ -492,25 +627,5 @@ class UserManager: ObservableObject {
                 verify(false)
             }
         }
-    }
-    
-    func isHadCoin(coinID: String) -> Bool {
-        for transaction in buyHistory {
-            if transaction.coinId == coinID {
-                return true
-            }
-        }
-        
-        return false
-    }
-    
-    func getUserHolding(coinID: String) -> Double {
-        for transaction in buyHistory {
-            if transaction.coinId == coinID {
-                return transaction.numberOfCoin
-            }
-        }
-        
-        return 0.0
     }
 }
