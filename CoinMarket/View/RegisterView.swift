@@ -83,6 +83,7 @@ struct RegisterView: View {
                         Text("Email")
                             .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
                         TextField("Email", text: $email)
+                            .autocapitalization(.none)
                             .modifier(TextFieldModifier())
                     }
                     
