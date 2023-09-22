@@ -183,8 +183,6 @@ struct RegisterView: View {
         }catch{
             print("error")
         }
-        
-        
     }
     
 }

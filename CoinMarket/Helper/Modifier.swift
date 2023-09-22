@@ -19,6 +19,12 @@ struct TextFieldModifier: ViewModifier{
             .cornerRadius(10)
     }
 }
+struct TextModifier: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 35))
+    }
+}
 
 struct LongButton: ViewModifier{
     func body(content: Content) -> some View {
@@ -28,6 +34,18 @@ struct LongButton: ViewModifier{
             .frame(height: UIDevice.isIPhone ? 50 : 70)
             .background(.yellow)
             .foregroundColor(Color.theme.background)
+            .cornerRadius(10)
+    }
+}
+
+struct SignOutButton: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 40))
+            .frame(maxWidth: .infinity)
+            .frame(height: UIDevice.isIPhone ? 50 : 70)
+            .background(Color("Logout"))
+            .foregroundColor(.white)
             .cornerRadius(10)
     }
 }
