@@ -10,9 +10,9 @@ import SwiftUI
 import UIKit
 
 class ImagePickerCoordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    var parent: RegisterView
+    var parent: ProfileView
 
-    init(_ parent: RegisterView) {
+    init(_ parent: ProfileView) {
         self.parent = parent
     }
 
