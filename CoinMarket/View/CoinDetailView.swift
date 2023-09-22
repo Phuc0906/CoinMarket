@@ -10,9 +10,11 @@ import Firebase
 
 struct CoinDetailView: View {
     @EnvironmentObject private var vm: DetailViewModel
+    @StateObject private var buyVM = BuyViewModel()
     @State var coin: Coin
     @State private var toLogin = false
     @State private var toBuyView = false
+    @State private var toSellView = false
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -32,7 +34,11 @@ struct CoinDetailView: View {
         }.fullScreenCover(isPresented: $toLogin) {
             LoginView()
         }.fullScreenCover(isPresented: $toBuyView) {
-            BuyView(coin: coin)
+            BuyView(coin: coin, isBuy: true)
+                .environmentObject(buyVM)
+        }.fullScreenCover(isPresented: $toSellView) {
+            BuyView(coin: coin, isBuy: false)
+                .environmentObject(buyVM)
         }
     }
 }
@@ -112,6 +118,7 @@ extension CoinDetailView {
                         VStack {
                             Button {
                                 // MARK: move to sell page
+                                toSellView = true
                             } label: {
                                 Text("Sell")
                                     .foregroundColor(colorScheme == .dark ? .black : .white)
