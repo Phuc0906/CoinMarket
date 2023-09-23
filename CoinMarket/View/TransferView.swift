@@ -42,8 +42,13 @@ struct TransferView: View {
                 } label: {
                     HStack {
                         Text("Scan QR code to send crypto")
+                            .foregroundColor(.white)
                             .padding(EdgeInsets(top: 15, leading: 40, bottom: 15, trailing: 40))
-                            .background(Color.theme.secondaryText)
+                            .background(LinearGradient(
+                                gradient: Gradient(colors: [Color.yellow, Color.orange]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ))
                             .cornerRadius(30)
                     }
                 }
@@ -52,9 +57,15 @@ struct TransferView: View {
                 } label: {
                     HStack {
                         Text("Enter code to send crypto")
+                            .foregroundColor(.white)
                             .padding(EdgeInsets(top: 15, leading: 40, bottom: 15, trailing: 40))
-                            .background(Color.theme.secondaryText)
+                            .background( LinearGradient(
+                                gradient: Gradient(colors: [Color.yellow, Color.orange]),
+                                startPoint: .topLeading,
+                                endPoint: .bottomTrailing
+                            ))
                             .cornerRadius(30)
+                        
                     }
                 }
                 Spacer()
@@ -108,6 +119,6 @@ struct TransferView: View {
 
 struct TransferView_Previews: PreviewProvider {
     static var previews: some View {
-        TransferView()
+        TransferView().environmentObject(TransferViewModel())
     }
 }

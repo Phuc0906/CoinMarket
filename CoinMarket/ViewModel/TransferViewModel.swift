@@ -9,6 +9,7 @@ import Foundation
 import Firebase
 
 class TransferViewModel: ObservableObject {
+    
     private var auth = AuthViewModel()
     let db = Firestore.firestore()
     let userManager = UserManager()
