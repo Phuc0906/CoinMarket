@@ -20,6 +20,17 @@ struct BuyHistoryView: View {
                     }
                 }
             }.navigationTitle("Transaction History")
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        Button {
+                            presentationMode.wrappedValue.dismiss()
+                        } label: {
+                            Text("Done")
+                                .foregroundColor(.blue)
+                        }
+
+                    }
+                }
         }
     }
 }

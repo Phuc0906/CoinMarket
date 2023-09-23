@@ -374,7 +374,7 @@ class UserManager: ObservableObject {
         for var localTransaction in localWallet {
             if localTransaction.value.coinId == transaction.coinId {
                 localWallet[localTransaction.key]?.amount -= transaction.amount // this amount is negative
-                localWallet[localTransaction.key]?.numberOfCoin -= transaction.numberOfCoin
+                localWallet[localTransaction.key]?.numberOfCoin -= abs(transaction.numberOfCoin)
                 self.userInfo?.balance = String(Double(self.userInfo?.balance ?? "0.0")! + abs(transaction.amount))
                 break
             }

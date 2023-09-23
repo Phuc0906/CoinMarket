@@ -260,18 +260,18 @@ struct ProfileView: View {
                 .environmentObject(buyHistoryVM)
         })
         .onAppear {
-//            if let userId = vm.user?.uid {
-//                fetchProfileImage(userID: userId)
-//            }
-//            // Fetch or load user data when the view appears
-//            if let fetchedUser = userManager.userInfo {
-//                // Assign the fetched user data to the State property
-//                self.user = fetchedUser
-//            } else {
-//                // Handle the case where user data couldn't be loaded
-//                // For example, show an error message or take appropriate action
-//                print("User data couldn't be loaded.")
-//            }
+            if let userId = vm.user?.uid {
+                fetchProfileImage(userID: userId)
+            }
+            // Fetch or load user data when the view appears
+            if let fetchedUser = userManager.userInfo {
+                // Assign the fetched user data to the State property
+                self.user = fetchedUser
+            } else {
+                // Handle the case where user data couldn't be loaded
+                // For example, show an error message or take appropriate action
+                print("User data couldn't be loaded.")
+            }
         }
     }
     

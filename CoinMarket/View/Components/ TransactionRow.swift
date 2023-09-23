@@ -42,7 +42,7 @@ struct TransactionRow: View {
                     .padding(.leading, 6)
                     .foregroundColor(Color.theme.accent)
                 
-                if transaction.numberOfCoin < 0 {
+                if transaction.amount < 0 {
                     Image(systemName: "arrow.up.right")
                         .foregroundColor(.red)
                 }else {
@@ -55,9 +55,9 @@ struct TransactionRow: View {
             Spacer()
             
             VStack(alignment: .trailing) {
-                Text("\(String(format: "%.2f", coin.current_price)) \(coin.symbol.uppercased())")
+                Text("\(transaction.numberOfCoin) \(coin.symbol.uppercased())")
                     .foregroundColor(Color.theme.accent)
-                Text("\(transaction.amount)")
+                Text("$ \(transaction.amount)")
                     .foregroundColor((transaction.numberOfCoin > 0) ? Color.theme.green : Color.theme.red)
                 
             }
