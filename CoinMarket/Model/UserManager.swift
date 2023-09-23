@@ -82,9 +82,30 @@ class UserManager: ObservableObject {
             
         }
     }
+
+    func getUserBuyHistory(userID: String, complete: ((_ transactions: [Transaction]) -> Void)? = nil) {
+        db.collection("buy_history").document("\(userID)").getDocument { (document, error) in
+            
+            if let document = document, document.exists {
+                
+                let dataTransactions = document.data()?.values.map(String.init(describing:))
+                
+                if let jsonData = dataTransactions![0].data(using: .utf8) {
+                    do {
+                        let transactions = try JSONDecoder().decode([Transaction].self, from: jsonData)
+                        self.buyHistory = transactions
+                        complete?(transactions)
+                    }catch {
+                        
+                    }
+                }
+            }
+        }
+    }
     
     func getBuyHistory() {
         if let user = auth.user {
+            print("In us manager \(user.uid)")
             self.db.collection("buy_history").document("\(user.uid)").getDocument { (document, error) in
                 
                 if let document = document, document.exists {
@@ -95,6 +116,7 @@ class UserManager: ObservableObject {
                         do {
                             let transactions = try JSONDecoder().decode([Transaction].self, from: jsonData)
                             self.buyHistory = transactions
+                            print("In user buy history")
                         }catch {
                             
                         }
