@@ -24,8 +24,6 @@ class CoinManager {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
         
-        
-        
         let now = Date()
         let date2_format = dateFormatter.string(from: now)
         print(dateFormatter.date(from: dateString1))
