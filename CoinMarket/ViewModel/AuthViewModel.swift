@@ -38,4 +38,15 @@ class AuthViewModel: ObservableObject {
             print("user in not signed in.")
         }
     }
+    
+    func getEmail() -> String? {
+        if let currentUser = Auth.auth().currentUser {
+            let userEmail = currentUser.email
+            // Now, userEmail contains the user's email address
+            return userEmail
+        } else {
+            // No user is signed in.
+            return nil
+        }
+    }
 }

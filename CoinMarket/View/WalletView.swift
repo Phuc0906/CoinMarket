@@ -87,7 +87,7 @@ struct WalletView: View {
                 VStack(spacing: 30) {
                     VStack {
                         if let user = userManager.userInfo {
-                            Text("\(user.balance)")
+                            Text("\(user.balance)$")
                                 .font(.system(size: 50))
                                 .foregroundColor(Color.theme.accent)
                         } else {
