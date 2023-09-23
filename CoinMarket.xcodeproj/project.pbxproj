@@ -22,6 +22,7 @@
 		58BF85F12ABDA4300056D42D /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF85F02ABDA4300056D42D /* ImagePicker.swift */; };
 		58BF85F32ABDA6D70056D42D /* UserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58BF85F22ABDA6D70056D42D /* UserInfo.swift */; };
 		7830FAC12ABD46F500C50FB7 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7830FAC02ABD46F500C50FB7 /* EditProfileView.swift */; };
+		785EBDD22ABF636400B7F816 /* DepositView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785EBDD12ABF636400B7F816 /* DepositView.swift */; };
 		786FC98C2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98B2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf */; };
 		786FC9912AB772B50016E4FF /* WixMadeforDisplay-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98D2AB772B40016E4FF /* WixMadeforDisplay-Medium.ttf */; };
 		786FC9922AB772B50016E4FF /* WixMadeforDisplay-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 786FC98E2AB772B40016E4FF /* WixMadeforDisplay-SemiBold.ttf */; };
@@ -88,6 +89,7 @@
 		58BF85F02ABDA4300056D42D /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 		58BF85F22ABDA6D70056D42D /* UserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfo.swift; sourceTree = "<group>"; };
 		7830FAC02ABD46F500C50FB7 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		785EBDD12ABF636400B7F816 /* DepositView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DepositView.swift; sourceTree = "<group>"; };
 		786FC98B2AB771AE0016E4FF /* WixMadeforDisplay-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-Regular.ttf"; sourceTree = "<group>"; };
 		786FC98D2AB772B40016E4FF /* WixMadeforDisplay-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-Medium.ttf"; sourceTree = "<group>"; };
 		786FC98E2AB772B40016E4FF /* WixMadeforDisplay-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "WixMadeforDisplay-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -251,6 +253,7 @@
 			children = (
 				BC7481E22AAD9AE500ABC993 /* AddCoinView.swift */,
 				7830FAC02ABD46F500C50FB7 /* EditProfileView.swift */,
+				785EBDD12ABF636400B7F816 /* DepositView.swift */,
 			);
 			path = CustomView;
 			sourceTree = "<group>";
@@ -406,6 +409,7 @@
 				BC7481BC2AAAF3B400ABC993 /* ContentView.swift in Sources */,
 				BC7482032AB48B0000ABC993 /* BuyView.swift in Sources */,
 				58BF85F32ABDA6D70056D42D /* UserInfo.swift in Sources */,
+				785EBDD22ABF636400B7F816 /* DepositView.swift in Sources */,
 				58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */,
 				BC7482092AB7ED7600ABC993 /* BuyViewModel.swift in Sources */,
 				BC7481DE2AAD7DEA00ABC993 /* MainView.swift in Sources */,

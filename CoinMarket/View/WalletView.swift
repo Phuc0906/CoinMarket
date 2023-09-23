@@ -12,10 +12,12 @@ struct WalletView: View {
     @StateObject private var transferVM = TransferViewModel()
     @State private var showPortfolio = false
     @State private var showTransfer = false
+    @State private var isDeposit = false
     @State var selectedPie: String = ""
     @State var selectedDonut: String = ""
     @ObservedObject private var userManager = UserManager()
     let coinManager = CoinManager()
+    
     var body: some View {
         VStack {
             HStack {
@@ -46,6 +48,15 @@ struct WalletView: View {
         }
         .fullScreenCover(isPresented: $showTransfer) {
             TransferView().environmentObject(transferVM)
+        }
+        
+        .sheet(isPresented:$isDeposit) {
+            DepositView()
+        }
+        .onChange(of: isDeposit){newValue in
+            userManager.getUserInfo {
+                print("get")
+            }
         }
     }
 }
@@ -121,12 +132,11 @@ extension WalletView {
                     .font(.caption)
                     .foregroundColor(Color.theme.accent)
             }
-            
             HStack {
                 Spacer()
                 Button(action: {
+                    isDeposit.toggle()
                 }) {
-                    
                     VStack {
                         Image(systemName: "dollarsign.arrow.circlepath")
                         
@@ -141,7 +151,6 @@ extension WalletView {
                         Capsule()
                             .fill(Color.yellow) // Change the color to your desired background color
                     )
-                    
                 }
                 
                 Spacer()
@@ -195,7 +204,6 @@ extension WalletView {
                     
                 }
                 .padding()
-                
             }
         }
     }
