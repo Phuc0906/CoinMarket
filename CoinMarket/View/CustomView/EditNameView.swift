@@ -8,14 +8,11 @@
 import SwiftUI
 import Firebase
 
-struct EditProfileView: View {
-    var dismiss: () -> Void // A closure to handle restarting the game
+struct EditNameView: View {
     
     @ObservedObject private var userManager = UserManager()
-    
-    var user: UserInfo? {
-        return userManager.userInfo
-    }
+    @ObservedObject private var authVM = AuthViewModel()
+    @Environment(\.presentationMode) var presentationMode
     
     var name_placeholder: String?{
         return userManager.userInfo?.name
@@ -29,6 +26,7 @@ struct EditProfileView: View {
     @State private var newEmail = ""
     
     var body: some View {
+        
         ZStack{
             Color.white.ignoresSafeArea()
             
@@ -38,13 +36,6 @@ struct EditProfileView: View {
                     Text("Edit profile")
                         .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
                         .padding(.vertical)
-                    
-//                    VStack(alignment: .leading, spacing: 5){
-//                        Text("Email")
-//                            .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
-//                        TextField(email_placeholder ?? "None", text: $newEmail)
-//                            .modifier(TextFieldModifier())
-//                    }
                     
                     VStack(alignment: .leading, spacing: 5){
                         Text("Name")
@@ -56,8 +47,8 @@ struct EditProfileView: View {
                     Button(action: {
                         // Save user info
                         if !newName.isEmpty{
-                            register()
-                            dismiss()
+                            update()
+                            presentationMode.wrappedValue.dismiss()
                         }
                         else{
                             print("Name is empty")
@@ -71,7 +62,7 @@ struct EditProfileView: View {
                     
                     Button(action: {
                         // Handle restarting the game here
-                        dismiss()
+                        presentationMode.wrappedValue.dismiss()
                     }) {
                         Text("Cancel")
                             .modifier(SignOutButton())
@@ -87,31 +78,20 @@ struct EditProfileView: View {
         }
     }
     
-    func register() {
-        if let user = user {
-            let newUser = UserInfo(id: user.id, name: newName, balance: user.balance)
-            saveUserData(user: newUser)
+    func update() {
+        if var user = userManager.userInfo {
+            user.name = newName
+            if let userId = authVM.user?.uid {
+                let newUser = UserInfo(id: userId, name: newName, balance: user.balance)
+                userManager.saveUserInfo(user: newUser)
+            }
         }
     }
-    
-    func saveUserData(user: UserInfo) {
-        let db = Firestore.firestore()
-        
-        do {
-            let encodedData = try JSONEncoder().encode(user)
-            let jsonString = String(data: encodedData,
-                                    encoding: .utf8)
-            db.collection("users").document("\(user.id)").setData(["profile": jsonString!])
-        }catch{
-            print("error")
-        }
-    }
-    
     
 }
 
-struct EditProfileView_Previews: PreviewProvider {
+struct EditNameView_Previews: PreviewProvider {
     static var previews: some View {
-        EditProfileView(dismiss: {})
+        EditNameView()
     }
 }

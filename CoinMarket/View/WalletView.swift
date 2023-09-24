@@ -138,9 +138,64 @@ extension WalletView {
                     isDeposit.toggle()
                 }) {
                     VStack {
-                        Image(systemName: "dollarsign.arrow.circlepath")
+                        if let user = userManager.userInfo {
+                            Text("\(user.balance)$")
+                                .font(.system(size: 50))
+                                .foregroundColor(Color.theme.accent)
+                        } else {
+                            Text("0$")
+                                .font(.system(size: 50))
+                                .foregroundColor(Color.theme.accent)
+                        }
+                        Text("Total Balance")
+                            .font(.caption)
+                            .foregroundColor(Color.theme.accent)
+                    }
+                    
+                    HStack {
+                        Spacer()
+                        Button(action: {
+                        }) {
+                            
+                            VStack {
+                                Image(systemName: "dollarsign.arrow.circlepath")
+                                
+                                    .foregroundColor(.white)
+                                Text("Deposit")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: 200)
+                            }
+                            .padding()
+                            .background(
+                                Capsule()
+                                    .fill(Color.yellow) // Change the color to your desired background color
+                            )
+                            
+                        }
                         
-                            .foregroundColor(.white)
+                        Spacer()
+                        
+                        Button(action: {
+                        }) {
+                            
+                            VStack {
+                                Image(systemName: "person.line.dotted.person")
+                                    .foregroundColor(.white)
+                                Text("P2P Trading")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: 200)
+                            }
+                            .padding()
+                            .background(
+                                Capsule()
+                                    .fill(Color.yellow) // Change the color to your desired background color
+                            )
+                            
+                        }
+                        
+                        Spacer()
                         Text("Deposit")
                             .font(.headline)
                             .foregroundColor(.white)
