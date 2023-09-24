@@ -12,6 +12,7 @@ import FirebaseStorage
 struct ProfileView: View {
     @ObservedObject private var vm = AuthViewModel()
     @ObservedObject private var userManager = UserManager()
+    @StateObject private var buyHistoryVM = BuyHistoryViewModel()
     
     @State private var showEditProfile = false
     @Environment(\.colorScheme) var colorScheme
@@ -26,15 +27,14 @@ struct ProfileView: View {
     @State private var profileImageURL: URL?
     @State private var isImagePickerPresented = false
     @State private var isEdited = false
+    @State private var toBuyHistory = false
     
     var body: some View {
-        ScrollView{
-            ZStack{
-                Color.theme.background
-                    .ignoresSafeArea()
-                
+        ZStack{
+            Color.theme.background
+                .ignoresSafeArea()
+            ScrollView {
                 VStack(spacing: UIDevice.isIPhone ? 20 : 50){
-                    //MARK: HEADING TITLE
                     HStack{
                         Text(language ? "Profile" : "Hồ sơ")
                             .font(.custom("WixMadeForDisplay-ExtraBold", size: UIDevice.isIPhone ? 40 : 50))
@@ -98,7 +98,7 @@ struct ProfileView: View {
                     .padding(EdgeInsets(top: 30, leading: 25, bottom: 30, trailing: 30))
                     .background(.cyan.opacity(0.8))
                     .cornerRadius(20)
-                    
+                  
                     
                     //MARK: PROFILE IMAGE
                     VStack{
@@ -135,9 +135,6 @@ struct ProfileView: View {
                                 .frame(width: UIDevice.isIPhone ? 120 : 180, height: UIDevice.isIPhone ? 120 : 180)
                                 .foregroundColor(.gray)
                         }
-//                        Button(action: selectProfilePicture) {
-//                            Text("Select Profile Picture")
-//                        }
                         if isEdited {
                             Button("Save", action: {
                                 if let profileImage = profileImage, let userId = vm.user?.uid {
@@ -186,7 +183,31 @@ struct ProfileView: View {
                                     Spacer()
                                 }
                             }
-                            
+                           
+                            Button(action: {
+                                print("Edit theme")
+                                toBuyHistory = true
+                            }) {
+                                HStack(spacing: 20){
+                                    Image(systemName: "purchased")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
+                                    Text("Buy History")
+                            // Row Theme
+                            Button(action: {
+                                print("Edit theme")
+                            }) {
+                                HStack(spacing: 20){
+                                    Image("theme")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
+                                    Text("Theme")
+                                        .modifier(TextModifier())
+                                    Spacer()
+                                }
+                            }
                             // Row Theme
                             Button(action: {
                                 print("Edit theme")
@@ -237,7 +258,8 @@ struct ProfileView: View {
                                     .shadow(color: Color.gray, radius: 5, x: 0, y: 2) // Shadow for the border
                             )
                     )
-     
+                    
+                    
                     Spacer()
                     Button {
                         vm.signOut()
@@ -250,6 +272,7 @@ struct ProfileView: View {
                     Spacer()
                 }
             }
+            
         }
         .sheet(isPresented:$showEditProfile) {
             EditNameView()
@@ -263,7 +286,13 @@ struct ProfileView: View {
         .sheet(isPresented: $isImagePickerPresented) {
             ImagePicker(image: $profileImage)
         }
-    
+        .sheet(isPresented: $showEditProfile){
+            EditProfileView(dismiss: dismiss)
+        }
+        .fullScreenCover(isPresented: $toBuyHistory, content: {
+            BuyHistoryView()
+                .environmentObject(buyHistoryVM)
+        })
         .onAppear {
             print("On Appear profile view")
             if let userId = vm.user?.uid {
