@@ -118,13 +118,27 @@ struct ProfileView: View {
                                         .offset(x: 40, y: 50)
                                 )
                         } else {
-                            // Display a default placeholder or error image
-                            Image(systemName: "person.fill")
-                                .resizable()
-                                .scaledToFit()
-                                .clipShape(Circle())
-                                .frame(width: UIDevice.isIPhone ? 120 : 180, height: UIDevice.isIPhone ? 120 : 180)
-                                .foregroundColor(.gray)
+                            Circle()
+                                .fill(Color.white)
+                                .frame(width: 130, height: 130)
+                                .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
+                                .overlay(
+                                    Image(systemName: "person.fill") // Replace with the name of your image asset
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 120, height: 120)
+                                        .clipShape(Circle())
+                                )
+                                .overlay(
+                                    Button(action: selectProfilePicture) {
+                                        Image("pen") // Replace with the name of your image asset
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 35, height: 35)
+                                            .clipShape(Circle())
+                                    }
+                                        .offset(x: 40, y: 50)
+                                )
                         }
                         if isEdited {
                             Button("Save", action: {
@@ -137,123 +151,119 @@ struct ProfileView: View {
                     }
                     
                     // MARK: SETTING
-                    VStack(alignment: .leading) {
-                        VStack(alignment: .leading){
-                            //MARK: EDIT NAME
-                            Button(action: {
-                                if let user = userManager.userInfo {
-                                    print(user.id)
-                                }
-                                showEditProfile.toggle()
-                            }) {
-                                HStack(spacing: 20){
-                                    Image("profile")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
-                                    Text("Edit profile information")
-                                        .modifier(TextModifier())
-                                    
-                                    Spacer()
-                                }
+                    VStack(alignment: .leading){
+                        //MARK: EDIT NAME
+                        Button(action: {
+                            if let user = userManager.userInfo {
+                                print(user.id)
                             }
-                            
-                            
-                            //MARK: NOTIFICATION
-                            Button(action: {
-                                print("Edit notification")
-                            }) {
-                                HStack(spacing: 20){
-                                    Image("noti")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
-                                    Text("Notification")
-                                        .modifier(TextModifier())
-                                    Spacer()
-                                }
-                            }
-                            
-                            //MARK: VIEW HISTORY
-                            Button(action: {
-                                print("See history")
-                                toBuyHistory = true
-                            }) {
-                                HStack(spacing: 20){
-                                    Image(systemName: "purchased")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
-                                    Text("Buy History")
-                                        .modifier(TextModifier())
-                                    Spacer()
-                                }
-                            }
-                            
-                            
-                            //MARK: EDIT THEME
-                            Button(action: {
-                                print("Edit theme")
-                            }) {
-                                HStack(spacing: 20){
-                                    Image("theme")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
-                                    Text("Theme")
-                                        .modifier(TextModifier())
-                                    Spacer()
-                                }
-                            }
-                            
-                            //MARK: EDIT LANGUAGE
-                            Button(action: {
-                                print("Edit language")
-                            }) {
-                                HStack(spacing: 20){
-                                    Image("lang")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
-                                    Text("Language")
-                                        .modifier(TextModifier())
-                                    
-                                    Spacer()
-                                    
-                                    Image(language ? "uk" : "vietnamese")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIDevice.isIPhone ? 35 : 60)
-                                }
+                            showEditProfile.toggle()
+                        }) {
+                            HStack(spacing: 20){
+                                Image("profile")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
+                                Text("Edit profile information")
+                                    .modifier(TextModifier())
                                 
+                                Spacer()
                             }
                         }
-                        .frame(maxWidth: UIDevice.isIPhone ? 320 : 600)
-                        .padding(EdgeInsets(top: 30, leading: 25, bottom: 30, trailing: 25))
-                        .foregroundColor(.black)
-                        .background(
-                            RoundedRectangle(cornerRadius: 20) // Rounded border
-                                .stroke(Color.gray, lineWidth: 0.1) // Border color and width
-                                .background(
-                                    RoundedRectangle(cornerRadius: 20) // Rounded border background
-                                        .fill(Color.white) // Border background color
-                                        .shadow(color: Color.gray, radius: 5, x: 0, y: 2) // Shadow for the border
-                                )
-                        )
                         
-                        Spacer()
-                        Button {
-                            vm.signOut()
-                        } label: {
-                            Text("Sign out")
-                                .modifier(SignOutButton())
+                        
+                        //MARK: NOTIFICATION
+                        Button(action: {
+                            print("Edit notification")
+                        }) {
+                            HStack(spacing: 20){
+                                Image("noti")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
+                                Text("Notification")
+                                    .modifier(TextModifier())
+                                Spacer()
+                            }
+                        }
+                        
+                        //MARK: VIEW HISTORY
+                        Button(action: {
+                            print("See history")
+                            toBuyHistory = true
+                        }) {
+                            HStack(spacing: 20){
+                                Image(systemName: "purchased")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
+                                Text("Buy History")
+                                    .modifier(TextModifier())
+                                Spacer()
+                            }
+                        }
+                        
+                        
+                        //MARK: EDIT THEME
+                        Button(action: {
+                            print("Edit theme")
+                        }) {
+                            HStack(spacing: 20){
+                                Image("theme")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
+                                Text("Theme")
+                                    .modifier(TextModifier())
+                                Spacer()
+                            }
+                        }
+                        
+                        //MARK: EDIT LANGUAGE
+                        Button(action: {
+                            print("Edit language")
+                        }) {
+                            HStack(spacing: 20){
+                                Image("lang")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
+                                Text("Language")
+                                    .modifier(TextModifier())
+                                
+                                Spacer()
+                                
+                                Image(language ? "uk" : "vietnamese")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: UIDevice.isIPhone ? 35 : 60)
+                            }
                             
                         }
-                        .frame(maxWidth: 320)
-                        Spacer()
                     }
+                    .frame(maxWidth: UIDevice.isIPhone ? 320 : 600)
+                    .padding(EdgeInsets(top: 30, leading: 25, bottom: 30, trailing: 25))
+                    .foregroundColor(.black)
+                    .background(
+                        RoundedRectangle(cornerRadius: 20) // Rounded border
+                            .stroke(Color.gray, lineWidth: 0.1) // Border color and width
+                            .background(
+                                RoundedRectangle(cornerRadius: 20) // Rounded border background
+                                    .fill(Color.white) // Border background color
+                                    .shadow(color: Color.gray, radius: 5, x: 0, y: 2) // Shadow for the border
+                            )
+                    )
+                    
+                    Button {
+                        vm.signOut()
+                    } label: {
+                        Text("Sign out")
+                            .modifier(SignOutButton())
+                        
+                    }
+                    .frame(maxWidth: 320)
                 }
-                
+
             }
             .sheet(isPresented:$showEditProfile) {
                 EditNameView()
@@ -353,7 +363,7 @@ struct ProfileView_Previews: PreviewProvider {
             .previewDisplayName("iPhone 14")
         
         MainView()
-            .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch)"))
+            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
             .previewDisplayName("iPad Pro")
     }
 }
