@@ -48,7 +48,7 @@ struct LoginView: View {
                             .frame(width: UIDevice.isIPhone ? 40 : 50)
                     }
                     // theme button
-                    Button(action: {
+                    Button(action: {    
                         // Add your action here
                         print("Change mode")
                         language.toggle()
