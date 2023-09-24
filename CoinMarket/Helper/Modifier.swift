@@ -19,6 +19,14 @@ struct TextFieldModifier: ViewModifier{
             .cornerRadius(10)
     }
 }
+
+struct TitleModifier: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 30 : 40))
+    }
+}
+
 struct TextModifier: ViewModifier{
     func body(content: Content) -> some View {
         content
