@@ -9,6 +9,7 @@ import Charts
 
 
 struct WalletView: View {
+    //MARK: PROPERTIES
     @StateObject private var transferVM = TransferViewModel()
     @State private var showPortfolio = false
     @State private var showTransfer = false
@@ -18,8 +19,10 @@ struct WalletView: View {
     @ObservedObject private var userManager = UserManager()
     let coinManager = CoinManager()
     
+    //MARK: BODY
     var body: some View {
         VStack {
+            //MARK: HEADING TITLE
             HStack {
                 CircleButtonView(iconName: "info")
                     .background(
@@ -55,13 +58,14 @@ struct WalletView: View {
         }
         .onChange(of: isDeposit){newValue in
             userManager.getUserInfo {
-                print("get")
+                print("Get user updated balance: \(userManager.userInfo?.balance ?? "FAIL")")
             }
         }
     }
 }
 
 extension WalletView {
+    //MARK: PORTFOLIO VIEW
     private var portfolioSection: some View {
         VStack {
             if let holdings = userManager.holdings {
@@ -115,8 +119,11 @@ extension WalletView {
             .listStyle(GroupedListStyle())
         }
     }
+    
+    //MARK: BALANCE VIEW
     private var balanceSection: some View {
         VStack(spacing: 30) {
+            //MARK: BALANCE
             VStack {
                 if let user = userManager.userInfo {
                     let myDouble = Double(user.balance)?.formattedWithAbbreviations()
@@ -134,68 +141,13 @@ extension WalletView {
             }
             HStack {
                 Spacer()
+                //MARK: DEPOSIT BUTTON
                 Button(action: {
                     isDeposit.toggle()
                 }) {
                     VStack {
-                        if let user = userManager.userInfo {
-                            Text("\(user.balance)$")
-                                .font(.system(size: 50))
-                                .foregroundColor(Color.theme.accent)
-                        } else {
-                            Text("0$")
-                                .font(.system(size: 50))
-                                .foregroundColor(Color.theme.accent)
-                        }
-                        Text("Total Balance")
-                            .font(.caption)
-                            .foregroundColor(Color.theme.accent)
-                    }
-                    
-                    HStack {
-                        Spacer()
-                        Button(action: {
-                        }) {
-                            
-                            VStack {
-                                Image(systemName: "dollarsign.arrow.circlepath")
-                                
-                                    .foregroundColor(.white)
-                                Text("Deposit")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
-                                    .frame(maxWidth: 200)
-                            }
-                            .padding()
-                            .background(
-                                Capsule()
-                                    .fill(Color.yellow) // Change the color to your desired background color
-                            )
-                            
-                        }
-                        
-                        Spacer()
-                        
-                        Button(action: {
-                        }) {
-                            
-                            VStack {
-                                Image(systemName: "person.line.dotted.person")
-                                    .foregroundColor(.white)
-                                Text("P2P Trading")
-                                    .font(.headline)
-                                    .foregroundColor(.white)
-                                    .frame(maxWidth: 200)
-                            }
-                            .padding()
-                            .background(
-                                Capsule()
-                                    .fill(Color.yellow) // Change the color to your desired background color
-                            )
-                            
-                        }
-                        
-                        Spacer()
+                        Image(systemName: "dollarsign.arrow.circlepath")
+                            .foregroundColor(.white)
                         Text("Deposit")
                             .font(.headline)
                             .foregroundColor(.white)
@@ -210,6 +162,7 @@ extension WalletView {
                 
                 Spacer()
                 
+                //MARK: TRANSFER BUTTON
                 Button(action: {
                   showTransfer = true
                 }) {
@@ -227,13 +180,12 @@ extension WalletView {
                         Capsule()
                             .fill(Color.yellow) // Change the color to your desired background color
                     )
-                    
                 }
-                
                 Spacer()
                 
             }
             
+            //MARK: ASSETS
             VStack {
                 ZStack {
                     if let userAssets = userManager.userAssets {
@@ -248,7 +200,6 @@ extension WalletView {
                             
                         }
                     }
-                    
                     Circle()
                         .foregroundColor(Color.theme.background)
                         .frame(width: UIScreen.main.bounds.width/1.5)

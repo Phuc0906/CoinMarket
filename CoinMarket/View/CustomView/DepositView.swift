@@ -8,17 +8,19 @@
 import SwiftUI
 
 struct DepositView: View {
+    //MARK: PROPERTY
     @State var amount = "" //money
     
     @ObservedObject private var userManager = UserManager()
     @Environment(\.presentationMode) var presentationMode
     
+    //MARK: BODY
     var body: some View {
         ZStack{
             Color.white.ignoresSafeArea()
             
             GeometryReader{ geometry in
-                
+                //MARK: TITLE
                 VStack(spacing: 30){
                     Text("Deposit")
                         .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
@@ -30,7 +32,7 @@ struct DepositView: View {
                         PrefixTextField(text: $amount, prefix: "$ ")
                     }
                     
-                    //MARK: Auto amount
+                    //MARK: ADD AMOUNT AUTO
                     HStack{
                         Button(action: {
                             amount = "1000"
@@ -55,6 +57,7 @@ struct DepositView: View {
                         }
                     }
                     
+                    //MARK: DEPOSIT BUTTON
                     Button(action: {
                         // Save user info
                         if !amount.isEmpty{
@@ -71,6 +74,7 @@ struct DepositView: View {
                             .foregroundColor(.black)
                     }
                     
+                    //MARK: CANCEL BUTTON
                     Button(action: {
                         // Handle restarting the game here
                         presentationMode.wrappedValue.dismiss()
@@ -89,6 +93,7 @@ struct DepositView: View {
         }
     }
     
+    //MARK: FUNCTIONS
     //function to update balance
     func deposit() {
         if let user = userManager.userInfo, let sum = addStringsAsNumbers(user.balance, amount) {

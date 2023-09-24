@@ -317,7 +317,6 @@ class UserManager: ObservableObject {
                 return transaction.value.numberOfCoin
             }
         }
-        
         return 0.0
     }
     
