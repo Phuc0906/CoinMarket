@@ -9,11 +9,15 @@ import Charts
 
 
 struct WalletView: View {
+    @StateObject private var transferVM = TransferViewModel()
     @State private var showPortfolio = false
+    @State private var showTransfer = false
+    @State private var isDeposit = false
     @State var selectedPie: String = ""
     @State var selectedDonut: String = ""
     @ObservedObject private var userManager = UserManager()
     let coinManager = CoinManager()
+    
     var body: some View {
         VStack {
             HStack {
@@ -36,55 +40,103 @@ struct WalletView: View {
                     }
             }
             if (showPortfolio) {
-                VStack {
-                    if let holdings = userManager.holdings {
-                        PieChart(dataModel: holdings) {  dataModel in
-                            if let dataModel = dataModel {
-                                let percentage = String(format: "%.2f", (dataModel.amount / holdings.totalValue)*100)
-                                self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total coin amount"
-                            } else {
-                                self.selectedPie = ""
-                            }
-                        }
-                        .frame(width: UIScreen.main.bounds.width/1.5, height:  UIScreen.main.bounds.height/5)
-                        
-                        Text("\(selectedPie)")
+                portfolioSection
+            } else {
+                balanceSection
+            }
+            Spacer()
+        }
+        .fullScreenCover(isPresented: $showTransfer) {
+            TransferView().environmentObject(transferVM)
+        }
+        
+        .sheet(isPresented:$isDeposit) {
+            DepositView()
+        }
+        .onChange(of: isDeposit){newValue in
+            userManager.getUserInfo {
+                print("get")
+            }
+        }
+    }
+}
+
+extension WalletView {
+    private var portfolioSection: some View {
+        VStack {
+            if let holdings = userManager.holdings {
+                PieChart(dataModel: holdings) {  dataModel in
+                    if let dataModel = dataModel {
+                        let percentage = String(format: "%.2f", (dataModel.amount / holdings.totalValue)*100)
+                        self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total coin amount"
+                    } else {
+                        self.selectedPie = ""
                     }
-                    
                 }
+                .frame(width: UIScreen.main.bounds.width/1.5, height:  UIScreen.main.bounds.height/5)
                 
-                ScrollView {
-                    VStack {
-                        Section("Asset Management") {
-                            BarView(cryptoHoldings: [CryptoHolding(name:"Bitcoin", amount: 3.5), CryptoHolding(name: "Dodge", amount: 7)])
-                                .frame(height: UIScreen.main.bounds.height/3.5)
-                        }
-                        Section("Holding List") {
-                            VStack {
-                                HStack {
-                                    Text("Name")
-                                        .font(.caption)
-                                        .foregroundColor(Color.theme.secondaryText)
-                                    Spacer()
-                                    Text("Total Coin Value")
-                                        .font(.caption)
-                                        .foregroundColor(Color.theme.secondaryText)
-                                }
-                                .padding()
-                                ForEach(userManager.wallet.keys.sorted(), id: \.self) { coinId in
-                                    if let transaction = userManager.wallet[coinId] {
-                                        if let currentCoin = coinManager.getCoin(coinId: transaction.coinId) {
-                                            WalletCoinRow(transaction: transaction, coin: currentCoin)
-                                        }
+                Text("\(selectedPie)")
+            }
+            
+            
+            List {
+                Section("Holding List") {
+                    HStack {
+                        Text("Rank")
+                            .font(.caption)
+                            .foregroundColor(Color.theme.secondaryText)
+                        Text("Name")
+                            .font(.caption)
+                            .foregroundColor(Color.theme.secondaryText)
+                            .padding(.leading, 10)
+                        Spacer()
+                        Text("Total Coin Value")
+                            .font(.caption)
+                            .foregroundColor(Color.theme.secondaryText)
+                    }
+                    .padding()
+                    ForEach(Array(userManager.wallet.keys.sorted()), id: \.self) { coinId in
+                        if let transaction = userManager.wallet[coinId], let currentCoin = coinManager.getCoin(coinId: transaction.coinId) {
+                            WalletCoinRow(transaction: transaction, coin: currentCoin)
+                                .swipeActions(edge: .trailing, allowsFullSwipe: false) {
+                                    Button(role: .destructive) {
+                                        // Perform the delete action here
+                                        userManager.sellAll(coinID: coinId)
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
                                     }
                                 }
-                            }
                         }
                     }
                 }
                 
-            } else {
-                VStack(spacing: 30) {
+            }
+            .padding(.vertical)
+            .listStyle(GroupedListStyle())
+        }
+    }
+    private var balanceSection: some View {
+        VStack(spacing: 30) {
+            VStack {
+                if let user = userManager.userInfo {
+                    let myDouble = Double(user.balance)?.formattedWithAbbreviations()
+                    Text(myDouble ?? "")
+                        .font(.system(size: 50))
+                        .foregroundColor(Color.theme.accent)
+                } else {
+                    Text("0$")
+                        .font(.system(size: 50))
+                        .foregroundColor(Color.theme.accent)
+                }
+                Text("Total Balance")
+                    .font(.caption)
+                    .foregroundColor(Color.theme.accent)
+            }
+            HStack {
+                Spacer()
+                Button(action: {
+                    isDeposit.toggle()
+                }) {
                     VStack {
                         if let user = userManager.userInfo {
                             Text("\(user.balance)$")
@@ -144,41 +196,70 @@ struct WalletView: View {
                         }
                         
                         Spacer()
-                        
+                        Text("Deposit")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: 200)
                     }
+                    .padding()
+                    .background(
+                        Capsule()
+                            .fill(Color.yellow) // Change the color to your desired background color
+                    )
+                }
+                
+                Spacer()
+                
+                Button(action: {
+                  showTransfer = true
+                }) {
                     
                     VStack {
-                        ZStack {
-                            if let userAssets = userManager.userAssets {
-                                PieChart(dataModel: userAssets) { dataModel in
-                                    if let dataModel = dataModel {
-                                        let percentage = String(format: "%.2f",
-                                                                (dataModel.amount/userAssets.totalValue)*100)
-                                        self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total assets"
-                                    }else {
-                                        self.selectedPie = ""
-                                    }
-                                    
-                                }
+                        Image(systemName: "person.line.dotted.person")
+                            .foregroundColor(.white)
+                        Text("P2P Trading")
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .frame(maxWidth: 200)
+                    }
+                    .padding()
+                    .background(
+                        Capsule()
+                            .fill(Color.yellow) // Change the color to your desired background color
+                    )
+                    
+                }
+                
+                Spacer()
+                
+            }
+            
+            VStack {
+                ZStack {
+                    if let userAssets = userManager.userAssets {
+                        PieChart(dataModel: userAssets) { dataModel in
+                            if let dataModel = dataModel {
+                                let percentage = String(format: "%.2f",
+                                                        (dataModel.amount/userAssets.totalValue)*100)
+                                self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total assets"
+                            }else {
+                                self.selectedPie = ""
                             }
                             
-                            Circle()
-                                .foregroundColor(Color.theme.background)
-                                .frame(width: UIScreen.main.bounds.width/1.5)
-                            
-                            Text("\(selectedPie)")
-                                .frame(width: UIScreen.main.bounds.width/2)
-                                .multilineTextAlignment(.center)
-                            
                         }
-                        .padding()
-                        
                     }
+                    
+                    Circle()
+                        .foregroundColor(Color.theme.background)
+                        .frame(width: UIScreen.main.bounds.width/1.5)
+                    
+                    Text("\(selectedPie)")
+                        .frame(width: UIScreen.main.bounds.width/2)
+                        .multilineTextAlignment(.center)
+                    
                 }
+                .padding()
             }
-            Spacer()
         }
     }
 }
-
-

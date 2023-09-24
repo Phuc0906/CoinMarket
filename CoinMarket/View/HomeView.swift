@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct HomeView: View {
+    @ObservedObject private var userManager = UserManager()
+    
     @Binding var selectedTab: Int
     @EnvironmentObject private var vm: HomeViewModel
     @Environment(\.colorScheme) var colorScheme
@@ -56,25 +58,23 @@ struct HomeView: View {
                         }
                         
                     }
-                    
-                    VStack(alignment: .leading) {
-                        HStack {
-                            Image(systemName: "dollarsign")
-                                .resizable()
-                                .frame(width: UIScreen.main.bounds.width / 20, height: UIScreen.main.bounds.width / 15)
-                            Text(language ? "Your wallet" : "Ví của bạn")
-                                .font(.title)
-                                .fontWeight(.bold)
+                    if let user = userManager.userInfo{
+                        HStack{
+                            VStack(alignment: .leading) {
+                                Text(language ? "Your wallet" : "Ví của bạn")
+                                    .modifier(TitleModifier())
+                                
+                                Text("\(user.balance)$")
+                                    .modifier(TextModifier())
+                            }
                             Spacer()
                         }
+                        .padding(EdgeInsets(top: 30, leading: UIDevice.isIPhone ? 25 : 30, bottom: 30, trailing: 30))
+                            .foregroundColor(Color.theme.accent)
+                            .background(Color(UIColor(red: 1.00, green: 0.87, blue: 0.16, alpha: 1.00)))
+                            .cornerRadius(20)
                         
-                        Text("123456 $")
-                            .padding(EdgeInsets(top: 30, leading: 0, bottom: 20, trailing: 0))
-                            .font(.title2)
-                    }.padding(EdgeInsets(top: 30, leading: 25, bottom: 30, trailing: 30))
-                        .foregroundColor(colorScheme == .dark ? .black : Color(UIColor(red: 0.62, green: 0.62, blue: 0.62, alpha: 1.00)))
-                        .background(Color(UIColor(red: 1.00, green: 0.87, blue: 0.16, alpha: 1.00)))
-                        .cornerRadius(20)
+                    }
                 }.padding(EdgeInsets(top: 0, leading: 10, bottom: 0, trailing: 10))
                     .cornerRadius(20)
                 
