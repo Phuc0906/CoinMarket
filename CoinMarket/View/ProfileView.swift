@@ -10,14 +10,18 @@ import Firebase
 import FirebaseStorage
 
 struct ProfileView: View {
-    @StateObject private var vm = AuthViewModel()
+    @ObservedObject private var vm = AuthViewModel()
     @ObservedObject private var userManager = UserManager()
     @StateObject private var buyHistoryVM = BuyHistoryViewModel()
     
     @State private var showEditProfile = false
     @Environment(\.colorScheme) var colorScheme
     @State private var language = true
-    @State private var user: UserInfo?
+    var email: String? {
+        return vm.getEmail()
+    }
+
+    
     @State var profileImage: UIImage?
     @State private var isFetchingImage = true
     @State private var profileImageURL: URL?
@@ -58,26 +62,27 @@ struct ProfileView: View {
                         }
                         
                         //MARK: INFO
-                        if let user = user{
+                        if let user = userManager.userInfo {
                             VStack(alignment: .leading, spacing: 10){
                                 Text(user.name)
                                     .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 40))
                                     .foregroundColor(.white)
                                 
                                 HStack(spacing: 50){
-                                    //                                VStack(alignment: .leading){
-                                    //                                    Text("UserId")
-                                    //                                        .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 16 : 30))
-                                    //                                    Text(user.id)
-                                    //                                        .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 16   : 30))
-                                    //                                }
+//                                    VStack(alignment: .leading){
+//                                        Text("UserId")
+//                                            .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 16 : 30))
+//                                        Text(user.id)
+//                                            .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 16   : 30))
+//                                    }
                                     
-                                    
-                                    VStack(alignment: .leading){
-                                        Text("Email")
-                                            .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 40))
-                                        Text("Email???")
-                                            .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 40))
+                                    if let userEmail = email {
+                                        VStack(alignment: .leading){
+                                            Text("Email")
+                                                .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 40))
+                                            Text(userEmail)
+                                                .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 40))
+                                        }
                                     }
                                 }
                                 .foregroundColor(.white)
@@ -93,30 +98,42 @@ struct ProfileView: View {
                     .padding(EdgeInsets(top: 30, leading: 25, bottom: 30, trailing: 30))
                     .background(.cyan.opacity(0.8))
                     .cornerRadius(20)
+                  
                     
+                    //MARK: PROFILE IMAGE
                     VStack{
                         if isFetchingImage {
                             ProgressView() // Show a loading indicator while fetching the image
                         } else if let profileImage = profileImage {
-                            Image(uiImage: profileImage)
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: UIDevice.isIPhone ? 100 : 150)
-                                .clipShape(Circle())
-                                .frame(width: UIDevice.isIPhone ? 120 : 180, height: UIDevice.isIPhone ? 120 : 180)
-                                .padding(.bottom, 20)
+                            Circle()
+                                .fill(Color.white)
+                                .frame(width: 130, height: 130)
+                                .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
+                                .overlay(
+                                    Image(uiImage: profileImage) // Replace with the name of your image asset
+                                        .resizable()
+                                        .scaledToFill()
+                                        .frame(width: 120, height: 120)
+                                        .clipShape(Circle())
+                                )
+                                .overlay(
+                                    Button(action: selectProfilePicture) {
+                                        Image("pen") // Replace with the name of your image asset
+                                            .resizable()
+                                            .scaledToFill()
+                                            .frame(width: 35, height: 35)
+                                            .clipShape(Circle())
+                                    }
+                                        .offset(x: 40, y: 50)
+                                )
                         } else {
                             // Display a default placeholder or error image
                             Image(systemName: "person.fill")
                                 .resizable()
                                 .scaledToFit()
-                                .frame(width: UIDevice.isIPhone ? 100 : 150)
                                 .clipShape(Circle())
                                 .frame(width: UIDevice.isIPhone ? 120 : 180, height: UIDevice.isIPhone ? 120 : 180)
                                 .foregroundColor(.gray)
-                        }
-                        Button(action: selectProfilePicture) {
-                            Text("Select Profile Picture")
                         }
                         if isEdited {
                             Button("Save", action: {
@@ -134,10 +151,9 @@ struct ProfileView: View {
                         VStack(alignment: .leading){
                             // Row Profile
                             Button(action: {
-                                if let user = user {
+                                if let user = userManager.userInfo {
                                     print(user.id)
                                 }
-                                
                                 showEditProfile.toggle()
                             }) {
                                 HStack(spacing: 20){
@@ -167,7 +183,7 @@ struct ProfileView: View {
                                     Spacer()
                                 }
                             }
-                            
+                           
                             Button(action: {
                                 print("Edit theme")
                                 toBuyHistory = true
@@ -178,11 +194,20 @@ struct ProfileView: View {
                                         .scaledToFit()
                                         .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
                                     Text("Buy History")
+                            // Row Theme
+                            Button(action: {
+                                print("Edit theme")
+                            }) {
+                                HStack(spacing: 20){
+                                    Image("theme")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
+                                    Text("Theme")
                                         .modifier(TextModifier())
                                     Spacer()
                                 }
                             }
-                            
                             // Row Theme
                             Button(action: {
                                 print("Edit theme")
@@ -249,6 +274,15 @@ struct ProfileView: View {
             }
             
         }
+        .sheet(isPresented:$showEditProfile) {
+            EditNameView()
+        }
+        .onChange(of: showEditProfile){newValue in
+            userManager.getUserInfo {
+                print("get")
+            }
+        }
+            
         .sheet(isPresented: $isImagePickerPresented) {
             ImagePicker(image: $profileImage)
         }
@@ -260,37 +294,25 @@ struct ProfileView: View {
                 .environmentObject(buyHistoryVM)
         })
         .onAppear {
+            print("On Appear profile view")
             if let userId = vm.user?.uid {
                 fetchProfileImage(userID: userId)
-            }
-            // Fetch or load user data when the view appears
-            if let fetchedUser = userManager.userInfo {
-                // Assign the fetched user data to the State property
-                self.user = fetchedUser
-            } else {
-                // Handle the case where user data couldn't be loaded
-                // For example, show an error message or take appropriate action
-                print("User data couldn't be loaded.")
             }
         }
     }
     
     //MARK: FUNCTIONS
-    private func dismiss(){
-        showEditProfile.toggle()
-    }
-    
     private func fetchProfileImage(userID: String) {
         let storageRef = Storage.storage().reference()
         let profileImageRef = storageRef.child("profileImages/\(userID).jpg")
-
-        profileImageRef.getData(maxSize: 5 * 1024 * 1024) { data, error in
+        
+        profileImageRef.getData(maxSize: Int64(5 * 1024 * 1024)) { data, error in
             if let error = error {
                 print("Error fetching profile image: \(error.localizedDescription)")
                 isFetchingImage = false
                 return
             }
-
+            
             if let data = data, let image = UIImage(data: data) {
                 profileImage = image
                 isFetchingImage = false
@@ -306,11 +328,11 @@ struct ProfileView: View {
     func saveProfilePicture(_ image: UIImage, userID: String) {
         let storageRef = Storage.storage().reference()
         let profileImageRef = storageRef.child("profileImages/\(userID).jpg")
-
+        
         if let imageData = image.jpegData(compressionQuality: 0.5) {
             let metadata = StorageMetadata()
             metadata.contentType = "image/jpeg"
-
+            
             profileImageRef.putData(imageData, metadata: metadata) { (metadata, error) in
                 if let error = error {
                     print("Error uploading profile picture: \(error.localizedDescription)")
@@ -327,7 +349,7 @@ struct ProfileView: View {
             }
         }
     }
-
+    
     func updateUserProfilePictureURL(_ url: URL, userID: String) {
         // You can update the user's Firestore document with the profile picture URL.
         let db = Firestore.firestore()
@@ -341,17 +363,17 @@ struct ProfileView: View {
             }
         }
     }
-
+    
 }
 
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
-        ProfileView()
+        MainView()
             .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
             .previewDisplayName("iPhone 14")
         
-        ProfileView()
+        MainView()
             .previewDevice(PreviewDevice(rawValue: "iPad Pro (12.9-inch)"))
             .previewDisplayName("iPad Pro")
     }

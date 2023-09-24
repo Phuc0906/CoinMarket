@@ -19,10 +19,30 @@ struct TextFieldModifier: ViewModifier{
             .cornerRadius(10)
     }
 }
+
+struct TitleModifier: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 30 : 40))
+    }
+}
+
 struct TextModifier: ViewModifier{
     func body(content: Content) -> some View {
         content
             .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 35))
+    }
+}
+
+struct MediumButton: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 30))
+            .frame(maxWidth: .infinity)
+            .frame(height: UIDevice.isIPhone ? 40 : 60)
+            .background(Color("TextField"))
+            .foregroundColor(.black)
+            .cornerRadius(20)
     }
 }
 

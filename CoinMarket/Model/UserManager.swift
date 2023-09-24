@@ -66,7 +66,7 @@ class UserManager: ObservableObject {
         db.collection("users").document()
     }
     
-    func saveUserInfo(user: UserInfo) {
+    func saveUserInfo(user: UserInfo, complete: (() -> Void)? = nil) {
         do {
             let encodedData = try JSONEncoder().encode(user)
             let jsonString = String(data: encodedData,
@@ -74,8 +74,10 @@ class UserManager: ObservableObject {
             db.collection("users").document("\(user.id)").setData(["profile": jsonString!]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
+                    complete?()
                 } else {
                     print("Document user written!")
+                    complete?()
                 }
             }
         }catch {
@@ -210,9 +212,7 @@ class UserManager: ObservableObject {
         
         if let coin = transferCoin {
             var localWallet = self.wallet
-            
-            var i = 0
-            
+
             for var walletTransaction in localWallet {
                 if walletTransaction.value.coinId == transaction.coinId {
                     localWallet[walletTransaction.key]?.amount -= coin.current_price*abs(amount)
