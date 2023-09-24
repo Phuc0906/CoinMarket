@@ -96,9 +96,15 @@ struct DepositView: View {
     //MARK: FUNCTIONS
     //function to update balance
     func deposit() {
-        if let user = userManager.userInfo, let sum = addStringsAsNumbers(user.balance, amount) {
-            let newUser = UserInfo(id: user.id, name: user.name, balance: sum)
-            userManager.saveUserInfo(user: newUser)
+        if let user = userManager.userInfo{
+            if let sum = addStringsAsNumbers(user.balance, amount) {
+                let newUser = UserInfo(id: user.id, name: user.name, balance: sum)
+                userManager.saveUserInfo(user: newUser)
+            }
+            else{
+                let newUser = UserInfo(id: user.id, name: user.name, balance: amount)
+                userManager.saveUserInfo(user: newUser)
+            }
         }
     }
     
