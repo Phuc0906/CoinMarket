@@ -26,6 +26,18 @@ struct TextModifier: ViewModifier{
     }
 }
 
+struct MediumButton: ViewModifier{
+    func body(content: Content) -> some View {
+        content
+            .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 30))
+            .frame(maxWidth: .infinity)
+            .frame(height: UIDevice.isIPhone ? 40 : 60)
+            .background(Color("TextField"))
+            .foregroundColor(.black)
+            .cornerRadius(20)
+    }
+}
+
 struct LongButton: ViewModifier{
     func body(content: Content) -> some View {
         content
