@@ -98,13 +98,13 @@ struct ProfileView: View {
                         } else if let profileImage = profileImage {
                             Circle()
                                 .fill(Color.white)
-                                .frame(width: 130, height: 130)
+                                .frame(width: UIDevice.isIPhone ? 130 : 230, height: UIDevice.isIPhone ? 130 : 230)
                                 .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
                                 .overlay(
                                     Image(uiImage: profileImage) // Replace with the name of your image asset
                                         .resizable()
                                         .scaledToFill()
-                                        .frame(width: 120, height: 120)
+                                        .frame(width: UIDevice.isIPhone ? 120 : 220, height: UIDevice.isIPhone ? 120 : 220)
                                         .clipShape(Circle())
                                 )
                                 .overlay(
@@ -112,21 +112,21 @@ struct ProfileView: View {
                                         Image("pen") // Replace with the name of your image asset
                                             .resizable()
                                             .scaledToFill()
-                                            .frame(width: 35, height: 35)
+                                            .frame(width: UIDevice.isIPhone ? 35 : 50, height: UIDevice.isIPhone ? 35 : 50)
                                             .clipShape(Circle())
                                     }
-                                        .offset(x: 40, y: 50)
+                                        .offset(x: UIDevice.isIPhone ? 40 : 80, y: UIDevice.isIPhone ? 50 : 90)
                                 )
                         } else {
                             Circle()
                                 .fill(Color.white)
-                                .frame(width: 130, height: 130)
+                                .frame(width: UIDevice.isIPhone ? 130 : 230, height: UIDevice.isIPhone ? 130 : 230)
                                 .shadow(color: Color.black.opacity(0.3), radius: 4, x: 0, y: 4)
                                 .overlay(
                                     Image(systemName: "person.fill") // Replace with the name of your image asset
                                         .resizable()
                                         .scaledToFill()
-                                        .frame(width: 120, height: 120)
+                                        .frame(width: UIDevice.isIPhone ? 120 : 220, height: UIDevice.isIPhone ? 120 : 220)
                                         .clipShape(Circle())
                                 )
                                 .overlay(
@@ -134,10 +134,10 @@ struct ProfileView: View {
                                         Image("pen") // Replace with the name of your image asset
                                             .resizable()
                                             .scaledToFill()
-                                            .frame(width: 35, height: 35)
+                                            .frame(width: UIDevice.isIPhone ? 35 : 50, height: UIDevice.isIPhone ? 35 : 50)
                                             .clipShape(Circle())
                                     }
-                                        .offset(x: 40, y: 50)
+                                        .offset(x: UIDevice.isIPhone ? 40 : 80, y: UIDevice.isIPhone ? 50 : 90)
                                 )
                         }
                         if isEdited {
