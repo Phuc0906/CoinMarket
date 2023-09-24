@@ -20,7 +20,6 @@ struct ProfileView: View {
     var email: String? {
         return vm.getEmail()
     }
-
     
     @State var profileImage: UIImage?
     @State private var isFetchingImage = true
@@ -35,14 +34,13 @@ struct ProfileView: View {
                 .ignoresSafeArea()
             ScrollView {
                 VStack(spacing: UIDevice.isIPhone ? 20 : 50){
+                    //MARK: TITLE
                     HStack{
                         Text(language ? "Profile" : "Hồ sơ")
                             .font(.custom("WixMadeForDisplay-ExtraBold", size: UIDevice.isIPhone ? 40 : 50))
                             .foregroundColor(Color.theme.accent)
                             .fontWeight(.bold)
                         Spacer()
-                        
-                        
                     }
                     .padding(EdgeInsets(top: 20, leading: 20, bottom: 0, trailing: 10))
                     
@@ -69,13 +67,6 @@ struct ProfileView: View {
                                     .foregroundColor(.white)
                                 
                                 HStack(spacing: 50){
-//                                    VStack(alignment: .leading){
-//                                        Text("UserId")
-//                                            .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 16 : 30))
-//                                        Text(user.id)
-//                                            .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 16   : 30))
-//                                    }
-                                    
                                     if let userEmail = email {
                                         VStack(alignment: .leading){
                                             Text("Email")
@@ -98,7 +89,7 @@ struct ProfileView: View {
                     .padding(EdgeInsets(top: 30, leading: 25, bottom: 30, trailing: 30))
                     .background(.cyan.opacity(0.8))
                     .cornerRadius(20)
-                  
+                    
                     
                     //MARK: PROFILE IMAGE
                     VStack{
@@ -146,10 +137,9 @@ struct ProfileView: View {
                     }
                     
                     // MARK: SETTING
-                    
                     VStack(alignment: .leading) {
                         VStack(alignment: .leading){
-                            // Row Profile
+                            //MARK: EDIT NAME
                             Button(action: {
                                 if let user = userManager.userInfo {
                                     print(user.id)
@@ -169,7 +159,7 @@ struct ProfileView: View {
                             }
                             
                             
-                            // Row notification
+                            //MARK: NOTIFICATION
                             Button(action: {
                                 print("Edit notification")
                             }) {
@@ -183,9 +173,10 @@ struct ProfileView: View {
                                     Spacer()
                                 }
                             }
-                           
+                            
+                            //MARK: VIEW HISTORY
                             Button(action: {
-                                print("Edit theme")
+                                print("See history")
                                 toBuyHistory = true
                             }) {
                                 HStack(spacing: 20){
@@ -194,21 +185,13 @@ struct ProfileView: View {
                                         .scaledToFit()
                                         .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
                                     Text("Buy History")
-                            // Row Theme
-                            Button(action: {
-                                print("Edit theme")
-                            }) {
-                                HStack(spacing: 20){
-                                    Image("theme")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
-                                    Text("Theme")
                                         .modifier(TextModifier())
                                     Spacer()
                                 }
                             }
-                            // Row Theme
+                            
+                            
+                            //MARK: EDIT THEME
                             Button(action: {
                                 print("Edit theme")
                             }) {
@@ -223,8 +206,7 @@ struct ProfileView: View {
                                 }
                             }
                             
-                            
-                            // Row language
+                            //MARK: EDIT LANGUAGE
                             Button(action: {
                                 print("Edit language")
                             }) {
@@ -243,63 +225,61 @@ struct ProfileView: View {
                                         .scaledToFit()
                                         .frame(width: UIDevice.isIPhone ? 35 : 60)
                                 }
+                                
                             }
                         }
-                    }
-                    .frame(maxWidth: UIDevice.isIPhone ? 320 : 600)
-                    .padding(EdgeInsets(top: 30, leading: 25, bottom: 30, trailing: 25))
-                    .foregroundColor(.black)
-                    .background(
-                        RoundedRectangle(cornerRadius: 20) // Rounded border
-                            .stroke(Color.gray, lineWidth: 0.1) // Border color and width
-                            .background(
-                                RoundedRectangle(cornerRadius: 20) // Rounded border background
-                                    .fill(Color.white) // Border background color
-                                    .shadow(color: Color.gray, radius: 5, x: 0, y: 2) // Shadow for the border
-                            )
-                    )
-                    
-                    
-                    Spacer()
-                    Button {
-                        vm.signOut()
-                    } label: {
-                        Text("Sign out")
-                            .modifier(SignOutButton())
+                        .frame(maxWidth: UIDevice.isIPhone ? 320 : 600)
+                        .padding(EdgeInsets(top: 30, leading: 25, bottom: 30, trailing: 25))
+                        .foregroundColor(.black)
+                        .background(
+                            RoundedRectangle(cornerRadius: 20) // Rounded border
+                                .stroke(Color.gray, lineWidth: 0.1) // Border color and width
+                                .background(
+                                    RoundedRectangle(cornerRadius: 20) // Rounded border background
+                                        .fill(Color.white) // Border background color
+                                        .shadow(color: Color.gray, radius: 5, x: 0, y: 2) // Shadow for the border
+                                )
+                        )
                         
+                        Spacer()
+                        Button {
+                            vm.signOut()
+                        } label: {
+                            Text("Sign out")
+                                .modifier(SignOutButton())
+                            
+                        }
+                        .frame(maxWidth: 320)
+                        Spacer()
                     }
-                    .frame(maxWidth: 320)
-                    Spacer()
+                }
+                
+            }
+            .sheet(isPresented:$showEditProfile) {
+                EditNameView()
+            }
+            .onChange(of: showEditProfile){newValue in
+                userManager.getUserInfo {
+                    print("get")
                 }
             }
             
-        }
-        .sheet(isPresented:$showEditProfile) {
-            EditNameView()
-        }
-        .onChange(of: showEditProfile){newValue in
-            userManager.getUserInfo {
-                print("get")
+            .sheet(isPresented: $isImagePickerPresented) {
+                ImagePicker(image: $profileImage)
             }
-        }
-            
-        .sheet(isPresented: $isImagePickerPresented) {
-            ImagePicker(image: $profileImage)
-        }
-        .sheet(isPresented: $showEditProfile){
-            EditProfileView(dismiss: dismiss)
-        }
-        .fullScreenCover(isPresented: $toBuyHistory, content: {
-            BuyHistoryView()
-                .environmentObject(buyHistoryVM)
-        })
-        .onAppear {
-            print("On Appear profile view")
-            if let userId = vm.user?.uid {
-                fetchProfileImage(userID: userId)
+            .fullScreenCover(isPresented: $toBuyHistory, content: {
+                BuyHistoryView()
+                    .environmentObject(buyHistoryVM)
+            })
+            .onAppear {
+                print("On Appear profile view")
+                if let userId = vm.user?.uid {
+                    fetchProfileImage(userID: userId)
+                }
             }
         }
     }
+    
     
     //MARK: FUNCTIONS
     private func fetchProfileImage(userID: String) {
@@ -365,7 +345,6 @@ struct ProfileView: View {
     }
     
 }
-
 
 struct ProfileView_Previews: PreviewProvider {
     static var previews: some View {
