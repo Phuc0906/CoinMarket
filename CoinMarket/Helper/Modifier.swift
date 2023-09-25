@@ -15,7 +15,7 @@ struct TextFieldModifier: ViewModifier{
             .padding()
             .frame(maxWidth: .infinity)
             .background(Color("TextField"))
-            .foregroundColor(Color("Placeholder"))
+            .foregroundColor(Color.theme.secondaryText)
             .cornerRadius(10)
     }
 }

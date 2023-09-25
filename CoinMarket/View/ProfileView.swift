@@ -39,7 +39,13 @@ struct ProfileView: View {
                     toRegisterView = true
                 } label: {
                     Text("Register")
-                        .modifier(SignOutButton())
+                        .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 40))
+                        .frame(maxWidth: .infinity)
+                        .frame(height: UIDevice.isIPhone ? 50 : 70)
+                        .background(.yellow)
+                        .foregroundColor(.white)
+                        .cornerRadius(10)
+                        
                     
                 }
                 
@@ -55,6 +61,7 @@ struct ProfileView: View {
             }.fullScreenCover(isPresented: $toLoginView) {
                 LoginView()
             }
+            .padding()
         }
     }
     
@@ -157,7 +164,7 @@ extension ProfileView {
                     // MARK: ID CARD
                     VStack(alignment: .leading) {
                         //MARK: LOGO
-                        HStack(spacing: 0){
+                        HStack(spacing: 10){
                             Spacer()
                             Image("logo-app")
                                 .resizable()
