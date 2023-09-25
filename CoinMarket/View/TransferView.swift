@@ -15,6 +15,7 @@ struct TransferView: View {
     @State private var isShowingScanner = false
     @State private var receiverId: String = ""
     @State private var toCodeInputField = false
+    @ObservedObject private var uVm = UserManager()
     var body: some View {
         NavigationView {
             VStack {
@@ -24,6 +25,15 @@ struct TransferView: View {
                         .font(.title)
                 }.padding(EdgeInsets(top: 30, leading: 20, bottom: 0, trailing: 20))
                 Spacer()
+                if let id = uVm.userInfo?.id {
+                    Text("Wallet ID: \(id)")
+                        .font(.headline )
+                        .foregroundColor(Color.theme.accent)
+                } else {
+                    Text("")
+                }
+
+                
                 Image(uiImage: UIImage(data: generateQRCode(userId: vm.getUserId()))!)
                     .resizable()
                     .frame(width: 200, height: 200)
