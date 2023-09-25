@@ -13,10 +13,10 @@ struct ProfileView: View {
     @ObservedObject private var vm = AuthViewModel()
     @ObservedObject private var userManager = UserManager()
     @StateObject private var buyHistoryVM = BuyHistoryViewModel()
-    
+    @EnvironmentObject private var uVm: UserManager
     @State private var showEditProfile = false
     @Environment(\.colorScheme) var colorScheme
-    @State private var language = true
+   
     var email: String? {
         return vm.getEmail()
     }
@@ -145,7 +145,7 @@ extension ProfileView {
                 VStack(spacing: UIDevice.isIPhone ? 20 : 50){
                     //MARK: TITLE
                     HStack{
-                        Text(language ? "Profile" : "Hồ sơ")
+                        Text(uVm.language ? "Profile" : "Hồ sơ")
                             .font(.custom("WixMadeForDisplay-ExtraBold", size: UIDevice.isIPhone ? 40 : 50))
                             .foregroundColor(Color.theme.accent)
                             .fontWeight(.bold)
@@ -281,20 +281,6 @@ extension ProfileView {
                         }
                         
                         
-                        //MARK: NOTIFICATION
-//                        Button(action: {
-//                            print("Edit notification")
-//                        }) {
-//                            HStack(spacing: 20){
-//                                Image("noti")
-//                                    .resizable()
-//                                    .scaledToFit()
-//                                    .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
-//                                Text("Notification")
-//                                    .modifier(TextModifier())
-//                                Spacer()
-//                            }
-//                        }
                         
                         //MARK: VIEW HISTORY
                         Button(action: {
@@ -329,21 +315,21 @@ extension ProfileView {
                             }
                         }
                         
-                        //MARK: EDIT LANGUAGE
+                        //MARK: EDIT uVm.language
                         Button(action: {
-                            print("Edit language")
+                            uVm.language.toggle()
                         }) {
                             HStack(spacing: 20){
                                 Image("lang")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
-                                Text("Language")
+                                Text("Change Language")
                                     .modifier(TextModifier())
                                 
                                 Spacer()
                                 
-                                Image(language ? "uk" : "vietnamese")
+                                Image(uVm.language ? "uk" : "vietnamese")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: UIDevice.isIPhone ? 35 : 60)

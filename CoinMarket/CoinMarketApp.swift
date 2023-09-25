@@ -12,10 +12,11 @@ import Firebase
 struct CoinMarketApp: App {
     
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
-    
+    @StateObject private var vm = UserManager()
     var body: some Scene {
         WindowGroup {
             SplashScreenView()
+                .environmentObject(vm)
         }
     }
 }

@@ -18,6 +18,7 @@ class UserManager: ObservableObject {
     @Published var walletTransactions: [Transaction] = []
     @Published var holdings: ChartDataModel?
     @Published var userAssets: ChartDataModel?
+    @Published var language = false
     let coinManager = CoinManager()
     private var auth = AuthViewModel()
     let db = Firestore.firestore()

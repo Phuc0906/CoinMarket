@@ -18,12 +18,10 @@ struct LoginView: View {
     
     @State var nextView: Bool = false
     @State var RegisterView: Bool = false
-    
-    @State private var language = true //true = English, false  = Vietnamese
     @State private var theme = true // true = light, false = dark
     
     @Environment(\.presentationMode) var presentationMode
-    
+    @EnvironmentObject private var vm: UserManager
     
     var body: some View {
         ZStack{
@@ -34,32 +32,6 @@ struct LoginView: View {
             
             // MARK: - BODY
             GeometryReader{ geometry in
-                HStack{
-                    Spacer()
-                    //language button
-                    Button(action: {
-                        // Add your action here
-                        print("Change language")
-                        language.toggle()
-                    }) {
-                        Image(language ? "uk" : "vietnam")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: UIDevice.isIPhone ? 40 : 50)
-                    }
-                    // theme button
-                    Button(action: {    
-                        // Add your action here
-                        print("Change mode")
-                        language.toggle()
-                    }) {
-                        Image(systemName: theme ? "moon.fill" : "sun.max.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: UIDevice.isIPhone ? 40 : 50)
-                    }
-                }
-                .padding(.horizontal, 10)
                 
                 VStack (alignment: .leading, spacing: 20){
                     
@@ -74,7 +46,7 @@ struct LoginView: View {
                     }
                     
                     // MARK: - TAGLINE
-                    Text(language ? "Nice to see you again" : "Rất vui được gặp lại bạn")
+                    Text(vm.language ? "Nice to see you again" : "Rất vui được gặp lại bạn")
                         .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
                         .padding(.vertical)
                     
@@ -88,9 +60,9 @@ struct LoginView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 5){
-                        Text(language ? "Password" : "Mật khẩu")
+                        Text(vm.language ? "Password" : "Mật khẩu")
                             .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
-                        SecureField(language ? "Password" : "Mật khẩu", text: $password)
+                        SecureField(vm.language ? "Password" : "Mật khẩu", text: $password)
                             .modifier(TextFieldModifier())
                     }
                     
@@ -103,7 +75,7 @@ struct LoginView: View {
                     // MARK: - LOGIN AND FACEID
                     HStack (spacing: 10){
                         Button(action: login) {
-                            Text(language ? "Log in" : "Đăng nhập")
+                            Text(vm.language ? "Log in" : "Đăng nhập")
                                 .modifier(LongButton())
                         }
                         
@@ -124,7 +96,7 @@ struct LoginView: View {
                         Button(action: {
                             RegisterView = true
                         }) {
-                            Text(language ? "or Register Now!" : "hoặc Đăng kí ngay!")
+                            Text(vm.language ? "or Register Now!" : "hoặc Đăng kí ngay!")
                                 .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 30))
                         }
                         .padding(.bottom, 30)
@@ -134,7 +106,7 @@ struct LoginView: View {
                             nextView = true
                         }) {
                             HStack {
-                                Text(language ? "Get start" : "Bắt đầu")
+                                Text(vm.language ? "Get start" : "Bắt đầu")
                                     .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 35))
                                 Image(systemName: "arrow.right")
                                     .foregroundColor(.black)

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject private var userManager = UserManager()
-    
+    @EnvironmentObject private var uVm: UserManager
     @Binding var selectedTab: Int
     @EnvironmentObject private var vm: HomeViewModel
     @Environment(\.colorScheme) var colorScheme
@@ -18,7 +18,6 @@ struct HomeView: View {
     @StateObject private var detailVM = DetailViewModel()
     @StateObject private var transferVM = TransferViewModel()
     
-    @State private var language = true
     
     @State private var toTransferView = false
     
@@ -29,7 +28,7 @@ struct HomeView: View {
                 // MARK: Wallet
                 VStack {
                     HStack {
-                        Text(language ? "Home" : "Trang chủ")
+                        Text(uVm.language ? "Home" : "Trang chủ")
                             .font(.custom("WixMadeForDisplay-ExtraBold", size: UIDevice.isIPhone ? 40 : 50))
                             .foregroundColor(colorScheme == .dark ? .white : .black)
                             .fontWeight(.bold)
@@ -48,10 +47,10 @@ struct HomeView: View {
                         
                         Button(action: {
                             // Add your action here
-                            print("Change language")
-                            language.toggle()
+                            print("Change uVm.language")
+                            uVm.language.toggle()
                         }) {
-                            Image(language ? "uk" : "vietnam")
+                            Image(uVm.language ? "uk" : "vietnam")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: UIDevice.isIPhone ? 40 : 50)
@@ -61,7 +60,7 @@ struct HomeView: View {
                     if let user = userManager.userInfo{
                         HStack{
                             VStack(alignment: .leading) {
-                                Text(language ? "Your wallet" : "Ví của bạn")
+                                Text(uVm.language ? "Your wallet" : "Ví của bạn")
                                     .modifier(TitleModifier())
                                 let myDouble = Double(user.balance)?.asCurrencyWith6Decimals()
                                 Text(myDouble ?? "")
@@ -88,9 +87,9 @@ struct HomeView: View {
                 VStack {
                     VStack {
                         HStack {
-                            Text(language ? "Top stock" : "Phổ biến")
+                            Text(uVm.language ? "Top stock" : "Phổ biến")
                             Spacer()
-                            Text(language ? "See all" : "Tất cả")
+                            Text(uVm.language ? "See all" : "Tất cả")
                                 .onTapGesture {
                                     selectedTab = 1
                                 }

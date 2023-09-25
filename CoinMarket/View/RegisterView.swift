@@ -16,44 +16,15 @@ struct RegisterView: View {
     
     @State var nextView: Bool = false
     @State var LoginView: Bool = false
-    
-    @State private var language = true //true = English, false  = Vietnamese
+
     @State private var theme = true // true = light, false = dark
-    
+    @EnvironmentObject private var vm: UserManager
     var body: some View {
         
         ZStack{
             Color.theme.background
                 .ignoresSafeArea()
             GeometryReader{ geometry in
-                HStack{
-                    Spacer()
-                    // language button
-                    Button(action: {
-                        // Add your action here
-                        print("Change language")
-                        language.toggle()
-                    }) {
-                        Image(language ? "uk" : "vietnam")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: UIDevice.isIPhone ? 40 : 50)
-                    }
-                    
-                    // theme button
-                    Button(action: {
-                        // Add your action here
-                        print("Change mode")
-                        language.toggle()
-                    }) {
-                        Image(systemName: theme ? "moon.fill" : "sun.max.fill")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: UIDevice.isIPhone ? 40 : 50)
-                    }
-                }
-                .padding(.horizontal, 10)
-                
                 VStack (alignment: .leading, spacing: 20){
                     HStack{
                         Image("logo-transparent")
@@ -64,14 +35,14 @@ struct RegisterView: View {
                             .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
                     }
                     
-                    Text(language ? "Let's start your journey" : "Bắt đầu ngay bây giờ")
+                    Text(vm.language ? "Let's start your journey" : "Bắt đầu ngay bây giờ")
                         .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
                         .padding(.vertical)
                     
                     VStack(alignment: .leading, spacing: 5){
-                        Text(language ? "Username" : "Tên người dùng")
+                        Text(vm.language ? "Username" : "Tên người dùng")
                             .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
-                        TextField(language ? "Username" : "Tên người dùng", text: $name)
+                        TextField(vm.language ? "Username" : "Tên người dùng", text: $name)
                             .modifier(TextFieldModifier())
                     }
                     
@@ -84,18 +55,18 @@ struct RegisterView: View {
                     }
                     
                     VStack(alignment: .leading, spacing: 5){
-                        Text(language ? "Password" : "Mật khẩu")
+                        Text(vm.language ? "Password" : "Mật khẩu")
                             .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
-                        SecureField(language ? "Password" : "Mật khẩu", text: $password)
+                        SecureField(vm.language ? "Password" : "Mật khẩu", text: $password)
                             .modifier(TextFieldModifier())
                     }
                     
                     
                     
                     VStack(alignment: .leading, spacing: 5){
-                        Text(language ? "Confirm Password" : "Xác nhận mật khẩu")
+                        Text(vm.language ? "Confirm Password" : "Xác nhận mật khẩu")
                             .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
-                        SecureField(language ? "Confirm Password" : "Xác nhận mật khẩu", text: $confirmPassword)
+                        SecureField(vm.language ? "Confirm Password" : "Xác nhận mật khẩu", text: $confirmPassword)
                             .modifier(TextFieldModifier())
                     }
                     
@@ -107,7 +78,7 @@ struct RegisterView: View {
                     }
                     
                     Button(action: register) {
-                        Text(language ? "Register" : "Đăng kí")
+                        Text(vm.language ? "Register" : "Đăng kí")
                             .modifier(LongButton())
                     }
                     
@@ -115,7 +86,7 @@ struct RegisterView: View {
                         Button(action: {
                             LoginView = true
                         }) {
-                            Text(language ? "Already have an account?" : "Bạn có tài khoản rồi?")
+                            Text(vm.language ? "Already have an account?" : "Bạn có tài khoản rồi?")
                                 .font(.custom("WixMadeforDisplay-Medium", size: UIDevice.isIPhone ? 20 : 30))
                         }
                         
@@ -124,7 +95,7 @@ struct RegisterView: View {
                             nextView = true
                         }) {
                             HStack {
-                                Text(language ? "Get start" : "Bắt đầu")
+                                Text(vm.language ? "Get start" : "Bắt đầu")
                                     .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 25 : 35))
                                 Image(systemName: "arrow.right")
                                     .foregroundColor(.black)
@@ -171,7 +142,7 @@ struct RegisterView: View {
                 }
             }
         } else {
-            errorMessage = language ? "Passwords do not match." : "Mật khẩu không đúng."
+            errorMessage = vm.language ? "Passwords do not match." : "Mật khẩu không đúng."
         }
     }
 
