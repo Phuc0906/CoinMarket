@@ -27,8 +27,117 @@ struct ProfileView: View {
     @State private var isImagePickerPresented = false
     @State private var isEdited = false
     @State private var toBuyHistory = false
+    @State private var toLoginView = false
+    @State private var toRegisterView = false
     
     var body: some View {
+        if let user = vm.user {
+            userProfile
+        }else {
+            VStack {
+                Button {
+                    toRegisterView = true
+                } label: {
+                    Text("Register")
+                        .modifier(SignOutButton())
+                    
+                }
+                
+                Button {
+                    toLoginView = true
+                } label: {
+                    Text("Login")
+                        .modifier(SignOutButton())
+                }
+
+            }.fullScreenCover(isPresented: $toRegisterView) {
+                RegisterView()
+            }.fullScreenCover(isPresented: $toLoginView) {
+                LoginView()
+            }
+        }
+    }
+    
+    
+    //MARK: FUNCTIONS
+    private func fetchProfileImage(userID: String) {
+        let storageRef = Storage.storage().reference()
+        let profileImageRef = storageRef.child("profileImages/\(userID).jpg")
+        
+        profileImageRef.getData(maxSize: Int64(5 * 1024 * 1024)) { data, error in
+            if let error = error {
+                print("Error fetching profile image: \(error.localizedDescription)")
+                isFetchingImage = false
+                return
+            }
+            
+            if let data = data, let image = UIImage(data: data) {
+                profileImage = image
+                isFetchingImage = false
+            }
+        }
+    }
+    
+    func selectProfilePicture() {
+        isEdited = true
+        isImagePickerPresented = true
+    }
+    
+    func saveProfilePicture(_ image: UIImage, userID: String) {
+        let storageRef = Storage.storage().reference()
+        let profileImageRef = storageRef.child("profileImages/\(userID).jpg")
+        
+        if let imageData = image.jpegData(compressionQuality: 0.5) {
+            let metadata = StorageMetadata()
+            metadata.contentType = "image/jpeg"
+            
+            profileImageRef.putData(imageData, metadata: metadata) { (metadata, error) in
+                if let error = error {
+                    print("Error uploading profile picture: \(error.localizedDescription)")
+                } else {
+                    // Successfully uploaded profile picture
+                    profileImageRef.downloadURL { (url, error) in
+                        if let url = url {
+                            // You can save the download URL to the user's Firestore document or wherever you store user data.
+                            // For example, you can update the user's document with the download URL.
+                            self.updateUserProfilePictureURL(url, userID: userID)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func updateUserProfilePictureURL(_ url: URL, userID: String) {
+        // You can update the user's Firestore document with the profile picture URL.
+        let db = Firestore.firestore()
+        let userRef = db.collection("users").document(userID)
+        
+        userRef.updateData(["profilePictureURL": url.absoluteString]) { (error) in
+            if let error = error {
+                print("Error updating profile picture URL: \(error.localizedDescription)")
+            } else {
+                print("Profile picture URL updated successfully")
+            }
+        }
+    }
+    
+}
+
+struct ProfileView_Previews: PreviewProvider {
+    static var previews: some View {
+        MainView()
+            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
+            .previewDisplayName("iPhone 14")
+        
+        MainView()
+            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
+            .previewDisplayName("iPad Pro")
+    }
+}
+
+extension ProfileView {
+    private var userProfile: some View {
         ZStack{
             Color.theme.background
                 .ignoresSafeArea()
@@ -50,7 +159,7 @@ struct ProfileView: View {
                         //MARK: LOGO
                         HStack(spacing: 0){
                             Spacer()
-                            Image("logo-transparent")
+                            Image("logo-app")
                                 .resizable()
                                 .scaledToFit()
                                 .frame(height: UIDevice.isIPhone ? 60 : 150)
@@ -288,82 +397,5 @@ struct ProfileView: View {
                 }
             }
         }
-    }
-    
-    
-    //MARK: FUNCTIONS
-    private func fetchProfileImage(userID: String) {
-        let storageRef = Storage.storage().reference()
-        let profileImageRef = storageRef.child("profileImages/\(userID).jpg")
-        
-        profileImageRef.getData(maxSize: Int64(5 * 1024 * 1024)) { data, error in
-            if let error = error {
-                print("Error fetching profile image: \(error.localizedDescription)")
-                isFetchingImage = false
-                return
-            }
-            
-            if let data = data, let image = UIImage(data: data) {
-                profileImage = image
-                isFetchingImage = false
-            }
-        }
-    }
-    
-    func selectProfilePicture() {
-        isEdited = true
-        isImagePickerPresented = true
-    }
-    
-    func saveProfilePicture(_ image: UIImage, userID: String) {
-        let storageRef = Storage.storage().reference()
-        let profileImageRef = storageRef.child("profileImages/\(userID).jpg")
-        
-        if let imageData = image.jpegData(compressionQuality: 0.5) {
-            let metadata = StorageMetadata()
-            metadata.contentType = "image/jpeg"
-            
-            profileImageRef.putData(imageData, metadata: metadata) { (metadata, error) in
-                if let error = error {
-                    print("Error uploading profile picture: \(error.localizedDescription)")
-                } else {
-                    // Successfully uploaded profile picture
-                    profileImageRef.downloadURL { (url, error) in
-                        if let url = url {
-                            // You can save the download URL to the user's Firestore document or wherever you store user data.
-                            // For example, you can update the user's document with the download URL.
-                            self.updateUserProfilePictureURL(url, userID: userID)
-                        }
-                    }
-                }
-            }
-        }
-    }
-    
-    func updateUserProfilePictureURL(_ url: URL, userID: String) {
-        // You can update the user's Firestore document with the profile picture URL.
-        let db = Firestore.firestore()
-        let userRef = db.collection("users").document(userID)
-        
-        userRef.updateData(["profilePictureURL": url.absoluteString]) { (error) in
-            if let error = error {
-                print("Error updating profile picture URL: \(error.localizedDescription)")
-            } else {
-                print("Profile picture URL updated successfully")
-            }
-        }
-    }
-    
-}
-
-struct ProfileView_Previews: PreviewProvider {
-    static var previews: some View {
-        MainView()
-            .previewDevice(PreviewDevice(rawValue: "iPhone 14"))
-            .previewDisplayName("iPhone 14")
-        
-        MainView()
-            .previewDevice(PreviewDevice(rawValue: "iPad Pro (11-inch)"))
-            .previewDisplayName("iPad Pro")
     }
 }

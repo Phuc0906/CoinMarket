@@ -19,7 +19,7 @@ struct SplashScreenView: View {
         } else {
             VStack {
                 VStack {
-                    Image("logo-transparent")
+                    Image("logo-app")
                         .resizable()
                         .scaledToFit()
                         .frame(width: 200)

@@ -63,9 +63,12 @@ struct HomeView: View {
                             VStack(alignment: .leading) {
                                 Text(language ? "Your wallet" : "Ví của bạn")
                                     .modifier(TitleModifier())
-                                
-                                Text("\(user.balance)$")
+                                let myDouble = Double(user.balance)?.asCurrencyWith6Decimals()
+                                Text(myDouble ?? "")
                                     .modifier(TextModifier())
+//
+//                                Text("\(user.balance)$")
+//                                    .modifier(TextModifier())
                             }
                             Spacer()
                         }

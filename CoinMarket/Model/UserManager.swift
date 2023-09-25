@@ -25,6 +25,7 @@ class UserManager: ObservableObject {
     var receiverValidation = false
     
     init() {
+        
         Auth.auth().addStateDidChangeListener { auth, user in
             self.user = user
             self.getTransactions()
@@ -622,6 +623,7 @@ class UserManager: ObservableObject {
                 chartCellModels.append(ChartCellModel(color: randomColor, name: currentCoin.name, amount: Double(transaction.value.numberOfCoin * currentCoin.current_price)))
             }
         }
+        print("In holdings \(chartCellModels.count)")
         self.holdings = ChartDataModel(dataModel: chartCellModels)
     }
     
