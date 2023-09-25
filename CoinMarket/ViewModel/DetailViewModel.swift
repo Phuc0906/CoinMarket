@@ -24,10 +24,8 @@ class DetailViewModel:ObservableObject {
     @Published var user: User?
     
     init() {
-        print("In here")
         Auth.auth().addStateDidChangeListener { auth, user in
             self.user = user
-            print(user?.email)
         }
     }
 }

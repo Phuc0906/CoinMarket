@@ -36,6 +36,7 @@ class BuyHistoryViewModel: ObservableObject {
         
     }
     
+    // MARK: fetch user buy history
     func getUserBuyHistory() {
         
         if let user = auth.user {
@@ -49,7 +50,6 @@ class BuyHistoryViewModel: ObservableObject {
                         do {
                             let transactions = try JSONDecoder().decode([Transaction].self, from: jsonData)
                             self.buyHistory = transactions
-                            print("In buy his vm trans")
                         }catch {
                             
                         }

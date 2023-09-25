@@ -271,6 +271,7 @@ class UserManager: ObservableObject {
         
     }
     
+    // MARK: save user transaction
     func addBuyHistory(transaction: Transaction, complete: (() -> Void)? = nil) {
         buyHistory.append(transaction)
         do {
@@ -294,6 +295,7 @@ class UserManager: ObservableObject {
         }
     }
     
+    // MARK: check if user are holding coin or not
     func isHadCoin(coinID: String) -> Bool {
         for transaction in buyHistory {
             if transaction.coinId == coinID {
@@ -304,6 +306,7 @@ class UserManager: ObservableObject {
         return false
     }
     
+    // MARK: sell all user's coin
     func sellAll(coinID: String) {
         var currentCoin = coinManager.getCoin(coinId: coinID)
         
@@ -337,6 +340,7 @@ class UserManager: ObservableObject {
         return 0.0
     }
     
+    // MARK: save user buy history
     func saveBuyHistory(transaction: Transaction) {
         do {
             if let user = auth.user {
@@ -360,6 +364,7 @@ class UserManager: ObservableObject {
         }
     }
     
+    // MARK: save user's holdings
     func saveWallet(wallet: [String:Transaction]) {
         
         do {
@@ -384,6 +389,7 @@ class UserManager: ObservableObject {
         }
     }
     
+    // MARK: sell an amount of coin
     func sell(transaction: Transaction, complete: (() -> Void)? = nil) {
         self.buyHistory.append(transaction)
         var localWallet = self.wallet
@@ -436,6 +442,7 @@ class UserManager: ObservableObject {
         
     }
     
+    // MARK: transfer coin to other user
     func transferTo(receiverID: String, transaction: Transaction, coins: [Coin], complete: (() -> Void)? = nil) {
         var transferCoin: Coin?
         for coin in coins {
@@ -526,6 +533,7 @@ class UserManager: ObservableObject {
         }
     }
     
+    // MARK: save receiver holding and transaction after receiving coin
     private func processReceiverTransaction(receiverWallet: [String:Transaction], receiverBuyHistory: [Transaction], receiverID: String, complete: (() -> Void)? = nil) {
         do {
             let encodedData = try JSONEncoder().encode(receiverWallet)
@@ -555,6 +563,7 @@ class UserManager: ObservableObject {
             
         }
     }
+    
     
     func addTransaction(transaction: Transaction, complete: (() -> Void)? = nil) {
         var localWallet = self.wallet
@@ -614,6 +623,7 @@ class UserManager: ObservableObject {
         }
     }
     
+    // MARK: this use for sketching a graph
     func getHoldings(wallet: [String:Transaction]) {
         var colors: [Color] = []
         var chartCellModels: [ChartCellModel] = []
@@ -658,6 +668,7 @@ class UserManager: ObservableObject {
         self.userAssets = ChartDataModel(dataModel: chartCellModels)
     }
     
+    // MARK: verify when receiver id
     func verifyUser(userId: String, verify: @escaping (Bool) -> Void) {
         db.collection("users").document("\(userId)").getDocument { document, error in
             if let document = document, document.exists {
