@@ -49,7 +49,7 @@ struct LoginView: View {
                     
                     // MARK: - LOGO AND APP NAME
                     HStack{
-                        Image("logo-transparent")
+                        Image("logo-app")
                             .resizable()
                             .scaledToFit()
                             .frame(height: UIDevice.isIPhone ? 100 : 150)

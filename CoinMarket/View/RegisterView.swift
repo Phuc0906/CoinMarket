@@ -39,7 +39,7 @@ struct RegisterView: View {
             GeometryReader{ geometry in
                 VStack (alignment: .leading, spacing: 20){
                     HStack{
-                        Image("logo-transparent")
+                        Image("logo-app")
                             .resizable()
                             .scaledToFit()
                             .frame(height: UIDevice.isIPhone ? 100 : 150)
