@@ -11,6 +11,7 @@ struct CryptoView: View {
     
     @EnvironmentObject private var vm: CryptoViewModel
     @StateObject private var detailVM = DetailViewModel()
+    @State var query = ""
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
@@ -32,7 +33,7 @@ struct CryptoView: View {
                 //MARK: Functional button
                 VStack {
                     VStack {
-                        ForEach(vm.allCoins, id: \.id) {coin in
+                        ForEach(vm.filterCoins, id: \.id) {coin in
                             NavigationLink(destination: CoinDetailView(coin: coin).environmentObject(detailVM)) {
                                 CoinRow(coin: coin)
                             }
@@ -43,6 +44,9 @@ struct CryptoView: View {
             }
         }
         .navigationViewStyle(StackNavigationViewStyle())
+        .searchable(text: $query).onChange(of: query) { newValue in
+            vm.getFilterCoin(query: newValue)
+        }
     }
 }
 

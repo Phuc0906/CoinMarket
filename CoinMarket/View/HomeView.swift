@@ -45,16 +45,7 @@ struct HomeView: View {
                         }
 
                         
-                        Button(action: {
-                            // Add your action here
-                            print("Change uVm.language")
-                            uVm.language.toggle()
-                        }) {
-                            Image(uVm.language ? "uk" : "vietnam")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: UIDevice.isIPhone ? 40 : 50)
-                        }
+                        
                         
                     }
                     if let user = userManager.userInfo{

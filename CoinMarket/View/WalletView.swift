@@ -18,6 +18,7 @@ struct WalletView: View {
     @State var selectedPie: String = ""
     @State var selectedDonut: String = ""
     @ObservedObject private var userManager = UserManager()
+    @EnvironmentObject private var vm: UserManager
     let coinManager = CoinManager()
     
     //MARK: BODY
@@ -34,7 +35,7 @@ struct WalletView: View {
                     }
                     
                 Spacer()
-                Text(!showPortfolio ? "Balance" : "Portfolio")
+                Text(!showPortfolio ? (vm.language ? "Balance" : "Số dư") : (vm.language ? "Portfolio" : "Hồ Sơ"))
                     .font(.headline)
                     .foregroundColor(Color.theme.accent)
                     .animation(.none, value: showPortfolio)
@@ -63,7 +64,7 @@ struct WalletView: View {
         }
         .onChange(of: isDeposit){newValue in
             userManager.getUserInfo {
-                print("Get user updated balance: \(userManager.userInfo?.balance ?? "FAIL")")
+                
             }
         }
     }
@@ -77,7 +78,7 @@ extension WalletView {
                 PieChart(dataModel: holdings) {  dataModel in
                     if let dataModel = dataModel {
                         let percentage = String(format: "%.2f", (dataModel.amount / holdings.totalValue)*100)
-                        self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total spots"
+                        self.selectedPie = vm.language ? "\(dataModel.name) achieves \(percentage)% of the total crypto value" : "\(dataModel.name) chiếm \(percentage)% của tổng tiền ảo"
                     } else {
                         self.selectedPie = ""
                     }
@@ -140,7 +141,7 @@ extension WalletView {
                         .font(.system(size: 50))
                         .foregroundColor(Color.theme.accent)
                 }
-                Text("Total Balance")
+                Text(vm.language ? "Total Balance" : "Tổng Số Dư")
                     .font(.caption)
                     .foregroundColor(Color.theme.accent)
             }
@@ -153,7 +154,7 @@ extension WalletView {
                     VStack {
                         Image(systemName: "dollarsign.arrow.circlepath")
                             .foregroundColor(.white)
-                        Text("Deposit")
+                        Text(vm.language ? "Deposit" : "Nạp Tiền")
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: 200)
@@ -175,7 +176,7 @@ extension WalletView {
                     VStack {
                         Image(systemName: "person.line.dotted.person")
                             .foregroundColor(.white)
-                        Text("P2P Trading")
+                        Text(vm.language ? "P2P Trading" : "Trao Đổi P2P")
                             .font(.headline)
                             .foregroundColor(.white)
                             .frame(maxWidth: 200)
@@ -198,7 +199,7 @@ extension WalletView {
                             if let dataModel = dataModel {
                                 let percentage = String(format: "%.2f",
                                                         (dataModel.amount/userAssets.totalValue)*100)
-                                self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total assets"
+                                self.selectedPie = vm.language ? "\(dataModel.name) achieves \(percentage)% of the total assets" : "\(dataModel.name) chiếm \(percentage)% của tổng tài sản"
                             }else {
                                 self.selectedPie = ""
                             }

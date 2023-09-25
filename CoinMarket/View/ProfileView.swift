@@ -273,7 +273,7 @@ extension ProfileView {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
-                                Text("Edit profile information")
+                                Text(uVm.language ? "Edit profile information" : "Chỉnh sửa thông tin")
                                     .modifier(TextModifier())
                                 
                                 Spacer()
@@ -284,7 +284,6 @@ extension ProfileView {
                         
                         //MARK: VIEW HISTORY
                         Button(action: {
-                            print("See history")
                             toBuyHistory = true
                         }) {
                             HStack(spacing: 20){
@@ -292,7 +291,7 @@ extension ProfileView {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
-                                Text("Buy History")
+                                Text(uVm.language ? "Buy History" : "Lịch Sử Giao Dịch")
                                     .modifier(TextModifier())
                                 Spacer()
                             }
@@ -301,7 +300,6 @@ extension ProfileView {
                         
                         //MARK: EDIT THEME
                         Button(action: {
-                            print("Edit theme")
                             UIApplication.shared.windows.first?.overrideUserInterfaceStyle = (colorScheme == .dark) ? .light : .dark
                         }) {
                             HStack(spacing: 20){
@@ -324,12 +322,12 @@ extension ProfileView {
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
-                                Text("Change Language")
+                                Text(uVm.language ? "Language" : "Ngôn Ngữ")
                                     .modifier(TextModifier())
                                 
                                 Spacer()
                                 
-                                Image(uVm.language ? "uk" : "vietnamese")
+                                Image(uVm.language ? "uk" : "vietnam")
                                     .resizable()
                                     .scaledToFit()
                                     .frame(width: UIDevice.isIPhone ? 35 : 60)
