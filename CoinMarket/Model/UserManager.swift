@@ -50,6 +50,7 @@ class UserManager: ObservableObject {
         }
     }
     
+    // MARK: get user holdings
     func getWallet() {
         if let user = auth.user {
             self.db.collection("wallet").document("\(user.uid)").getDocument { (document, error) in
@@ -76,10 +77,12 @@ class UserManager: ObservableObject {
         }
     }
     
+    // MARK: get all user on databasee
     private func getAllUsers() {
         db.collection("users").document()
     }
     
+    // MARK: update user info
     func saveUserInfo(user: UserInfo, complete: (() -> Void)? = nil) {
         do {
             let encodedData = try JSONEncoder().encode(user)
@@ -98,7 +101,7 @@ class UserManager: ObservableObject {
             
         }
     }
-
+    
     func getUserBuyHistory(userID: String, complete: ((_ transactions: [Transaction]) -> Void)? = nil) {
         db.collection("buy_history").document("\(userID)").getDocument { (document, error) in
             

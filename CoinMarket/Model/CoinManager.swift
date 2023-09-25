@@ -32,6 +32,7 @@ class CoinManager {
         fetchData()
     }
     
+    // MARK: compare updated date
     func compareDates(dateString1: String, format: String) -> ComparisonResult? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = format
@@ -50,6 +51,7 @@ class CoinManager {
         
     }
     
+    // MARK: fetch data from firebase or api
     private func fetchData() {
         let docRef = db.collection("coin_market").document("coins")
         docRef.getDocument { (document, error) in
@@ -57,13 +59,14 @@ class CoinManager {
                 let dataDescription = document.data()?.values.map(String.init(describing:))
                 let key = document.data()?.keys.map(String.init(describing:))
                 let dbDate = key![0].split(separator: ",")[0]
+                // MARK: compare last updated date on database with current date
                 if let comparisonResult = self.compareDates(dateString1: String(dbDate), format: "MM/dd/yyyy") {
                     switch comparisonResult {
-                    case .orderedAscending:
+                    case .orderedAscending: // MARK: not match => fetch again from api
                         print("Fetch from API")
                         fetchFromAPI()
                         break
-                    case .orderedSame:
+                    case .orderedSame: // MARK: check current time
 
 
                         // check hour
@@ -72,7 +75,8 @@ class CoinManager {
                         // Create a DateFormatter with the "HH:mm:ss" format
                         let dateFormatter = DateFormatter()
                         dateFormatter.dateFormat = "HH:mm:ss"
-
+                        
+                        //
                         if let pastTime = dateFormatter.date(from: String(key![0].split(separator: ",")[1])) {
                             // Extract the hour component from the current time
                             let calendar = Calendar.current
@@ -83,7 +87,8 @@ class CoinManager {
 
                             // Calculate the hour difference
                             let hourDifference = currentHour - pastHour
-
+                            
+                            // MARK: the different time is not over 1 hour => fetch from previous update
                             if hourDifference == 0 {
                                 print("Fetch from Firebase")
                                 if let jsonData = dataDescription![0].data(using: .utf8) {
@@ -94,7 +99,7 @@ class CoinManager {
 
                                     }
                                 }
-                            }else {
+                            }else { // MARK: recall api
                                 print("Fetch from API")
                                 fetchFromAPI()
                             }
@@ -121,7 +126,7 @@ class CoinManager {
             }
     }
     
-    func fetchFromAPI() {
+    func fetchFromAPI() { // MARK: fetch coin data from api
         guard let url = URL(string: "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=100&page=1&sparkline=true&locale=en") else {return }
         
         coinSubrciption = URLSession.shared.dataTaskPublisher(for: url)
@@ -182,7 +187,7 @@ class CoinManager {
         }
     }
     
-    
+    // MARK: compare and get matched coin
     func getCoin(coinId: String) -> Coin? {
         for coin in coins {
             if coin.id == coinId {

@@ -30,6 +30,7 @@ class HomeViewModel: ObservableObject {
         downloadCoinData()
     }
     
+    // MARK: mark and sort to get top 5 coins
     func getTopCoins() -> [Coin] {
         var topCoins: [Coin] = []
         
@@ -45,6 +46,7 @@ class HomeViewModel: ObservableObject {
         return topCoins
     }
     
+    // MARK: get all coins from database
     func downloadCoinData() {
         print("Size: \(coinManager.coins.count)")
         coinManager.$coins.sink {[weak self] coinData in

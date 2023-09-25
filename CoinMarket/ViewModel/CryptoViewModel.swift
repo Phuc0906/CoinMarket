@@ -33,6 +33,7 @@ class CryptoViewModel: ObservableObject {
         }
     }
     
+    // MARK: download coins
     func downloadCoinData(complete: (() -> Void)? = nil) {
         coinManager.$coins.sink {[weak self] coinData in
             self?.allCoins = coinData
