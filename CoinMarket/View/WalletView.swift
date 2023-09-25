@@ -12,6 +12,7 @@ struct WalletView: View {
     //MARK: PROPERTIES
     @StateObject private var transferVM = TransferViewModel()
     @State private var showPortfolio = false
+    @State private var showInfo = false
     @State private var showTransfer = false
     @State private var isDeposit = false
     @State var selectedPie: String = ""
@@ -28,6 +29,10 @@ struct WalletView: View {
                     .background(
                         CircleButtonAnimationView(animate: $showPortfolio)
                     )
+                    .onTapGesture {
+                        showInfo = true
+                    }
+                    
                 Spacer()
                 Text(!showPortfolio ? "Balance" : "Portfolio")
                     .font(.headline)
@@ -72,7 +77,7 @@ extension WalletView {
                 PieChart(dataModel: holdings) {  dataModel in
                     if let dataModel = dataModel {
                         let percentage = String(format: "%.2f", (dataModel.amount / holdings.totalValue)*100)
-                        self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total coin amount"
+                        self.selectedPie = "\(dataModel.name) achieves \(percentage)% of the total spots"
                     } else {
                         self.selectedPie = ""
                     }
@@ -211,6 +216,9 @@ extension WalletView {
                 }
                 .padding()
             }
+        }
+        .sheet(isPresented: $showInfo) {
+            InfoView()
         }
     }
 }

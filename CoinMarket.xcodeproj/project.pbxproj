@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		049DAFD72AB4046B00671A1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 049DAFD62AB4046B00671A1D /* Assets.xcassets */; };
+		04EF7AF12ABCAB2700539354 /* InfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AF02ABCAB2700539354 /* InfoView.swift */; };
 		04EF7AF32ABD708000539354 /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04EF7AF22ABD708000539354 /* Double.swift */; };
 		58A1C6EA2AB32DEB002350FF /* RegisterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6E92AB32DEB002350FF /* RegisterView.swift */; };
 		58A1C6EC2AB32EF8002350FF /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58A1C6EB2AB32EF8002350FF /* LoginView.swift */; };
@@ -78,6 +79,7 @@
 
 /* Begin PBXFileReference section */
 		049DAFD62AB4046B00671A1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		04EF7AF02ABCAB2700539354 /* InfoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoView.swift; sourceTree = "<group>"; };
 		04EF7AF22ABD708000539354 /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		58A1C6E92AB32DEB002350FF /* RegisterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterView.swift; sourceTree = "<group>"; };
 		58A1C6EB2AB32EF8002350FF /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 				BC74820E2ABAF73000ABC993 /* TransferView.swift */,
 				BC7482192ABB1B2900ABC993 /* ReceiverCodeInputView.swift */,
 				BC74821D2ABB238400ABC993 /* SendingView.swift */,
+				04EF7AF02ABCAB2700539354 /* InfoView.swift */,
 				BC7482252ABEDFE200ABC993 /* BuyHistoryView.swift */,
 				7867CE152AC0737700B22308 /* SplashScreenView.swift */,
 			);
@@ -464,6 +467,7 @@
 				BC7481DA2AAD7D6800ABC993 /* CryptoView.swift in Sources */,
 				BC7481E62AAF793000ABC993 /* Coin.swift in Sources */,
 				BC7482052AB4B9D600ABC993 /* CustomKeyPad.swift in Sources */,
+				04EF7AF12ABCAB2700539354 /* InfoView.swift in Sources */,
 				04EF7AF32ABD708000539354 /* Double.swift in Sources */,
 				BC7481E02AAD877900ABC993 /* AddButtonCustomView.swift in Sources */,
 			);
