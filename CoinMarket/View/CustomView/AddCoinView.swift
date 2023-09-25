@@ -5,6 +5,18 @@
 //  Created by Phuc Hoang on 10/09/2023.
 //
 
+/*
+  RMIT University Vietnam
+  Course: COSC2659 iOS Development
+  Semester: 2023B
+  Assessment: Assignment 3
+  Author: Hoang Phuc
+  ID: s3879362
+  Created  date: 10/09/2023
+  Last modified: 10/09/2023
+  Acknowledgement: Acknowledge the resources that you use here.
+*/
+
 import SwiftUI
 
 struct AddCoinView: View {
