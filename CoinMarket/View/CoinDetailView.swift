@@ -43,7 +43,9 @@ struct CoinDetailView: View {
                     functionalButton
                 }
             }.navigationTitle(Text("\(coin.name)"))
-        }.fullScreenCover(isPresented: $toLogin) {
+        }
+        .navigationViewStyle(StackNavigationViewStyle())
+        .fullScreenCover(isPresented: $toLogin) {
             LoginView()
         }.fullScreenCover(isPresented: $toBuyView) {
             BuyView(coin: coin, isBuy: true)
