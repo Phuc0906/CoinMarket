@@ -40,7 +40,7 @@ struct EditNameView: View {
     var body: some View {
         
         ZStack{
-            Color.white.ignoresSafeArea()
+            Color.theme.background.ignoresSafeArea()
             
             GeometryReader{ geometry in
                 
@@ -48,12 +48,15 @@ struct EditNameView: View {
                     Text("Edit profile")
                         .font(.custom("WixMadeforDisplay-ExtraBold", size: UIDevice.isIPhone ? 25 : 40))
                         .padding(.vertical)
+                        .foregroundColor(Color.theme.accent)
                     
                     VStack(alignment: .leading, spacing: 5){
                         Text("Name")
                             .font(.custom("WixMadeforDisplay-Bold", size: UIDevice.isIPhone ? 20 : 30))
+                            .foregroundColor(Color.theme.accent)
                         TextField(name_placeholder ?? "None", text: $newName)
                             .modifier(TextFieldModifier())
+                        
                     }
                     
                     Button(action: {

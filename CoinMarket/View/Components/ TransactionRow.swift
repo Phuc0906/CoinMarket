@@ -69,7 +69,7 @@ struct TransactionRow: View {
             VStack(alignment: .trailing) {
                 Text("\(transaction.numberOfCoin) \(coin.symbol.uppercased())")
                     .foregroundColor(Color.theme.accent)
-                Text("$ \(transaction.amount)")
+                Text("$ \(transaction.amount.formattedWithAbbreviations())")
                     .foregroundColor((transaction.numberOfCoin > 0) ? Color.theme.green : Color.theme.red)
                 
             }
