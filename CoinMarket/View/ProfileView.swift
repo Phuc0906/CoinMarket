@@ -282,19 +282,19 @@ extension ProfileView {
                         
                         
                         //MARK: NOTIFICATION
-                        Button(action: {
-                            print("Edit notification")
-                        }) {
-                            HStack(spacing: 20){
-                                Image("noti")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
-                                Text("Notification")
-                                    .modifier(TextModifier())
-                                Spacer()
-                            }
-                        }
+//                        Button(action: {
+//                            print("Edit notification")
+//                        }) {
+//                            HStack(spacing: 20){
+//                                Image("noti")
+//                                    .resizable()
+//                                    .scaledToFit()
+//                                    .frame(width: UIDevice.isIPhone ? 35 : 60, height: UIDevice.isIPhone ? 35 : 60)
+//                                Text("Notification")
+//                                    .modifier(TextModifier())
+//                                Spacer()
+//                            }
+//                        }
                         
                         //MARK: VIEW HISTORY
                         Button(action: {
@@ -316,6 +316,7 @@ extension ProfileView {
                         //MARK: EDIT THEME
                         Button(action: {
                             print("Edit theme")
+                            UIApplication.shared.windows.first?.overrideUserInterfaceStyle = (colorScheme == .dark) ? .light : .dark
                         }) {
                             HStack(spacing: 20){
                                 Image("theme")

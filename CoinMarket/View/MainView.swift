@@ -37,10 +37,6 @@ struct MainView: View {
                     }
                     .tag(1)
                     .environmentObject(cryptoVM)
-                    
-                
-                AddButtonCustomView(lastSelectedTab: $lastSelectedTab, selectedTab: $selectedTab)
-                    .tag(9)
                 
                 
                 WalletView()
@@ -74,23 +70,6 @@ struct MainView: View {
             .animation(.easeInOut) // Apply animation to the entire TabView
             .transition(.slide)
             
-            VStack {
-                Spacer()
-                AddCoinView(isShown: $isShownAdd)
-            }.padding(EdgeInsets(top: 0, leading: 0, bottom: 50, trailing: 0))
-            
-            VStack {
-                Spacer()
-                Button(action: {
-                    isShownAdd.toggle()
-                }) {
-                    Image(systemName: "plus")
-                        .rotationEffect(isShownAdd ? Angle(degrees: 45) : Angle(degrees: 0))
-                        .padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 7))
-                        .background(.yellow)
-                        .cornerRadius(30)
-                }
-            }.padding(EdgeInsets(top: 0, leading: 0, bottom: 16, trailing: 0))
         }
     }
 }
