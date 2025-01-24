@@ -2,6 +2,18 @@
 
 CoinMarket is an iOS application designed to provide a user-friendly experience for browsing, buying, and managing cryptocurrencies. Built with Swift and SwiftUI, the app utilizes the MVVM (Model-View-ViewModel) architectural pattern and leverages Firebase for backend functionalities.
 
+## Table of Contents
+
+- [CoinMarket - iOS Cryptocurrency Trading App](#coinmarket---ios-cryptocurrency-trading-app)
+  - [Table of Contents](#table-of-contents)
+  - [Key Features](#key-features)
+  - [Architecture](#architecture)
+  - [Technologies Used](#technologies-used)
+  - [Future Improvements](#future-improvements)
+  - [Installation](#installation)
+  - [App Images](#app-images)
+    - [Key Features Illustrated](#key-features-illustrated)
+
 ## Key Features
 
 - **User Authentication:** Secure user registration and login handled by Firebase Authentication.
@@ -98,3 +110,22 @@ This section details the technologies and tools used in the development of the C
 5. **Build and run the app:**
 
    Select a simulator or a physical device and click the "Run" button in Xcode to build and run the app.
+
+## App Images
+
+### Key Features Illustrated
+
+<div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+    <img src="./Images/Login.jpeg" alt="Login Screen" width="150" style="margin: 5px
+    ;"/>
+    <img src="./Images/Dashboard.png" alt="Dashboard" width="150" style="margin: 5px
+    ;"/>
+    <img src="./Images/Deposit.png" alt="Deposit Screen" width="150" style="margin: 5px
+    ;"/>
+    <img src="./Images/Transaction.png" alt="Transaction Screen" width="150" style="margin: 5px
+    ;"/>
+    <img src="./Images/CoinView.png" alt="Coin View" width="150" style="margin: 5px
+    ;"/>
+    <img src="./Images/Wallet.jpeg" alt="Coin View" width="150" style="margin: 5px
+    ;"/>
+</div>
